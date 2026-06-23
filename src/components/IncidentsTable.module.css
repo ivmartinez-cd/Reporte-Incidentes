@@ -1,0 +1,78 @@
+.card {
+  padding: 1.3rem 1.4rem;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.title { font-size: 1rem; }
+.meta { font-size: 0.76rem; color: var(--text-muted); }
+
+.scroll {
+  overflow-x: auto;
+  max-height: 520px;
+  overflow-y: auto;
+  border-radius: var(--radius-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  text-align: left;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--border-strong);
+  z-index: 1;
+}
+
+.table tbody td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-soft);
+  vertical-align: top;
+}
+
+.table tbody tr {
+  transition: background 0.15s var(--ease);
+}
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.nowrap { white-space: nowrap; }
+.right { text-align: right; }
+
+.desc {
+  max-width: 360px;
+  min-width: 220px;
+  color: var(--text);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.03);
+}

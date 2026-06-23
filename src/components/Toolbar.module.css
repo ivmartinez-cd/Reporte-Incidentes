@@ -1,0 +1,55 @@
+.bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.2rem;
+  padding: 1rem 1.4rem;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field .select {
+  min-width: 220px;
+}
+
+.status {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.statusText { min-width: 110px; text-align: right; }
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .field .select { min-width: 0; width: 100%; }
+  .field { flex: 1 1 100%; }
+  .status { margin-left: 0; }
+}

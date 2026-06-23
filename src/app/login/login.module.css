@@ -1,0 +1,72 @@
+.wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.6rem 2.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(2, 117, 216, 0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.logo {
+  height: 38px;
+  width: auto;
+  margin-bottom: 1.8rem;
+  filter: drop-shadow(0 4px 14px rgba(240, 164, 0, 0.35));
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  margin: 0 0 0.4rem 0.1rem;
+  font-weight: 600;
+}
+
+.group {
+  margin-bottom: 1.2rem;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin: -0.4rem 0 1rem;
+  font-weight: 500;
+}
+
+.submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+
+.foot {
+  margin-top: 1.8rem;
+  text-align: center;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
