@@ -80,17 +80,28 @@ export async function listEmpresas(): Promise<Empresa[]> {
     // usuario_id vacio => el servicio devuelve TODOS los clientes.
     const raw = await callSoap("getEmpresas", { usuario_id: config.soap.user });
     const rows = parseSoapJson<Record<string, unknown>[]>(raw, []);
+    
+    // Obtenemos la fecha de hoy en formato YYYYMMDD para comparar con las fechas de restricción
+    const todayStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+
     const mapped = rows
       .map((row) => {
         const r = unwrapRow(row, "Empresa");
+        const restrictionDate = pick(r, ["FechaRestriccionServicio"]) ?? "19990101";
+        // Es activo si la restricción es el placeholder "19990101" o es una fecha futura
+        const isActive = restrictionDate === "19990101" || restrictionDate >= todayStr;
+        
         return {
           id: pick(r, ["id", "IdEmpresa", "empresa_id"]) ?? "",
           nombre:
             pick(r, ["Nombre", "nombre", "RazonSocial", "razon_social", "name"]) ??
             "—",
+          activa: isActive,
         };
       })
-      .filter((e) => e.id);
+      .filter((e) => e.id && e.activa) // Filtrar solo clientes activos
+      .map(({ id, nombre }) => ({ id, nombre })); // Retornar tipo Empresa limpio
+      
     return mapped.length ? mapped : MOCK_EMPRESAS;
   });
 }
@@ -98,11 +109,15 @@ export async function listEmpresas(): Promise<Empresa[]> {
 export async function listIncidents(
   empresaId: string,
   period: string,
+  limit: number = config.soap.testIncidentLimit,
 ): Promise<Incident[]> {
   if (config.useMock) return mockIncidents(empresaId, period);
 
-  const limit = config.soap.testIncidentLimit;
-  const key = `dom:incidents:${empresaId}:${period}`;
+  // `getTopIncidents` ordena por mas reciente y recien despues filtramos por
+  // periodo del lado del dominio. Para periodos viejos hay que pedir un `Top`
+  // mas grande (via `limit`) para que la ventana alcance ese mes; el costo de
+  // enriquecimiento NO sube (solo enriquecemos los incidentes del periodo).
+  const key = `dom:incidents:${empresaId}:${period}:${limit}`;
   return cached(key, config.soap.cacheTtlSeconds, async () => {
     // getTopIncidents(IdEmpresa, IdSucursal, IdSector, OrderBy, Top, IdEstado)
     // Limite de prueba: pedimos solo `Top` filas al WSDL para no agotar recursos.

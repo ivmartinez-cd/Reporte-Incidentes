@@ -51,6 +51,8 @@ export async function GET(req: Request) {
   if (mode === "extract") {
     const ids = (url.searchParams.get("ids") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
     const periods = (url.searchParams.get("periods") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+    // Top alto para que la ventana de getTopIncidents alcance períodos viejos.
+    const limit = Number(url.searchParams.get("limit") ?? "1000") || 1000;
     if (!ids.length || !periods.length) {
       return NextResponse.json({ error: "faltan ids o periods" }, { status: 400 });
     }
@@ -61,7 +63,7 @@ export async function GET(req: Request) {
     for (const id of ids) {
       const nombre = empresas.find((e) => e.id === id)?.nombre ?? "(desconocido)";
       for (const period of periods) {
-        const incidents = await listIncidents(id, period);
+        const incidents = await listIncidents(id, period, limit);
         const file = path.join(CORPUS_DIR, `${id}-${period}.json`);
         fs.writeFileSync(
           file,
