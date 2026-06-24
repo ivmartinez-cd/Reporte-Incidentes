@@ -29,7 +29,7 @@ export default function SucursalBar({ data }: { data: Datum[] }) {
       </div>
 
       {data.length === 0 ? (
-        <div className={styles.empty}>Sin datos para el período</div>
+        <div className={styles.empty}>Sin datos para el periodo</div>
       ) : (
         <div className={styles.body}>
           <ResponsiveContainer width="100%" height="100%">
@@ -40,11 +40,11 @@ export default function SucursalBar({ data }: { data: Datum[] }) {
             >
               <CartesianGrid
                 horizontal={false}
-                stroke="rgba(255,255,255,0.06)"
+                stroke="var(--chart-grid)"
               />
               <XAxis
                 type="number"
-                tick={{ fill: "var(--text-muted)", fontSize: 12 }}
+                tick={{ fill: "var(--chart-axis)", fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
                 allowDecimals={false}
@@ -53,12 +53,12 @@ export default function SucursalBar({ data }: { data: Datum[] }) {
                 type="category"
                 dataKey="name"
                 width={110}
-                tick={{ fill: "var(--text-soft)", fontSize: 12 }}
+                tick={{ fill: "var(--chart-axis)", fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
-                cursor={{ fill: "rgba(255,255,255,0.04)" }}
+                cursor={{ fill: "var(--row-hover)" }}
                 content={<BarTooltip />}
               />
               <Bar dataKey="value" radius={[0, 6, 6, 0]} barSize={20}>

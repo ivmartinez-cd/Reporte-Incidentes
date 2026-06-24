@@ -5,11 +5,11 @@ import { config } from "@/lib/config";
 import { SESSION_COOKIE } from "./constants";
 
 /**
- * Autenticación "login simple": credenciales por variables de entorno y una
- * cookie de sesión firmada con HMAC-SHA256. No hay base de usuarios.
+ * Autenticacion "login simple": credenciales por variables de entorno y una
+ * cookie de sesion firmada con HMAC-SHA256. No hay base de usuarios.
  *
- * La verificación criptográfica fuerte ocurre en el servidor (este módulo).
- * El middleware sólo hace una comprobación de presencia para la redirección.
+ * La verificacion criptografica fuerte ocurre en el servidor (este modulo).
+ * El middleware solo hace una comprobacion de presencia para la redireccion.
  */
 
 export { SESSION_COOKIE };

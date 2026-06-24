@@ -3,27 +3,43 @@ import * as soap from "soap";
 import { config } from "@/lib/config";
 import { cached } from "@/lib/cache";
 import { createLimiter, withRetry } from "@/lib/concurrency";
+import { unwrapSoapValue } from "./normalize";
 
 /**
- * Cliente SOAP único y cacheado. El WSDL se descarga una sola vez por proceso
- * (cacheado vía `cached`), y todas las llamadas pasan por un limitador de
- * concurrencia para no saturar el servicio (Sistemas monitorea el consumo).
+ * Cliente SOAP unico por proceso (Singleton real). El WSDL es pesado: hay que
+ * descargarlo y parsear su XML. Eso debe ocurrir UNA sola vez por proceso y NO
+ * expirar por TTL ni recrearse en cada request/recarga de pagina.
+ *
+ * Guardamos la PROMESA de creacion (no solo el cliente) para que multiples
+ * requests concurrentes durante el arranque compartan la misma inicializacion
+ * en vuelo. Si la creacion falla, descartamos la promesa para poder reintentar.
+ *
+ * Todas las llamadas pasan por un limitador de concurrencia para no saturar el
+ * servicio (Sistemas monitorea el consumo).
  */
 
 const limit = createLimiter(config.soap.maxConcurrency);
 
-async function getClient(): Promise<soap.Client> {
-  return cached("soap:client", config.soap.cacheTtlSeconds, async () => {
-    const client = await soap.createClientAsync(config.soap.wsdlUrl, {
-      wsdl_options: { timeout: config.soap.timeoutMs },
+let clientPromise: Promise<soap.Client> | null = null;
+
+function getClient(): Promise<soap.Client> {
+  if (!clientPromise) {
+    clientPromise = (async () => {
+      const client = await soap.createClientAsync(config.soap.wsdlUrl, {
+        wsdl_options: { timeout: config.soap.timeoutMs },
+      });
+      client.setEndpoint(config.soap.wsdlUrl.replace(/\?wsdl$/i, ""));
+      return client;
+    })().catch((err) => {
+      clientPromise = null; // permitir recrear en el proximo intento
+      throw err;
     });
-    client.setEndpoint(config.soap.wsdlUrl.replace(/\?wsdl$/i, ""));
-    return client;
-  });
+  }
+  return clientPromise;
 }
 
 /**
- * Invoca una operación del WSDL con timeout estricto, reintentos con backoff
+ * Invoca una operacion del WSDL con timeout estricto, reintentos con backoff
  * y concurrencia limitada. El resultado SOAP crudo se cachea por `cacheTtl`.
  *
  * El servicio devuelve cada respuesta como un `xsd:string` que envuelve JSON;
@@ -46,7 +62,7 @@ export async function callSoap(
             `${operation}Async`
           ];
           if (typeof method !== "function") {
-            throw new Error(`Operación SOAP desconocida: ${operation}`);
+            throw new Error(`Operacion SOAP desconocida: ${operation}`);
           }
           const result = (await withTimeout(
             (method as (a: unknown) => Promise<unknown>).call(client, args),
@@ -55,9 +71,10 @@ export async function callSoap(
           )) as unknown[];
 
           // node-soap devuelve [result, rawResponse, soapHeader, rawRequest].
-          const payload = (result?.[0] ?? {}) as Record<string, unknown>;
-          const value = payload.Respuesta ?? payload.Result ?? payload.return;
-          return typeof value === "string" ? value : JSON.stringify(value ?? "");
+          // El servicio (RPC/encoded) envuelve el string de retorno en un objeto
+          // `{ attributes, $value }` y, a veces, bajo un nombre de retorno. Por
+          // eso desenvolvemos recursivamente hasta llegar al string JSON.
+          return unwrapSoapValue(result?.[0]);
         },
         { label: operation },
       ),
@@ -82,16 +99,4 @@ function withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
       },
     );
   });
-}
-
-/** Parsea el JSON embebido en la respuesta string del SOAP, tolerante a fallos. */
-export function parseSoapJson<T>(raw: string, fallback: T): T {
-  try {
-    const trimmed = raw.trim();
-    if (!trimmed) return fallback;
-    return JSON.parse(trimmed) as T;
-  } catch {
-    console.warn("[soap] no se pudo parsear JSON de la respuesta");
-    return fallback;
-  }
 }

@@ -1,8 +1,8 @@
 import NodeCache from "node-cache";
 
 /**
- * Caché en memoria, compartida por proceso. Protege al servicio SOAP de
- * llamadas repetidas dentro de la misma sesión / ventana de tiempo.
+ * Cache en memoria, compartida por proceso. Protege al servicio SOAP de
+ * llamadas repetidas dentro de la misma sesion / ventana de tiempo.
  *
  * `checkperiod` corre el barrido de expirados cada 2 min. `useClones: false`
  * evita copiar estructuras grandes (devolvemos la misma referencia cacheada).
@@ -41,16 +41,12 @@ export async function cached<T>(
   return promise;
 }
 
-export function invalidate(prefix?: string): void {
-  if (!prefix) {
-    store.flushAll();
-    return;
-  }
-  for (const key of store.keys()) {
-    if (key.startsWith(prefix)) store.del(key);
-  }
+/** Lectura directa de la cache (sin producer). `undefined` si no hay valor. */
+export function cacheGet<T>(key: string): T | undefined {
+  return store.get<T>(key);
 }
 
-export function cacheStats() {
-  return { keyCount: store.keys().length, ...store.getStats() };
+/** Escritura directa en la cache. Para cachear condicionalmente desde el caller. */
+export function cacheSet<T>(key: string, value: T, ttlSeconds: number): void {
+  store.set(key, value, ttlSeconds);
 }

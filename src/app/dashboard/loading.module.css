@@ -1,0 +1,85 @@
+.screen {
+  min-height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.4rem 4rem;
+}
+
+.panel {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+}
+
+.logo {
+  height: auto;
+  opacity: 0.95;
+  margin-bottom: 1.4rem;
+}
+
+/* ---- Anillo de marca ---- */
+.ring {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  margin-bottom: 1.2rem;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-right-color: var(--accent);
+  animation: spin 1.05s ease-in-out infinite;
+}
+
+.ringCore {
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(2, 117, 216, 0.32),
+    transparent 70%
+  );
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.title {
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring    { animation: none; border-top-color: var(--primary); }
+  .ringCore { animation: none; }
+}

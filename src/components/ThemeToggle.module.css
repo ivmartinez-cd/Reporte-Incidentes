@@ -1,0 +1,57 @@
+.toggle {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 99px;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.track {
+  width: 52px;
+  height: 28px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 99px;
+  position: relative;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+  display: flex;
+  align-items: center;
+}
+
+.track.light {
+  background: #cbd3e1; /* Fondo un poco mas oscuro en claro para contraste del knob */
+  border-color: rgba(54, 57, 85, 0.3);
+}
+
+.knob {
+  position: absolute;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  background: var(--text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--bg-base);
+}
+
+.track.light .knob {
+  transform: translateX(24px);
+  background: #ffffff;
+  color: #363955;
+  box-shadow: 0 2px 4px rgba(54, 57, 85, 0.2);
+}
+
+.knob svg {
+  width: 12px;
+  height: 12px;
+}

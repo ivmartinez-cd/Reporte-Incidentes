@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { logoutAction } from "@/app/dashboard/actions";
+import ThemeToggle from "./ThemeToggle";
+import ConfigButton from "./ConfigButton";
 import styles from "./Header.module.css";
 
 export default function Header({ user }: { user: string }) {
   return (
-    <header className={`${styles.header} glass`}>
+    <header className={styles.header}>
       <div className={styles.brand}>
         <Image
           src="/logo_login.png"
@@ -16,14 +18,15 @@ export default function Header({ user }: { user: string }) {
         />
         <span className={styles.divider} />
         <div className={styles.titles}>
-          <strong>Dashboard Ejecutivo</strong>
-          <small>Reportes de Incidentes</small>
+          <strong>Reportes de Incidentes</strong>
         </div>
       </div>
 
       <div className={styles.right}>
+        <ConfigButton />
+        <ThemeToggle />
         <span className={styles.user}>
-          <span className={styles.dot} /> {user}
+          <span className={styles.dot} />
         </span>
         <form action={logoutAction}>
           <button type="submit" className="btn btn-ghost">

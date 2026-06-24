@@ -15,12 +15,14 @@ export async function loginAction(
   const password = String(formData.get("password") ?? "");
 
   if (!username || !password) {
-    return { error: "Ingresá usuario y contraseña." };
+    return { error: "Ingresa usuario y contrasena." };
   }
   if (!verifyCredentials(username, password)) {
-    return { error: "Credenciales inválidas." };
+    return { error: "Credenciales invalidas." };
   }
 
   await setSessionCookie(username);
-  redirect("/dashboard");
+  // Tras autenticar, el usuario elige cliente a proposito (no se autoselecciona
+  // ninguno): vamos a la pantalla de seleccion, no directo al dashboard.
+  redirect("/seleccion");
 }

@@ -7,8 +7,8 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { CATEGORY_COLORS } from "@/lib/ai/categories";
 import type { IncidentCategory } from "@/lib/types";
+import { categoryColor } from "@/lib/ai/categories";
 import { formatInt } from "@/lib/format";
 import styles from "./charts.module.css";
 
@@ -17,18 +17,24 @@ interface Datum {
   value: number;
 }
 
-export default function CategoryDonut({ data }: { data: Datum[] }) {
+export default function CategoryDonut({
+  data,
+  categoryColors,
+}: {
+  data: Datum[];
+  categoryColors?: Record<string, string>;
+}) {
   const total = data.reduce((s, d) => s + d.value, 0);
 
   return (
     <div className={`card ${styles.card}`}>
       <div className={styles.head}>
-        <h3 className={styles.title}>Incidentes por Tipo (IA)</h3>
+        <h3 className={styles.title}>Incidentes por Categoria</h3>
         <span className={styles.meta}>{formatInt(total)} total</span>
       </div>
 
       {total === 0 ? (
-        <div className={styles.empty}>Sin datos para el período</div>
+        <div className={styles.empty}>Sin datos para el periodo</div>
       ) : (
         <>
           <div className={styles.centerWrap}>
@@ -38,13 +44,17 @@ export default function CategoryDonut({ data }: { data: Datum[] }) {
                   data={data}
                   dataKey="value"
                   nameKey="name"
-                  innerRadius="62%"
+                  innerRadius="65%"
                   outerRadius="92%"
-                  paddingAngle={2}
-                  stroke="none"
+                  paddingAngle={3}
+                  stroke="var(--surface-1)"
+                  strokeWidth={2}
                 >
                   {data.map((d) => (
-                    <Cell key={d.name} fill={CATEGORY_COLORS[d.name]} />
+                    <Cell
+                      key={d.name}
+                      fill={categoryColor(d.name, categoryColors)}
+                    />
                   ))}
                 </Pie>
                 <Tooltip content={<DonutTooltip total={total} />} />
@@ -58,16 +68,25 @@ export default function CategoryDonut({ data }: { data: Datum[] }) {
             </div>
           </div>
 
-          <div className={styles.legend}>
-            {data.map((d) => (
-              <span key={d.name} className={styles.legendItem}>
-                <span
-                  className={styles.swatch}
-                  style={{ background: CATEGORY_COLORS[d.name] }}
-                />
-                {d.name} · {d.value}
-              </span>
-            ))}
+          <div className={styles.legendGrid}>
+            {data.map((d) => {
+              const color = categoryColor(d.name, categoryColors);
+              const pct = total ? Math.round((d.value / total) * 100) : 0;
+              return (
+                <div key={d.name} className={styles.legendItemCard}>
+                  <div className={styles.legendLeft}>
+                    <span
+                      className={styles.swatch}
+                      style={{ background: color }}
+                    />
+                    <span className={styles.legendName}>{d.name}</span>
+                  </div>
+                  <span className={styles.legendValue}>
+                    {d.value} <span className={styles.legendPct}>({pct}%)</span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </>
       )}
@@ -95,3 +114,4 @@ function DonutTooltip({
     </div>
   );
 }
+

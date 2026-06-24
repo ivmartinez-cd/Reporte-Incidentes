@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Hardware y Desgaste",
+    "color": "#0275d8",
+    "description": "Reparacion o sustitucion de componentes fisicos de la impresora (reemplazo de fusores, rodillos pickup/retard de bandeja gastados, sensores sucios, bandas de transferencia, ADF rayado, cables de corriente/power flojos).",
+    "subcategories": [
+      "Fusor / Calor",
+      "Rodillos y Gomas",
+      "Modulo ADF / Escaner",
+      "Conexion Electrica",
+      "Panel / Botones",
+      "Embrague / Clutch",
+      "Componentes Internos",
+      "Unidad Laser (LSU)",
+      "Placa Logica / Controller",
+      "Cubierta / Carcasa",
+      "Carcasa / Cubierta",
+      "Estructura / Chasis",
+      "Motor / Engranajes",
+      "Diagnostico Interno",
+      "Diagnostico / Inspeccion",
+      "Diagnostico de Componentes Internos",
+      "Desgaste / Reparacion",
+      "Drum / Unidad de Imagen",
+      "Bandeja de Papel",
+      "Unidad de Imagen / Drum"
+    ]
+  },
+  {
+    "name": "Medio de Impresion",
+    "color": "#f0a400",
+    "description": "Incidentes relacionados con el papel y bandejas fisicas. Ejemplos: guias de bandeja desalineadas, resmas de papel humedas, papel de precios troquelado que se traba.",
+    "subcategories": [
+      "Ajuste de Guias / Bandejas",
+      "Calidad / Humedad del Papel",
+      "Papel Especial (Troquelado)",
+      "Atasco de Papel",
+      "Papel y Bandejas"
+    ]
+  },
+  {
+    "name": "Conectividad y Red",
+    "color": "#2bb6c4",
+    "description": "Perdidas de IP de red del equipo, puertos de red, switches, falso contacto en cables de red, configuraciones de red interna de la empresa.",
+    "subcategories": [
+      "Configuracion IP / Red",
+      "Red Fisica / Cableado",
+      "Configuracion de Red / IP"
+    ]
+  },
+  {
+    "name": "Insumos y Toner",
+    "color": "#e8743b",
+    "description": "Toner agotado, engranajes/enlaces rotos en el cartucho de toner que impiden el giro (causando atascos falsos), o manchas/rayas debido al cilindro/toner.",
+    "subcategories": [
+      "Toner Defectuoso",
+      "Limpieza de Componentes de Toner",
+      "Toner / Insumos"
+    ]
+  },
+  {
+    "name": "Gestion de Soporte",
+    "color": "#4dc247",
+    "description": "Tickets de soporte cerrados administrativamente por falta de datos, auto-resoluciones enviando videos/instructivos, o mal uso/negligencia del usuario (como carpetas u objetos apoyados sobre la salida del papel tapando la salida, o vandalismo fisico).",
+    "subcategories": [
+      "Auto-resolucion Asistida",
+      "Negligencia / Mal Uso",
+      "Diagnostico / Verificacion",
+      "Diagnostico sin falla",
+      "Diagnostico General",
+      "Revision General",
+      "Diagnostico / Inspeccion"
+    ]
+  },
+  {
+    "name": "Software y Firmware",
+    "color": "#7b61ff",
+    "description": "Spooler de Windows colgado, drivers corruptos en la PC de facturacion del cliente, configuraciones de tamano de papel en Windows, o actualizaciones de firmware, reinstalacion de firmware (FW) o carga de firmware del equipo.",
+    "subcategories": [
+      "Actualizacion de Firmware",
+      "Soporte Tecnico PC",
+      "Configuracion de Equipo"
+    ]
+  }
+]

@@ -1,2 +1,2 @@
-/** Constantes de sesión seguras para cualquier runtime (Edge incluido). */
+/** Constantes de sesion seguras para cualquier runtime (Edge incluido). */
 export const SESSION_COOKIE = "cd_session";

@@ -14,24 +14,45 @@ export interface Incident {
   sucursal?: string;
   maquina?: string;
   estado?: string;
-  /** Texto libre que describe el incidente — entrada para la tipificación IA. */
+  /** Texto libre que describe el incidente — entrada para la tipificacion IA. */
   descripcion: string;
   /** Costo asociado al incidente (ARS), si el SOAP lo expone. */
   costo?: number;
-  /** Categoría asignada por la IA (se completa luego de clasificar). */
+
+  // ── Contexto extra del incidente (disponible en el listado/detalle SOAP) ──
+  /** Quien reporto el incidente. */
+  solicitante?: string;
+  /** Tecnico/prestador asignado. */
+  tecnico?: string;
+  /** Tipo de trabajo: Correctivo / Preventivo / etc. */
+  tipoTrabajo?: string;
+  /** Causa raiz diagnosticada por el tecnico (ej. "TN - Toner"). */
+  causa?: string;
+  /** Articulo/modelo del equipo. */
+  articulo?: string;
+  /** Fecha de cierre (ISO), si el incidente esta resuelto/cerrado. */
+  fechaCierre?: string;
+
+  // ── Trabajo realizado por el tecnico (getIncidentJobs) ──
+  /** Resolucion derivada: lo que efectivamente hizo el tecnico. */
+  solucion?: string;
+  /** Bitacora completa de trabajos/observaciones del tecnico. */
+  trabajos?: IncidentJob[];
+
+  // ── Salidas de la IA ──
+  /** Categoria asignada por la IA (se completa luego de clasificar). */
   categoria?: IncidentCategory;
+  /** Subcategoria asignada por la IA. */
+  subcategoria?: string;
 }
 
-export type IncidentCategory =
-  | "Atasco Papel"
-  | "Error de Servicio"
-  | "Error de Servicio Crítico"
-  | "Instalación de Cola de Impresión"
-  | "Software"
-  | "Usabilidad/Configuración"
-  | "Error de Insumo"
-  | "Instalación / Desinstalación"
-  | "Sin Clasificar";
+/** Una entrada de la bitacora de trabajo del tecnico. */
+export interface IncidentJob {
+  descripcion: string;
+  observ?: string;
+}
+
+export type IncidentCategory = string;
 
 export interface AiUsage {
   promptTokens: number;
@@ -46,7 +67,12 @@ export interface ReportData {
   period: string; // "YYYY-MM"
   incidents: Incident[];
   generatedAt: string;
-  aiUsage: AiUsage;
   /** true si los datos provienen del mock y no del SOAP real. */
   isMock: boolean;
+  /**
+   * Cantidad de casos unicos que todavia no fueron clasificados por IA y se
+   * muestran con el heuristico provisional. >0 dispara el refinamiento en
+   * segundo plano (ver ClassificationRefiner / refineClassificationAction).
+   */
+  pending: number;
 }

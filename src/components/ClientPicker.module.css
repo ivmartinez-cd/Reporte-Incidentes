@@ -1,0 +1,183 @@
+.wrap {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* ---- Recientes -------------------------------------------------------------- */
+.recents {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recentsLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  font-family: var(--font-body);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface-2);
+  color: var(--text-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease),
+    transform 0.18s var(--ease);
+}
+.chip:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.chip:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* ---- Campo combobox --------------------------------------------------------- */
+.comboField {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.95rem;
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.input {
+  font-family: var(--font-body);
+  width: 100%;
+  background: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.95rem 1rem 0.95rem 2.7rem;
+  font-size: 1.02rem;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.input::placeholder {
+  color: var(--text-muted);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(2, 117, 216, 0.18);
+}
+.input:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---- Listbox de resultados -------------------------------------------------- */
+.listbox {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.12s var(--ease);
+}
+.optionActive {
+  background: rgba(2, 117, 216, 0.18);
+}
+
+.optionName {
+  color: var(--text);
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.optionId {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.empty {
+  margin: 0;
+  padding: 0.85rem 0.95rem;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Spinners --------------------------------------------------------------- */
+.fieldSpinner,
+.chipSpinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--accent);
+  animation: cp-spin 0.7s linear infinite;
+}
+.fieldSpinner {
+  position: absolute;
+  right: 1rem;
+}
+
+@keyframes cp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fieldSpinner,
+  .chipSpinner {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrap {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,39 @@
+.configButton {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.configButton:hover {
+  color: var(--text);
+  border-color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:global([data-theme="light"]) .configButton:hover {
+  background: rgba(54, 57, 85, 0.05);
+}
+
+.gearIcon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s var(--ease);
+}
+
+.configButton:hover .gearIcon {
+  transform: rotate(45deg);
+}
+
+.configButton:active {
+  transform: scale(0.95);
+}

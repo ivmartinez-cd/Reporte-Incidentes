@@ -7,7 +7,7 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Validación criptográfica real de la sesión (el middleware sólo redirige).
+  // Validacion criptografica real de la sesion (el middleware solo redirige).
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 

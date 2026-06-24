@@ -1,12 +1,16 @@
-import { getEmpresas, buildReport, summarize } from "@/lib/report";
-import { recentPeriods, periodLabel, formatInt, formatArs } from "@/lib/format";
+import { redirect } from "next/navigation";
+import { getEmpresas, buildReport } from "@/lib/report";
+import { summarize } from "@/lib/aggregate";
+import { recentPeriods, periodLabel, formatInt } from "@/lib/format";
+import { getCategories } from "@/lib/data/categoriesStore";
 import Toolbar from "@/components/Toolbar";
 import KpiCard from "@/components/KpiCard";
-import AiCostWidget from "@/components/AiCostWidget";
 import CategoryDonut from "@/components/charts/CategoryDonut";
+import SubcategoryBar from "@/components/charts/SubcategoryBar";
 import SucursalBar from "@/components/charts/SucursalBar";
 import Timeline from "@/components/charts/Timeline";
 import IncidentsTable from "@/components/IncidentsTable";
+import ClassificationRefiner from "@/components/ClassificationRefiner";
 import styles from "./dashboard.module.css";
 
 // El reporte se construye en cada request (datos cacheados aguas abajo).
@@ -21,12 +25,25 @@ export default async function DashboardPage({
   const empresas = await getEmpresas();
   const periods = recentPeriods(12);
 
-  const empresaId = sp.empresa ?? empresas[0]?.id ?? "";
+  // Seleccion explicita obligatoria: sin un cliente VALIDO en la URL, volvemos a
+  // la pantalla de seleccion (no autoseleccionamos "el primero").
+  const empresaId = sp.empresa ?? "";
+  if (!empresaId || !empresas.some((e) => e.id === empresaId)) {
+    redirect("/seleccion");
+  }
+
+  // El periodo si tiene un default natural (el mes mas reciente), no arbitrario.
   const period =
     sp.period && periods.includes(sp.period) ? sp.period : periods[0];
 
   const report = await buildReport(empresaId, period);
   const s = summarize(report);
+
+  // Mapa de colores dinamicos derivado de la taxonomia configurable.
+  const categoryColors = getCategories().reduce((acc, cat) => {
+    acc[cat.name] = cat.color;
+    return acc;
+  }, {} as Record<string, string>);
 
   return (
     <div className={styles.page}>
@@ -41,9 +58,9 @@ export default async function DashboardPage({
           </p>
         </div>
         <Toolbar
-          empresas={empresas}
+          empresaId={empresaId}
+          empresaNombre={report.empresa.nombre}
           periods={periods}
-          selectedEmpresa={empresaId}
           selectedPeriod={period}
         />
       </section>
@@ -57,46 +74,48 @@ export default async function DashboardPage({
           delay={0}
         />
         <KpiCard
-          label="Tipo más Común"
+          label="Categoria Principal"
           value={s.topCategory}
-          hint="categoría líder (IA)"
+          hint={s.total > 0 ? `${s.topCategoryCount} casos (${s.topCategoryPct}%)` : "Sin incidentes"}
           accent="accent"
           delay={60}
         />
         <KpiCard
-          label="Incidentes Críticos"
-          value={formatInt(s.criticos)}
-          hint="Error de Servicio Crítico"
-          accent="danger"
+          label="Sucursal Principal"
+          value={s.topSucursal}
+          hint={s.total > 0 ? `${s.topSucursalCount} incidentes` : "Sin incidentes"}
+          accent="primary"
           delay={120}
-        />
-        <KpiCard
-          label="Costo Operativo"
-          value={formatArs(s.costoTotal)}
-          hint="suma de costos del período"
-          accent="success"
-          delay={180}
         />
       </section>
 
       <section className={styles.mid}>
-        <CategoryDonut data={s.categories} />
-        <AiCostWidget usage={report.aiUsage} />
+        <Timeline data={s.timeline} />
       </section>
 
       <section className={styles.charts}>
-        <Timeline data={s.timeline} />
+        <CategoryDonut data={s.categories} categoryColors={categoryColors} />
+        <SubcategoryBar data={s.subcategories} categoryColors={categoryColors} />
+      </section>
+
+      <section className={styles.mid}>
         <SucursalBar data={s.sucursales} />
       </section>
 
       <section>
-        <IncidentsTable incidents={report.incidents} />
+        <IncidentsTable incidents={report.incidents} categoryColors={categoryColors} />
       </section>
 
       <footer className={styles.footer}>
         Generado {new Date(report.generatedAt).toLocaleString("es-AR")} ·
         Canal Directo · Confidencial — Uso exclusivo del Directorio
       </footer>
+
+      <ClassificationRefiner
+        empresaId={empresaId}
+        period={period}
+        pending={report.pending}
+      />
     </div>
   );
 }

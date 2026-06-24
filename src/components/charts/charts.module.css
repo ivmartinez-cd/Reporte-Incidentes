@@ -85,3 +85,47 @@
   color: var(--text-muted);
   font-size: 0.9rem;
 }
+
+/* Premium Legend Grid layout */
+.legendGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1rem;
+  margin-top: 1.2rem;
+}
+
+.legendItemCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.7rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+}
+
+.legendLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendName {
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.legendValue {
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.legendPct {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+

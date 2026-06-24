@@ -4,7 +4,7 @@ import type { AiUsage } from "@/lib/types";
 
 /**
  * Acumulador de uso/costo de IA en memoria (por proceso). Se reinicia al
- * reiniciar el servidor — suficiente para un panel interno. Para histórico
+ * reiniciar el servidor — suficiente para un panel interno. Para historico
  * persistente, reemplazar por una tabla/DB.
  */
 let totals: AiUsage = {
@@ -31,8 +31,19 @@ export function recordUsage(promptTokens: number, candidatesTokens: number) {
   };
 }
 
-export function getTotals(): AiUsage {
-  return { ...totals };
+/**
+ * Imprime el costo de IA SOLO en los logs del servidor. Esta informacion
+ * financiera nunca debe exponerse en el frontend (Junta / Presidente): se
+ * acumula en el backend y se reporta unicamente por consola.
+ */
+export function logUsage(runUsage: AiUsage) {
+  if (runUsage.calls === 0) return;
+  console.info(
+    `[ia-costo] corrida: ${runUsage.totalTokens} tokens / ` +
+      `${runUsage.calls} llamada(s) / $${runUsage.costUsd.toFixed(6)} USD · ` +
+      `acumulado: ${totals.totalTokens} tokens / ${totals.calls} llamada(s) / ` +
+      `$${totals.costUsd.toFixed(6)} USD`,
+  );
 }
 
 export function emptyUsage(): AiUsage {

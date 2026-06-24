@@ -22,6 +22,13 @@ Build de producción:
 npm run build && npm start
 ```
 
+Tests (Vitest, sobre la lógica pura: normalización SOAP, agregados de KPIs y formato):
+
+```bash
+npm test          # corrida única
+npm run test:watch
+```
+
 Login por defecto (configurable en `.env.local`): usuario `directorio`,
 contraseña `canaldirecto2026`.
 

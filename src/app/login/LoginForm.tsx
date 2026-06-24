@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Image from "next/image";
 import { loginAction, type LoginState } from "./actions";
+import ThemeToggle from "@/components/ThemeToggle";
 import styles from "./login.module.css";
 
 const initial: LoginState = {};
@@ -12,6 +13,9 @@ export default function LoginForm() {
 
   return (
     <div className={styles.wrap}>
+      <div style={{ position: "absolute", top: "1.5rem", right: "2rem", zIndex: 50 }}>
+        <ThemeToggle />
+      </div>
       <div className={`glass ${styles.card} rise`}>
         <Image
           src="/logo_login.png"
@@ -21,10 +25,7 @@ export default function LoginForm() {
           className={styles.logo}
           priority
         />
-        <h1 className={styles.title}>Dashboard Ejecutivo</h1>
-        <p className={styles.subtitle}>
-          Reportes de incidentes · Acceso restringido al Directorio
-        </p>
+        <h1 className={styles.title}>Reportes de Incidentes</h1>
 
         <form action={action}>
           <div className={styles.group}>
@@ -42,7 +43,7 @@ export default function LoginForm() {
 
           <div className={styles.group}>
             <label className={styles.label} htmlFor="password">
-              Contraseña
+              Contrasena
             </label>
             <input
               id="password"

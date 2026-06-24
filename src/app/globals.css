@@ -1,44 +1,84 @@
 /* ============================================================================
-   Canal Directo · Dashboard Ejecutivo — Sistema de Diseño
-   Paleta de marca, tipografía y primitivas (glassmorphism / dark mode).
+   Canal Directo · Dashboard Ejecutivo — Sistema de Diseno
+   Paleta de marca, tipografia y primitivas (glassmorphism / dark mode).
    ========================================================================== */
 
 :root {
+  /* === TEMA OSCURO — gama corporativa #363955 (indigo) === */
+  color-scheme: dark;
+
   /* Fondo y superficies */
-  --bg-base: #0a1020;          /* azul medianoche */
-  --bg-deep: #070b16;
-  --surface: #131c30;          /* gris azulado oscuro */
-  --surface-2: #1a2740;
-  --surface-glass: rgba(26, 39, 64, 0.55);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.14);
+  --bg-deep: #24263b;
+  --bg-base: #2c2f47;
+  --surface: #363955;          /* ancla de marca */
+  --surface-2: #424565;
+  --surface-glass: rgba(54, 57, 85, 0.9);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
 
   /* Acentos corporativos */
   --primary: #0275d8;
   --primary-deep: #014c8c;
-  --accent: #f0a400;           /* naranja acción */
+  --accent: #f0a400;           /* naranja accion */
   --accent-deep: #c98700;
 
-  /* Semánticos */
+  /* Semanticos */
   --success: #4dc247;
   --warning: #f0a400;
-  --danger: hsl(348, 83%, 47%);
+  --danger: hsl(348, 83%, 62%);
 
   /* Texto */
-  --text: #eef2f8;
-  --text-soft: #aab4c5;
-  --text-muted: #6b7689;
+  --text: #eef0f8;
+  --text-soft: #bcc1d8;
+  --text-muted: #939ab6;
 
-  /* Tipografía */
+  /* Componentes tematicos */
+  --input-bg: rgba(0, 0, 0, 0.22);
+  --header-bg: rgba(40, 43, 66, 0.97);
+  --row-hover: rgba(255, 255, 255, 0.05);
+  --chart-grid: rgba(255, 255, 255, 0.09);
+  --chart-axis: #939ab6;
+
+  /* Tipografia */
   --font-title: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
   --font-body: var(--font-roboto), "Roboto", system-ui, sans-serif;
 
-  /* Radios / sombras / transición */
+  /* Radios / sombras / transicion */
   --radius: 16px;
   --radius-sm: 10px;
-  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.65);
+  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.55);
   --shadow-glow: 0 0 0 1px var(--border), 0 24px 60px -28px rgba(2, 117, 216, 0.4);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="light"] {
+  /* === TEMA CLARO — gama corporativa #F5F6E6 (crema) === */
+  color-scheme: light;
+
+  --bg-base: #f5f6e6;
+  --bg-deep: #e8e9d8;
+  --surface: #ffffff;
+  --surface-2: #fcfcf2;
+  --surface-glass: rgba(255, 255, 255, 0.92);
+  --border: rgba(54, 57, 85, 0.14);
+  --border-strong: rgba(54, 57, 85, 0.26);
+
+  /* Azul un poco mas profundo: mejora el contraste sobre fondos claros. */
+  --primary: #0163b8;
+  --primary-deep: #014c8c;
+
+  --text: #363955;
+  --text-soft: #4c5578;
+  --text-muted: #69739a;
+
+  --input-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.96);
+  --row-hover: rgba(54, 57, 85, 0.045);
+  --chart-grid: rgba(54, 57, 85, 0.13);
+  --chart-axis: #69739a;
+
+  --shadow: 0 14px 40px -18px rgba(54, 57, 85, 0.22);
+  --shadow-glow: 0 0 0 1px var(--border), 0 20px 50px -20px rgba(2, 117, 216, 0.18);
 }
 
 * {
@@ -55,13 +95,25 @@ body {
 body {
   font-family: var(--font-body);
   color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(1100px 700px at 12% -8%, rgba(2, 117, 216, 0.18), transparent 55%),
     radial-gradient(900px 600px at 100% 0%, rgba(240, 164, 0, 0.1), transparent 50%),
     linear-gradient(180deg, var(--bg-base), var(--bg-deep));
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4 {
@@ -76,14 +128,28 @@ a {
   text-decoration: none;
 }
 
+/* Accesibilidad: indicador de foco visible y consistente para navegacion por
+   teclado (no aparece en clicks de raton gracias a :focus-visible). */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+/* Los campos ya muestran su propio anillo de foco (borde + box-shadow). */
+input.field:focus-visible,
+.select:focus-visible {
+  outline: none;
+}
+
 /* ---- Primitivas reutilizables ---------------------------------------------- */
 
+/* Fondo translucido pero SIN backdrop-filter: el desenfoque de fondo es de lo
+   mas caro de pintar (sobre todo al scrollear). El fondo casi opaco conserva
+   el aire "glass" a costo casi nulo. */
 .glass {
   background: var(--surface-glass);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
   box-shadow: var(--shadow);
 }
 
@@ -158,7 +224,7 @@ a {
 input.field {
   font-family: var(--font-body);
   width: 100%;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--input-bg);
   color: var(--text);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
@@ -170,6 +236,32 @@ input.field:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(2, 117, 216, 0.18);
+}
+
+/* Recharts — colores de ejes/grilla tematicos. El CSS de autor resuelve var()
+   en fill/stroke y gana sobre los atributos de presentacion inline de recharts,
+   asi los graficos siguen al tema sin logica en JS. */
+.recharts-cartesian-grid line {
+  stroke: var(--chart-grid);
+}
+.recharts-cartesian-axis-line,
+.recharts-cartesian-axis-tick-line {
+  stroke: var(--chart-grid);
+}
+.recharts-cartesian-axis-tick-value {
+  fill: var(--chart-axis);
+}
+.recharts-tooltip-cursor {
+  fill: var(--row-hover);
+}
+
+/* Transicion suave al alternar tema (se aplica solo durante el cambio de tema para evitar lag al hacer scroll) */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-transitioning,
+  .theme-transitioning * {
+    transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
+      color 0.25s var(--ease) !important;
+  }
 }
 
 /* Animaciones de entrada (micro-interacciones) */

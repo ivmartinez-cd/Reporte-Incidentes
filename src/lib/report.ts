@@ -1,12 +1,25 @@
 import "server-only";
 import { config } from "@/lib/config";
+import { cacheGet, cacheSet } from "@/lib/cache";
 import { listEmpresas, listIncidents } from "@/lib/soap/incidents";
 import { classifyIncidents } from "@/lib/ai/classify";
-import { CATEGORIES, UNCLASSIFIED } from "@/lib/ai/categories";
-import type { IncidentCategory, ReportData } from "@/lib/types";
+import { getCategories } from "@/lib/data/categoriesStore";
+import type { ReportData } from "@/lib/types";
 
 export async function getEmpresas() {
   return listEmpresas();
+}
+
+/**
+ * Hash estable de la taxonomia. Cambia al editar categorias/subcategorias (o al
+ * aceptar una sugerencia), lo que invalida el reporte cacheado y fuerza una
+ * reclasificacion. Mientras la taxonomia no cambie, el reporte se reutiliza.
+ */
+function categoriesVersion(): string {
+  const sig = JSON.stringify(getCategories().map((c) => [c.name, c.subcategories]));
+  let h = 0;
+  for (let i = 0; i < sig.length; i++) h = (sig.charCodeAt(i) + ((h << 5) - h)) | 0;
+  return (h >>> 0).toString(36);
 }
 
 /** Construye el reporte mensual completo de una empresa (datos + IA + costos). */
@@ -21,65 +34,28 @@ export async function buildReport(
       nombre: "—",
     };
 
-  const raw = await listIncidents(empresa.id, period);
-  const { incidents, usage } = await classifyIncidents(raw);
+  // Render rapido: NO bloqueamos la pagina esperando a Gemini. Clasificamos solo
+  // desde la cache de disco (useAi:false); lo no cacheado queda con el heuristico
+  // provisional y se refina en segundo plano (ver refineClassificationAction).
+  //
+  // Cacheamos el reporte por empresa+periodo+version de taxonomia SOLO cuando ya
+  // esta completamente clasificado por IA (`pending === 0`). Mientras haya
+  // pendientes lo dejamos sin cachear: asi, tras el refinamiento, el proximo
+  // render lee la cache de disco ya poblada y devuelve la clasificacion de IA.
+  const key = `report:${empresa.id}:${period}:${categoriesVersion()}`;
+  const hit = cacheGet<ReportData>(key);
+  if (hit) return hit;
 
-  return {
+  const raw = await listIncidents(empresa.id, period);
+  const { incidents, pending } = await classifyIncidents(raw, { useAi: false });
+  const report: ReportData = {
     empresa,
     period,
     incidents,
+    pending,
     generatedAt: new Date().toISOString(),
-    aiUsage: usage,
     isMock: config.useMock,
   };
-}
-
-/** Agregados derivados para los KPIs y gráficos del dashboard. */
-export function summarize(report: ReportData) {
-  const byCategory = new Map<IncidentCategory, number>();
-  for (const c of [...CATEGORIES, UNCLASSIFIED]) byCategory.set(c, 0);
-  for (const inc of report.incidents) {
-    const c = inc.categoria ?? UNCLASSIFIED;
-    byCategory.set(c, (byCategory.get(c) ?? 0) + 1);
-  }
-
-  const categories = [...byCategory.entries()]
-    .map(([name, value]) => ({ name, value }))
-    .filter((c) => c.value > 0)
-    .sort((a, b) => b.value - a.value);
-
-  const total = report.incidents.length;
-  const costoTotal = report.incidents.reduce((s, i) => s + (i.costo ?? 0), 0);
-  const criticos = byCategory.get("Error de Servicio Crítico") ?? 0;
-  const topCategory = categories[0]?.name ?? "—";
-
-  // Incidentes por día del mes (para la serie temporal).
-  const byDay = new Map<string, number>();
-  for (const inc of report.incidents) {
-    byDay.set(inc.fecha, (byDay.get(inc.fecha) ?? 0) + 1);
-  }
-  const timeline = [...byDay.entries()]
-    .map(([date, value]) => ({ date, value }))
-    .sort((a, b) => a.date.localeCompare(b.date));
-
-  // Top sucursales por cantidad de incidentes.
-  const bySucursal = new Map<string, number>();
-  for (const inc of report.incidents) {
-    const s = inc.sucursal ?? "—";
-    bySucursal.set(s, (bySucursal.get(s) ?? 0) + 1);
-  }
-  const sucursales = [...bySucursal.entries()]
-    .map(([name, value]) => ({ name, value }))
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 6);
-
-  return {
-    total,
-    costoTotal,
-    criticos,
-    topCategory,
-    categories,
-    timeline,
-    sucursales,
-  };
+  if (pending === 0) cacheSet(key, report, config.soap.cacheTtlSeconds);
+  return report;
 }

@@ -42,23 +42,30 @@
   right: 0;
   height: 3px;
 }
+/* Glow por color SIN `filter: blur` (que repinta carisimo en cada hover/scroll,
+   y son 3 KPIs a la vez). Un radial-gradient da el mismo halo difuso a costo
+   de pintado casi nulo. El color se inyecta por variante con --glow-color. */
 .glow {
   position: absolute;
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  right: -50px;
-  top: -60px;
-  filter: blur(40px);
-  opacity: 0.35;
+  right: -60px;
+  top: -80px;
+  opacity: 0.5;
   pointer-events: none;
+  background: radial-gradient(
+    circle,
+    var(--glow-color, var(--primary)),
+    transparent 68%
+  );
 }
 
 .primary::before { background: var(--primary); }
-.primary .glow { background: var(--primary); }
+.primary { --glow-color: var(--primary); }
 .accent::before { background: var(--accent); }
-.accent .glow { background: var(--accent); }
+.accent { --glow-color: var(--accent); }
 .success::before { background: var(--success); }
-.success .glow { background: var(--success); }
+.success { --glow-color: var(--success); }
 .danger::before { background: var(--danger); }
-.danger .glow { background: var(--danger); }
+.danger { --glow-color: var(--danger); }

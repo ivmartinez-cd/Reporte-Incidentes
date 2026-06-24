@@ -9,6 +9,21 @@
   padding: 0.85rem 1.6rem;
   margin: 0.9rem;
   border-radius: var(--radius);
+  /* SIN backdrop-filter a proposito. Al ser sticky, un backdrop-filter obliga
+     al navegador a re-difuminar TODO lo que pasa por debajo en CADA frame de
+     scroll: ese era el origen del "se arrastra". Usamos un fondo casi opaco
+     (var --header-bg) que se ve igual de prolijo a costo de pintado casi nulo;
+     `contain: paint` aisla el repintado del header del resto de la pagina. */
+  background: var(--header-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  contain: paint;
+}
+
+:global([data-theme="light"]) .header {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba(54, 57, 85, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(54, 57, 85, 0.08);
 }
 
 .brand {

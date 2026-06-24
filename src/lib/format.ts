@@ -10,28 +10,23 @@ export function periodLabel(period: string): string {
   return `${MESES[(m ?? 1) - 1] ?? ""} ${y ?? ""}`;
 }
 
-export function formatUsd(value: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: value < 1 ? 4 : 2,
-  }).format(value);
-}
-
-export function formatArs(value: number): string {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 0,
-  }).format(value);
-}
-
 export function formatInt(value: number): string {
   return new Intl.NumberFormat("es-AR").format(value);
 }
 
-/** Lista de los últimos N períodos "YYYY-MM" hasta el mes indicado (o actual). */
+/** Calcula el digito verificador usando ponderacion EAN/UPC (pesos alternados 3 y 1, mod 10). */
+export function calcCheckDigit(numStr: string): string {
+  const clean = numStr.replace(/\D/g, "");
+  if (!clean) return "";
+  let sum = 0;
+  for (let i = 0; i < clean.length; i++) {
+    const weight = i % 2 === 0 ? 3 : 1;
+    sum += Number(clean[i]) * weight;
+  }
+  return String((10 - (sum % 10)) % 10);
+}
+
+/** Lista de los ultimos N periodos "YYYY-MM" hasta el mes indicado (o actual). */
 export function recentPeriods(count = 12, from?: Date): string[] {
   const base = from ?? new Date();
   const out: string[] = [];

@@ -24,6 +24,37 @@
   min-width: 220px;
 }
 
+.client {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 41px;
+}
+
+.clientName {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.change {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.change:hover {
+  color: var(--text);
+  border-color: var(--primary);
+}
+
 .status {
   margin-left: auto;
   display: inline-flex;
