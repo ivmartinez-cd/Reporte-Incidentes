@@ -17,7 +17,7 @@ interface Datum {
   value: number;
 }
 
-export default function Timeline({ data }: { data: Datum[] }) {
+export default function Timeline({ data, height }: { data: Datum[]; height?: number }) {
   const view = data.map((d) => ({ ...d, day: d.date.slice(8) }));
 
   return (
@@ -30,7 +30,7 @@ export default function Timeline({ data }: { data: Datum[] }) {
       {data.length === 0 ? (
         <div className={styles.empty}>Sin datos para el periodo</div>
       ) : (
-        <div className={styles.body}>
+        <div className={styles.body} style={height ? { height, minHeight: height, flex: "none" } : undefined}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={view} margin={{ left: -18, right: 12, top: 6 }}>
               <defs>

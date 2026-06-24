@@ -1,0 +1,110 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Barra de progreso indeterminada fija arriba, para el filtrado interactivo. */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  overflow: hidden;
+  background: var(--border-strong);
+}
+.progress::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: var(--primary);
+  border-radius: 0 3px 3px 0;
+  animation: progressSlide 0.9s var(--ease) infinite;
+}
+
+@keyframes progressSlide {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chipsLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  background: var(--surface-2, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  cursor: pointer;
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.chip:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+.chip:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.chipKey {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.chipVal {
+  font-weight: 600;
+}
+
+.chipX {
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--text-muted);
+}
+.chip:hover:not(:disabled) .chipX {
+  color: var(--primary);
+}
+
+.clearAll {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.clearAll:hover:not(:disabled) {
+  color: var(--text);
+}
+.clearAll:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

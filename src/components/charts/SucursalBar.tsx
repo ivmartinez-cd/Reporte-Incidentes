@@ -11,6 +11,7 @@ import {
   Cell,
 } from "recharts";
 import { formatInt } from "@/lib/format";
+import { useReportNav } from "../reportNav";
 import styles from "./charts.module.css";
 
 interface Datum {
@@ -20,7 +21,11 @@ interface Datum {
 
 const BAR_COLORS = ["#0275d8", "#014c8c", "#f0a400", "#4dc247", "#2bb6c4", "#7b61ff"];
 
-export default function SucursalBar({ data }: { data: Datum[] }) {
+export default function SucursalBar({ data, height }: { data: Datum[]; height?: number }) {
+  const { filters, toggle, pending } = useReportNav();
+  const active = filters.sucursal;
+  const dim = (name: string) => (active && active !== name ? 0.28 : 1);
+
   return (
     <div className={`card ${styles.card}`}>
       <div className={styles.head}>
@@ -31,7 +36,7 @@ export default function SucursalBar({ data }: { data: Datum[] }) {
       {data.length === 0 ? (
         <div className={styles.empty}>Sin datos para el periodo</div>
       ) : (
-        <div className={styles.body}>
+        <div className={styles.body} style={height ? { height, minHeight: height, flex: "none" } : undefined}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
@@ -61,9 +66,20 @@ export default function SucursalBar({ data }: { data: Datum[] }) {
                 cursor={{ fill: "var(--row-hover)" }}
                 content={<BarTooltip />}
               />
-              <Bar dataKey="value" radius={[0, 6, 6, 0]} barSize={20}>
-                {data.map((_, i) => (
-                  <Cell key={i} fill={BAR_COLORS[i % BAR_COLORS.length]} />
+              <Bar
+                dataKey="value"
+                radius={[0, 6, 6, 0]}
+                barSize={20}
+                isAnimationActive={false}
+                onClick={(d) => !pending && toggle("sucursal", d.name)}
+                className={styles.clickable}
+              >
+                {data.map((d, i) => (
+                  <Cell
+                    key={i}
+                    fill={BAR_COLORS[i % BAR_COLORS.length]}
+                    fillOpacity={dim(d.name)}
+                  />
                 ))}
               </Bar>
             </BarChart>

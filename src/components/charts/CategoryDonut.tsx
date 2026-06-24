@@ -10,6 +10,7 @@ import {
 import type { IncidentCategory } from "@/lib/types";
 import { categoryColor } from "@/lib/ai/categories";
 import { formatInt } from "@/lib/format";
+import { useReportNav } from "../reportNav";
 import styles from "./charts.module.css";
 
 interface Datum {
@@ -20,11 +21,18 @@ interface Datum {
 export default function CategoryDonut({
   data,
   categoryColors,
+  height,
 }: {
   data: Datum[];
   categoryColors?: Record<string, string>;
+  height?: number;
 }) {
+  const { filters, toggle, pending } = useReportNav();
+  const active = filters.categoria;
   const total = data.reduce((s, d) => s + d.value, 0);
+
+  // Atenua lo no seleccionado cuando hay un filtro de categoria activo.
+  const dim = (name: string) => (active && active !== name ? 0.28 : 1);
 
   return (
     <div className={`card ${styles.card}`}>
@@ -37,7 +45,7 @@ export default function CategoryDonut({
         <div className={styles.empty}>Sin datos para el periodo</div>
       ) : (
         <>
-          <div className={styles.centerWrap}>
+          <div className={styles.centerWrap} style={height ? { height, minHeight: height, flex: "none" } : undefined}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -49,11 +57,17 @@ export default function CategoryDonut({
                   paddingAngle={3}
                   stroke="var(--surface-1)"
                   strokeWidth={2}
+                  isAnimationActive={false}
+                  onClick={(_, index) =>
+                    !pending && toggle("categoria", data[index].name)
+                  }
+                  className={styles.clickable}
                 >
                   {data.map((d) => (
                     <Cell
                       key={d.name}
                       fill={categoryColor(d.name, categoryColors)}
+                      fillOpacity={dim(d.name)}
                     />
                   ))}
                 </Pie>
@@ -72,8 +86,17 @@ export default function CategoryDonut({
             {data.map((d) => {
               const color = categoryColor(d.name, categoryColors);
               const pct = total ? Math.round((d.value / total) * 100) : 0;
+              const isActive = active === d.name;
               return (
-                <div key={d.name} className={styles.legendItemCard}>
+                <button
+                  key={d.name}
+                  type="button"
+                  disabled={pending}
+                  onClick={() => toggle("categoria", d.name)}
+                  className={`${styles.legendItemCard} ${styles.legendBtn} ${isActive ? styles.legendActive : ""}`}
+                  style={{ opacity: dim(d.name) }}
+                  title={isActive ? "Quitar filtro" : `Filtrar por ${d.name}`}
+                >
                   <div className={styles.legendLeft}>
                     <span
                       className={styles.swatch}
@@ -84,7 +107,7 @@ export default function CategoryDonut({
                   <span className={styles.legendValue}>
                     {d.value} <span className={styles.legendPct}>({pct}%)</span>
                   </span>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -114,4 +137,3 @@ function DonutTooltip({
     </div>
   );
 }
-

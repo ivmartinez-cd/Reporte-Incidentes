@@ -1,20 +1,36 @@
 import "server-only";
+import fs from "fs";
+import path from "path";
 import { GoogleGenAI, Type } from "@google/genai";
 import { config } from "@/lib/config";
 import { withRetry, createLimiter } from "@/lib/concurrency";
-import { UNCLASSIFIED } from "./categories";
 import { getCategories, type DynamicCategory } from "@/lib/data/categoriesStore";
-import { recordSuggestions } from "@/lib/data/suggestionsStore";
+import { TAXONOMY_RULES_V1 } from "./taxonomy.v1";
 import { recordUsage, costOf, emptyUsage } from "./costStore";
 import { getCachedClassification, saveCachedClassifications } from "@/lib/data/classificationCache";
 import type { AiUsage, Incident, IncidentCategory } from "@/lib/types";
 
+/**
+ * Clasificador de incidentes (taxonomia CERRADA v1.x + reglas + few-shot + gating
+ * por confianza). El modelo devuelve categoria, subcategoria y confianza; SOLO se
+ * MUESTRA lo de confianza "alta". Lo "media"/"baja" (y los fallos de API) quedan
+ * como "Pendiente de revision" — nunca una etiqueta inventada. Ver
+ * [[taxonomy.v1]] para la taxonomia y reglas, y el harness scripts/score.mjs.
+ */
+
 const BATCH_SIZE = 25;
+export const PENDIENTE = "Pendiente de revision";
 
 interface CaseInput {
   descripcion: string;
   causa?: string;
   solucion?: string;
+}
+
+interface Classification {
+  categoria: string;
+  subcategoria: string;
+  confianza: string; // alta | media | baja
 }
 
 const RESPONSE_SCHEMA = {
@@ -25,8 +41,9 @@ const RESPONSE_SCHEMA = {
       i: { type: Type.INTEGER },
       categoria: { type: Type.STRING },
       subcategoria: { type: Type.STRING },
+      confianza: { type: Type.STRING },
     },
-    required: ["i", "categoria", "subcategoria"],
+    required: ["i", "categoria", "subcategoria", "confianza"],
   },
 };
 
@@ -37,138 +54,94 @@ function getClient(): GoogleGenAI | null {
   return client;
 }
 
-// Concurrencia 1: batches secuenciales para no gatillar rate-limit (429) /
-// sobrecarga (503) de Gemini, que disparaban reintentos. Con la caché en disco
-// el costo es de una sola vez, así que la pérdida de velocidad es marginal.
-const aiLimiter = createLimiter(1);
+// Batches en paralelo (configurable). Acorta el tiempo del refinamiento.
+const aiLimiter = createLimiter(config.ai.concurrency);
 
-function caseKey(c: CaseInput): string {
+/** Clave de cache por contenido del caso. Exportada para que la revision manual
+ *  guarde el override en la misma clave que usa el clasificador. */
+export function caseKeyForCache(c: { descripcion: string; causa?: string; solucion?: string }): string {
   return `${c.descripcion}|${c.causa ?? ""}|${c.solucion ?? ""}`;
 }
+const caseKey = (c: CaseInput) => caseKeyForCache(c);
+const inputOf = (inc: Incident): CaseInput => ({
+  descripcion: inc.descripcion,
+  causa: inc.causa,
+  solucion: inc.solucion,
+});
 
-function inputOf(inc: Incident): CaseInput {
-  return { descripcion: inc.descripcion, causa: inc.causa, solucion: inc.solucion };
+/** Few-shot del gold (data/corpus/_fewshot.json). Cargado una vez por proceso;
+ *  si falta (deploy sin corpus), el clasificador funciona igual con menos contexto. */
+let fewshotCache: Array<{ fallas: string; observ: string; solucion: string; cat: string; sub: string }> | null = null;
+function getFewshot(): NonNullable<typeof fewshotCache> {
+  if (!fewshotCache) {
+    try {
+      const p = path.join(process.cwd(), "data", "corpus", "_fewshot.json");
+      fewshotCache = JSON.parse(fs.readFileSync(p, "utf-8"));
+    } catch {
+      fewshotCache = [];
+    }
+  }
+  return fewshotCache ?? [];
 }
 
-function buildPromptIntro(categories: DynamicCategory[]): string {
-  const categoryNames = categories.map(c => c.name);
-
-  const guidelines = categories
-    .map(c => {
-      const subs = c.subcategories.length
-        ? c.subcategories.map(s => `"${s}"`).join(", ")
-        : "(sin subcategorías definidas)";
-      return `- **${c.name}**: ${c.description}\n  Subcategorías permitidas: ${subs}`;
-    })
-    .join("\n");
-
-  return (
-    "Eres un experto en soporte técnico de impresión y tu tarea es clasificar incidentes en una de estas categorías exactas:\n" +
-    `[${categoryNames.join(", ")}].\n\n` +
-    "Guía de categorización (cada categoría con sus subcategorías permitidas):\n" +
-    guidelines + "\n\n" +
-    "REGLA DE SUBCATEGORÍA (ESTRICTA): para 'subcategoria' elegí SIEMPRE una de las 'Subcategorías permitidas' de la categoría que asignes, copiándola EXACTAMENTE. NO inventes nombres fuera de esa lista. Si —y solo si— ninguna de la lista aplica de verdad, proponé una nueva usando EXACTAMENTE el formato 'NUEVA: <nombre corto>' (ej: 'NUEVA: Drum / Unidad de Imagen'). Nunca uses un nombre que no esté en la lista sin el prefijo 'NUEVA:'.\n\n" +
-    "JERARQUÍA OPERATIVA DE EVALUACIÓN (CRÍTICO PARA TODOS LOS CLIENTES):\n" +
-    "Para garantizar una tipificación uniforme y robusta sin importar el cliente o el tipo de reporte, debes aplicar estrictamente el siguiente orden de prioridad:\n\n" +
-    "1. FUENTE DE VERDAD — CASI EXCLUYENTE: EL TRABAJO REALIZADO (campo 'Solución/Trabajo técnico').\n" +
-    "   - Es lo que el técnico efectivamente hizo al cerrar el incidente; es la ÚNICA fuente confiable. Clasificá SIEMPRE según este texto.\n" +
-    "   - Si la causa o el reporte del cliente contradicen el trabajo realizado, IGNORALOS y seguí la solución.\n" +
-    "   - *Ejemplo*: Si el reporte dice 'Atasca papel' pero la solución es 'Se realiza actualización de Firmware', es 'Software y Firmware'.\n" +
-    "   - *Ejemplo*: Si el reporte dice 'Atasca papel' pero la solución es 'Toner con enlace roto', es 'Insumos y Tóner'.\n" +
-    "   - *Ejemplo*: Si la solución es 'entrega de insumo / se cambia tóner', es 'Insumos y Tóner', SIN IMPORTAR que la causa diga 'EQ - Equipo'.\n" +
-    "   - **REGLA DE ACCIONES MÚLTIPLES (CRÍTICA)**: Si el trabajo realizado por el técnico menciona dos o más acciones que corresponden a categorías distintas (ej: 'se retiró papel atascado y se instaló driver'), cruza esta información con el 'Reporte del cliente'. Debes clasificar según la acción que resuelva de manera directa el síntoma o queja original del cliente (ej: si el cliente reportó 'Atasca Papel', priorizá 'se retiró atasco' y clasifica en 'Medio de Impresión' - 'Atasco de Papel', ya que la otra acción fue secundaria/preventiva).\n\n" +
-    "2. APOYO DÉBIL — USAR CON DESCONFIANZA: LA CAUSA DIAGNOSTICADA (campo 'Causa raíz').\n" +
-    "   - El técnico la elige de una lista en una app móvil y MUCHAS VECES está mal cargada (ej: aparece 'EQ - Equipo' aunque el trabajo real haya sido entregar un insumo). NUNCA dejes que la causa contradiga la solución.\n" +
-    "   - Úsala SOLO como pista muy débil cuando la solución sea genérica o esté vacía.\n\n" +
-    "3. RUIDO — ÚLTIMO RECURSO: EL REPORTE DEL CLIENTE.\n" +
-    "   - El cliente suele elegir el motivo al azar y a menudo NO refleja el problema real. Úsalo solo para entender el síntoma cuando no haya solución técnica.\n" +
-    "   - Si NO hay solución técnica descrita (incidente cerrado sin trabajo, 'se cierra por falta de respuesta', solo idas y vueltas administrativas), clasificá como 'Gestión de Soporte'.\n\n" +
-    "REGLA DE HARDWARE (CRÍTICA): asigná 'Hardware y Desgaste' ÚNICAMENTE si el técnico REEMPLAZÓ o REPARÓ una pieza física por desgaste o rotura (fusor, rodillos pickup/retard, kit de mantenimiento, módulo ADF, display/panel, cable o fuente de poder). Si el técnico SOLO limpió, retiró papel atascado, hizo 'mantenimiento/limpieza' general, reconfiguró o ajustó bandejas/guías SIN cambiar ninguna pieza, NO uses 'Hardware y Desgaste': usá 'Medio de Impresión' (papel/bandeja/atasco), 'Conectividad y Red' (IP/red), 'Software y Firmware' (configuración/PC/driver) o 'Gestión de Soporte' (mal uso/negligencia/cierre administrativo) según el trabajo realizado.\n\n" +
-    "SIN ACENTOS (OBLIGATORIO): escribí TODO el texto de salida (categoria y subcategoria) en ASCII puro, sin tildes, acentos ni 'ñ' (usá 'n'). Ej: 'Impresion' no 'Impresión', 'Tecnico' no 'Técnico', 'Configuracion' no 'Configuración'.\n\n" +
-    "Responde SOLO con un arreglo JSON en el mismo orden, con la estructura:\n" +
-    '[{"i": <indice>, "categoria": "<nombre exacto>", "subcategoria": "<subcategoria>"}]\n' +
-    "No agregues texto fuera del JSON."
-  );
-}
-
-/**
- * Normaliza a ASCII sin acentos: ó→o, é→e, ñ→n, y descarta cualquier carácter
- * no-ASCII o artefacto de codificación (p. ej. "\tilde{A}"). Todo el texto que
- * genera la IA se guarda sin acentos para evitar la corrupción de codificación
- * que sufren los caracteres acentuados en la respuesta de Gemini.
- */
+/** ASCII sin acentos ni artefactos de codificacion (convencion de la app). */
 function toAscii(s: string): string {
   if (!s) return "";
-  let res = s;
-  // Reemplazar LaTeX \tilde{A} y variantes unicode de codificación corrupta
-  res = res.replace(/\\tilde\{A\}©/gi, "e");
-  res = res.replace(/\\tilde\{A\}³/gi, "o");
-  res = res.replace(/\\tilde\{A\}¡/gi, "a");
-  res = res.replace(/\\tilde\{A\}º/gi, "u");
-  res = res.replace(/\\tilde\{A\}±/gi, "n");
-  res = res.replace(/\\tilde\{A\}/gi, "e"); // fallback genérico a 'e' para T\tilde{A}cnico
-  
-  // Reemplazar Ã© y similares directamente si vienen como caracteres corruptos unicode
-  res = res.replace(/Ã©/g, "e");
-  res = res.replace(/Ã³/g, "o");
-  res = res.replace(/Ã¡/g, "a");
-  res = res.replace(/Ãº/g, "u");
-  res = res.replace(/Ã±/g, "n");
-  res = res.replace(/Ã/g, "i"); // fallback genérico a 'i'
-
-  return res
+  return s
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "") // diacríticos (tildes/acentos)
-    .replace(/\\[a-zA-Z]+\{[^}]*\}/g, "") // cualquier otro artefacto tipo LaTeX
-    .replace(/[^\x00-\x7F]/g, "") // cualquier no-ASCII restante
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/\\[a-zA-Z]+\{[^}]*\}/g, "")
+    .replace(/[^\x00-\x7F]/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
+const norm = (s: string) => toAscii(s).toLowerCase();
 
-function normalizeCategoryDynamic(raw: string, categories: DynamicCategory[]): string {
-  // Comparación insensible a acentos: la IA responde en ASCII pero la taxonomía
-  // puede tener acentos, así que normalizamos ambos lados.
-  const cleaned = toAscii(raw).toLowerCase().replace(/[."'`]/g, "");
-  const match = categories.find((c) => {
-    const n = toAscii(c.name).toLowerCase();
-    return n === cleaned || cleaned.includes(n);
-  });
-  return match?.name ?? UNCLASSIFIED;
+function taxonomyText(categories: DynamicCategory[]): string {
+  return categories
+    .map((c) => `- ${c.name}:\n    ` + c.subcategories.map((s) => `* ${s}`).join("\n    "))
+    .join("\n");
 }
 
-const NEW_PREFIX = /^nueva\s*:\s*/i;
-
-function normSub(x: string): string {
-  return x.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().replace(/\s+/g, " ").trim();
+function buildIntro(categories: DynamicCategory[]): string {
+  const fewshot = getFewshot();
+  const examples = fewshot.length
+    ? "\n\nEJEMPLOS REALES (formato: caso => categoria > subcategoria):\n" +
+      fewshot.map((e) => `- Reporte: ${e.fallas}. Obs: ${e.observ}. Solucion: ${e.solucion} => ${e.cat} > ${e.sub}`).join("\n")
+    : "";
+  return (
+    "Sos un experto en soporte tecnico de impresion. Clasifica cada incidente en UNA (categoria, subcategoria) EXACTA de esta taxonomia CERRADA (no inventes ninguna):\n\n" +
+    taxonomyText(categories) +
+    "\n\nREGLAS:\n" + TAXONOMY_RULES_V1 +
+    "\n\nCONFIANZA: devolve 'confianza'='alta' si el caso encaja sin ambiguedad en una sola (categoria, subcategoria); 'media' si es razonable pero hay duda; 'baja' si es genuinamente ambiguo o quedo sin resolver. Se honesto: preferimos 'baja' (va a revision humana) antes que una etiqueta dudosa con falsa seguridad.\n\n" +
+    "SIN ACENTOS: responde en ASCII puro, copiando los nombres EXACTOS de la lista." +
+    examples
+  );
 }
 
-/**
- * Valida la subcategoría devuelta contra la lista permitida de su categoría
- * (tolerante a mayúsculas/acentos/espacios). Modo ESTRICTO: si no está en la
- * lista, NO entra a los datos (queda vacía) y el nombre propuesto se devuelve
- * como `suggestion` para ofrecerlo en la bandeja de sugerencias. El prefijo
- * 'NUEVA:' que pueda agregar el modelo se descarta para el match y el registro.
- */
-function snapSubcategory(
-  raw: string,
-  categoria: string,
-  categories: DynamicCategory[],
-): { sub: string; suggestion?: string } {
-  const cleaned = (raw ?? "").replace(NEW_PREFIX, "").trim();
-  if (!cleaned) return { sub: "" };
-  const cat = categories.find((c) => c.name === categoria);
-  const hit = cat?.subcategories.find((sub) => normSub(sub) === normSub(cleaned));
-  if (hit) return { sub: hit };
-  return { sub: "", suggestion: cleaned };
+function renderCase(c: CaseInput, i: number): string {
+  const parts = [`${i}. Reporte del cliente: ${c.descripcion}`];
+  if (c.solucion?.trim()) parts.push(`Solucion/trabajo del tecnico: ${c.solucion.trim()}`);
+  return parts.join(" | ");
 }
 
-/**
- * Clasifica incidentes. Por defecto consulta a la IA para los casos no cacheados.
- * Con `useAi: false` corre en "modo rápido": resuelve desde la caché de disco y
- * deja los faltantes con el heurístico provisional SIN llamar a Gemini ni escribir
- * caché — pensado para no bloquear el render del dashboard. `pending` informa
- * cuántos casos únicos quedaron sin clasificar por IA (para refinarlos aparte).
- */
+/** Snap a la taxonomia cerrada: devuelve nombres canonicos o PENDIENTE si la
+ *  categoria no existe. Subcategoria desconocida => "Otros - <categoria>". */
+function snap(rawCat: string, rawSub: string, categories: DynamicCategory[]): { categoria: string; subcategoria: string } {
+  const cat = categories.find((c) => norm(c.name) === norm(rawCat) || norm(rawCat).includes(norm(c.name)));
+  if (!cat) return { categoria: PENDIENTE, subcategoria: "" };
+  const sub = cat.subcategories.find((s) => norm(s) === norm(rawSub));
+  return { categoria: cat.name, subcategoria: sub ?? `Otros - ${cat.name}` };
+}
+
+/** Aplica el gating de confianza: solo "alta" se muestra; el resto => Pendiente. */
+function gated(c: Classification): { categoria: IncidentCategory; subcategoria: string } {
+  if ((c.confianza || "").toLowerCase() === "alta") {
+    return { categoria: c.categoria as IncidentCategory, subcategoria: c.subcategoria };
+  }
+  return { categoria: PENDIENTE as IncidentCategory, subcategoria: "" };
+}
+
 export async function classifyIncidents(
   incidents: Incident[],
   opts: { useAi?: boolean } = {},
@@ -182,131 +155,80 @@ export async function classifyIncidents(
     if (!seen.has(k)) seen.set(k, c);
   }
   const unique = [...seen.values()];
-  if (unique.length === 0) {
-    return { incidents, usage: emptyUsage(), pending: 0 };
-  }
+  if (unique.length === 0) return { incidents, usage: emptyUsage(), pending: 0 };
 
-  const map = new Map<string, { categoria: IncidentCategory; subcategoria: string }>();
+  const categories = getCategories();
   const ai = getClient();
   let usage = emptyUsage();
 
-  const categories = getCategories();
-
+  // Clasificacion final (ya con gating) por caseKey.
+  const result = new Map<string, { categoria: IncidentCategory; subcategoria: string }>();
   const toClassify: CaseInput[] = [];
 
-  // 1. Intentamos leer de la caché persistente en disco
+  // 1. Cache en disco (guarda la clasificacion cruda + confianza). Aplicamos el
+  //    gating al leer: lo no-"alta" se muestra como Pendiente.
   for (const c of unique) {
-    const k = caseKey(c);
-    const cached = getCachedClassification(k);
+    const cached = getCachedClassification(caseKey(c));
     if (cached) {
-      map.set(k, { categoria: cached.categoria as IncidentCategory, subcategoria: cached.subcategoria });
+      result.set(caseKey(c), gated({ categoria: cached.categoria, subcategoria: cached.subcategoria, confianza: cached.confianza ?? "alta" }));
     } else {
       toClassify.push(c);
     }
   }
 
   const pending = toClassify.length;
-  let calledAi = false;
 
-  // 2. Si hay elementos sin clasificar, los procesamos
+  // 2. Casos sin cachear.
   if (toClassify.length > 0) {
     if (!useAi || !ai) {
-      // Modo rápido (sin IA) o sin API key: heurístico provisional. En modo
-      // rápido NO persistimos en disco, para que el refinamiento en segundo
-      // plano sí consulte a Gemini y guarde la clasificación real.
-      for (const c of toClassify) {
-        map.set(caseKey(c), heuristic(c, categories));
-      }
+      // Modo rapido (render inmediato) o sin API: provisional "Pendiente", sin
+      // cachear, para que el refinamiento en segundo plano clasifique con IA.
+      for (const c of toClassify) result.set(caseKey(c), { categoria: PENDIENTE as IncidentCategory, subcategoria: "" });
     } else {
-      calledAi = true;
       const batches: CaseInput[][] = [];
-      for (let i = 0; i < toClassify.length; i += BATCH_SIZE) {
-        batches.push(toClassify.slice(i, i + BATCH_SIZE));
-      }
-      
-      const results = await Promise.all(
+      for (let i = 0; i < toClassify.length; i += BATCH_SIZE) batches.push(toClassify.slice(i, i + BATCH_SIZE));
+
+      const runs = await Promise.all(
         batches.map((batch) => aiLimiter(() => classifyBatch(ai, batch, categories))),
       );
 
-      const successfulClassifications: Record<string, { categoria: string; subcategoria: string }> = {};
-
-      results.forEach(({ result, runUsage }, b) => {
+      const toCache: Record<string, { categoria: string; subcategoria: string; confianza: string }> = {};
+      runs.forEach(({ result: preds, runUsage }, b) => {
         const batch = batches[b];
-        result.forEach((resObj, idx) => {
+        preds.forEach((p, idx) => {
           const k = caseKey(batch[idx]);
-          map.set(k, resObj);
-          
-          // Solo guardamos en la caché de disco si el lote se resolvió exitosamente con la IA
-          // (si falló y usó heurístico, runUsage es emptyUsage, por lo que no lo guardamos en caché
-          // para volver a intentar con IA en futuras cargas).
-          if (runUsage.calls > 0) {
-            successfulClassifications[k] = {
-              categoria: resObj.categoria,
-              subcategoria: resObj.subcategoria,
-            };
+          result.set(k, gated(p));
+          // Cacheamos la clasificacion cruda (con confianza) solo si hubo IA real.
+          if (runUsage.calls > 0 && p.categoria !== PENDIENTE) {
+            toCache[k] = { categoria: p.categoria, subcategoria: p.subcategoria, confianza: p.confianza };
           }
         });
         usage = addUsage(usage, runUsage);
       });
-
-      // Guardamos de forma persistente las clasificaciones exitosas de la IA
-      if (Object.keys(successfulClassifications).length > 0) {
-        saveCachedClassifications(successfulClassifications);
-      }
+      if (Object.keys(toCache).length > 0) saveCachedClassifications(toCache);
     }
   }
-
-  // Snap centralizado: validamos cada subcategoría contra la taxonomía y, si el
-  // modelo propuso una nueva (no está en la lista), NO la metemos en los datos
-  // —queda "Sin subcategorizar"— y la registramos como sugerencia para aprobar.
-  const suggestions = new Map<string, { categoria: string; name: string; count: number }>();
-  const snapped = new Map<string, { categoria: IncidentCategory; subcategoria: string }>();
-  for (const [k, res] of map) {
-    const { sub, suggestion } = snapSubcategory(res.subcategoria, res.categoria, categories);
-    snapped.set(k, { categoria: res.categoria, subcategoria: sub });
-    if (suggestion) {
-      const sk = `${res.categoria}|${suggestion.toLowerCase()}`;
-      const e = suggestions.get(sk);
-      if (e) e.count++;
-      else suggestions.set(sk, { categoria: res.categoria, name: suggestion, count: 1 });
-    }
-  }
-  // Solo registramos sugerencias cuando clasificó la IA (no el heurístico de
-  // fallback ni el modo rápido sin IA).
-  if (calledAi && suggestions.size) recordSuggestions([...suggestions.values()]);
 
   const classified = incidents.map((inc) => {
-    const res = snapped.get(caseKey(inputOf(inc)));
+    const r = result.get(caseKey(inputOf(inc)));
     return {
       ...inc,
-      categoria: (res?.categoria ?? UNCLASSIFIED) as IncidentCategory,
-      subcategoria: res?.subcategoria ?? "",
+      categoria: (r?.categoria ?? PENDIENTE) as IncidentCategory,
+      subcategoria: r?.subcategoria ?? "",
     };
   });
   return { incidents: classified, usage, pending };
-}
-
-function renderCase(c: CaseInput, i: number): string {
-  const parts = [`${i}. Reporte del cliente: ${c.descripcion}`];
-  if (c.causa?.trim()) parts.push(`[Causa raíz: ${c.causa.trim()}]`);
-  if (c.solucion?.trim()) parts.push(`[Solución/Trabajo técnico: ${c.solucion.trim()}]`);
-  return parts.join(" ");
 }
 
 async function classifyBatch(
   ai: GoogleGenAI,
   batch: CaseInput[],
   categories: DynamicCategory[],
-): Promise<{ result: Array<{ categoria: IncidentCategory; subcategoria: string }>; runUsage: AiUsage }> {
+): Promise<{ result: Classification[]; runUsage: AiUsage }> {
   const list = batch.map((c, i) => renderCase(c, i)).join("\n");
-  const prompt = `${buildPromptIntro(categories)}\n\nIncidentes:\n${list}`;
+  const prompt = `${buildIntro(categories)}\n\nCASOS A CLASIFICAR (responde SOLO un arreglo JSON [{i, categoria, subcategoria, confianza}] en el mismo orden):\n${list}`;
 
-  // Probamos el modelo principal y, si está caído (503 por sobrecarga de Google),
-  // el de respaldo. Pocos reintentos por modelo: ante un 503 conviene saltar al
-  // siguiente modelo antes que machacar el caído (eso era lo que inflaba la página).
-  const models = [config.ai.model, config.ai.fallbackModel].filter(
-    (m, i, arr) => m && arr.indexOf(m) === i,
-  );
+  const models = [config.ai.model, config.ai.fallbackModel].filter((m, i, arr) => m && arr.indexOf(m) === i);
 
   let lastErr: unknown;
   for (const model of models) {
@@ -320,18 +242,16 @@ async function classifyBatch(
               temperature: 0,
               responseMimeType: "application/json",
               responseSchema: RESPONSE_SCHEMA,
+              thinkingConfig: { thinkingBudget: config.ai.thinkingBudget },
             },
           }),
         { label: `gemini.classify(${model})`, retries: 1 },
       );
-
       const promptTokens = response.usageMetadata?.promptTokenCount ?? 0;
       const candidatesTokens = response.usageMetadata?.candidatesTokenCount ?? 0;
       recordUsage(promptTokens, candidatesTokens);
-
-      const parsed = parseCategories(response.text ?? "", batch.length, categories);
       return {
-        result: parsed,
+        result: parsePredictions(response.text ?? "", batch.length, categories),
         runUsage: {
           promptTokens,
           candidatesTokens,
@@ -346,34 +266,28 @@ async function classifyBatch(
     }
   }
 
-  console.error("[gemini] falló la clasificación en todos los modelos, uso heurístico:", lastErr);
-  return { result: batch.map((c) => heuristic(c, categories)), runUsage: emptyUsage() };
+  // Todos los modelos cayeron (503/etc): no inventamos => todo Pendiente.
+  console.error("[gemini] fallo la clasificacion en todos los modelos; quedan Pendiente:", lastErr);
+  return {
+    result: batch.map(() => ({ categoria: PENDIENTE, subcategoria: "", confianza: "baja" })),
+    runUsage: emptyUsage(),
+  };
 }
 
-function parseCategories(
-  text: string,
-  expected: number,
-  categories: DynamicCategory[],
-): Array<{ categoria: IncidentCategory; subcategoria: string }> {
-  const out: Array<{ categoria: IncidentCategory; subcategoria: string }> = Array(expected)
+function parsePredictions(text: string, expected: number, categories: DynamicCategory[]): Classification[] {
+  const out: Classification[] = Array(expected)
     .fill(null)
-    .map(() => ({ categoria: UNCLASSIFIED, subcategoria: "" }));
-
+    .map(() => ({ categoria: PENDIENTE, subcategoria: "", confianza: "baja" }));
   try {
-    const json = JSON.parse(text) as Array<{ i: number; categoria: string; subcategoria: string }>;
+    const json = JSON.parse(text) as Array<{ i: number; categoria: string; subcategoria: string; confianza?: string }>;
     for (const item of json) {
       if (item.i >= 0 && item.i < expected) {
-        // Guardamos la subcategoría CRUDA del modelo; la validación contra la
-        // lista permitida y la recolección de sugerencias se hace centralizado
-        // en classifyIncidents (un único punto de "snap").
-        out[item.i] = {
-          categoria: normalizeCategoryDynamic(item.categoria, categories) as IncidentCategory,
-          subcategoria: toAscii(item.subcategoria ?? ""),
-        };
+        const s = snap(item.categoria, toAscii(item.subcategoria ?? ""), categories);
+        out[item.i] = { ...s, confianza: (item.confianza ?? "media").toLowerCase() };
       }
     }
   } catch {
-    console.warn("[gemini] respuesta no-JSON; categorías sin clasificar");
+    console.warn("[gemini] respuesta no-JSON; casos quedan Pendiente");
   }
   return out;
 }
@@ -386,44 +300,4 @@ function addUsage(a: AiUsage, b: AiUsage): AiUsage {
     calls: a.calls + b.calls,
     costUsd: a.costUsd + b.costUsd,
   };
-}
-
-function heuristic(c: CaseInput, categories: DynamicCategory[]): { categoria: IncidentCategory; subcategoria: string } {
-  const t = `${c.causa ?? ""} ${c.descripcion} ${c.solucion ?? ""}`.toLowerCase();
-  
-  if (/(guia|bandeja)/.test((c.solucion ?? "").toLowerCase())) {
-    const catMedio = categories.find(cat => cat.name === "Medio de Impresion");
-    const subValida = catMedio?.subcategories?.find(s => s.toLowerCase().includes("guia")) ?? "Ajuste de Guias / Bandejas";
-    return { categoria: (catMedio?.name ?? "Medio de Impresion") as IncidentCategory, subcategoria: subValida };
-  }
-  if (/(firmware|\bfw\b|actualizacion.*firmware|actualizar.*firmware)/.test(t)) {
-    const catSoft = categories.find(cat => cat.name.toLowerCase().includes("firmware"));
-    const subValida = catSoft?.subcategories?.find(s => s.toLowerCase().includes("firmware")) ?? "Actualizacion de Firmware";
-    return { categoria: (catSoft?.name ?? "Software y Firmware") as IncidentCategory, subcategoria: subValida };
-  }
-  if (/(toner|tóner|cartucho|insumo|manch|copias.*clar)/.test(t)) {
-    const catInsumo = categories.find(cat => cat.name.toLowerCase().includes("insumo") || cat.name.toLowerCase().includes("toner"));
-    return { categoria: (catInsumo?.name ?? "Insumos y Toner") as IncidentCategory, subcategoria: "Toner / Insumos" };
-  }
-  if (/(\bip\b|\bred\b|\bping\b|conexion|\bswitch\b|cable.*?\bred\b|\bvpn\b|corte.*luz|energia)/.test(t)) {
-    const catRed = categories.find(cat => cat.name.toLowerCase().includes("red") || cat.name.toLowerCase().includes("conect"));
-    return { categoria: (catRed?.name ?? "Conectividad y Red") as IncidentCategory, subcategoria: "Configuracion IP / Red" };
-  }
-  if (/(guia|bandeja|troquelado|humed|precios|hojas.*finas|resma)/.test(t)) {
-    const catMedio = categories.find(cat => cat.name === "Medio de Impresion");
-    return { categoria: (catMedio?.name ?? "Medio de Impresion") as IncidentCategory, subcategoria: "Papel y Bandejas" };
-  }
-  if (/(driver|\bpc\b|reinicio.*\bpc\b|sistema|spooler|windows)/.test(t)) {
-    const catSoft = categories.find(cat => cat.name.toLowerCase().includes("firmware") || cat.name.toLowerCase().includes("software"));
-    return { categoria: (catSoft?.name ?? "Software y Firmware") as IncidentCategory, subcategoria: "Soporte Tecnico PC" };
-  }
-  if (/(negligencia|mal uso|vandalismo|objeto.*apoyado|cerrado.*falta.*respuesta|instructivo|auto-resolucion|video)/.test(t)) {
-    const catGest = categories.find(cat => cat.name.toLowerCase().includes("gest"));
-    return { categoria: (catGest?.name ?? "Gestion de Soporte") as IncidentCategory, subcategoria: "Revision General" };
-  }
-  if (/(fusor|rodillo|goma|\badf\b|retard|arrastre|mantenimiento|pickup|bujes|modulo)/.test(t) || t.includes("mantenimiento")) {
-    const catHard = categories.find(cat => cat.name.toLowerCase().includes("hard") || cat.name.toLowerCase().includes("desgaste"));
-    return { categoria: (catHard?.name ?? "Hardware y Desgaste") as IncidentCategory, subcategoria: "Desgaste / Reparacion" };
-  }
-  return { categoria: UNCLASSIFIED, subcategoria: "" };
 }

@@ -44,6 +44,12 @@ export const config = {
     // Google). El lite esta en infraestructura menos congestionada y es mas
     // barato; preferimos clasificar con el antes que caer al heuristico.
     fallbackModel: process.env.GEMINI_FALLBACK_MODEL ?? "gemini-2.5-flash-lite",
+    // gemini-2.5-pro es lento con thinking dinamico (~50s/llamada). Un presupuesto
+    // fijo de 2048 mantiene la precision (~96%) y baja el tiempo ~30%. (pro: min 128)
+    thinkingBudget: num(process.env.GEMINI_THINKING_BUDGET, 2048),
+    // Batches en paralelo. El 503 era global (no por cuota), asi que paralelizar
+    // es seguro y corta el tiempo de pared del refinamiento.
+    concurrency: num(process.env.GEMINI_CONCURRENCY, 4),
     // Precios en USD por 1.000.000 de tokens. VERIFICAR contra tarifario vigente.
     priceInputPerM: num(process.env.GEMINI_PRICE_INPUT_PER_M, 0.3),
     priceOutputPerM: num(process.env.GEMINI_PRICE_OUTPUT_PER_M, 2.5),

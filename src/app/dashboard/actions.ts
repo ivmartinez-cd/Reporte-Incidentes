@@ -3,8 +3,11 @@
 import { redirect } from "next/navigation";
 import { clearSessionCookie } from "@/lib/auth/session";
 import { listIncidents } from "@/lib/soap/incidents";
-import { classifyIncidents } from "@/lib/ai/classify";
+import { classifyIncidents, caseKeyForCache } from "@/lib/ai/classify";
 import { logUsage } from "@/lib/ai/costStore";
+import { saveCachedClassifications } from "@/lib/data/classificationCache";
+import { getCategories } from "@/lib/data/categoriesStore";
+import { invalidateReport } from "@/lib/report";
 
 export async function logoutAction(): Promise<void> {
   await clearSessionCookie();
@@ -29,4 +32,27 @@ export async function refineClassificationAction(
   const { usage } = await classifyIncidents(raw); // useAi por defecto: llama a Gemini
   logUsage(usage);
   return { progressed: usage.calls > 0 };
+}
+
+/**
+ * Revision manual: el gerente/usuario corrige la tipificacion de un caso (tipico:
+ * uno que quedo "Pendiente de revision"). Se valida contra la taxonomia cerrada y
+ * se guarda como override en el cache (confianza "alta" => se muestra). El caso
+ * queda fijado: futuras cargas usan esta clasificacion.
+ */
+export async function resolveClassificationAction(
+  inc: { descripcion: string; causa?: string; solucion?: string },
+  categoria: string,
+  subcategoria: string,
+  empresaId: string,
+  period: string,
+): Promise<{ ok: boolean; error?: string }> {
+  const cat = getCategories().find((c) => c.name === categoria);
+  if (!cat) return { ok: false, error: "categoria invalida" };
+  if (!cat.subcategories.includes(subcategoria)) return { ok: false, error: "subcategoria invalida" };
+  const key = caseKeyForCache(inc);
+  saveCachedClassifications({ [key]: { categoria, subcategoria, confianza: "alta" } });
+  // Invalida el reporte cacheado para que el refresh muestre la correccion.
+  invalidateReport(empresaId, period);
+  return { ok: true };
 }

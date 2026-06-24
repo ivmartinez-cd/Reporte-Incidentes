@@ -1,6 +1,6 @@
 import "server-only";
 import { config } from "@/lib/config";
-import { cacheGet, cacheSet } from "@/lib/cache";
+import { cacheGet, cacheSet, cacheDelete } from "@/lib/cache";
 import { listEmpresas, listIncidents } from "@/lib/soap/incidents";
 import { classifyIncidents } from "@/lib/ai/classify";
 import { getCategories } from "@/lib/data/categoriesStore";
@@ -20,6 +20,12 @@ function categoriesVersion(): string {
   let h = 0;
   for (let i = 0; i < sig.length; i++) h = (sig.charCodeAt(i) + ((h << 5) - h)) | 0;
   return (h >>> 0).toString(36);
+}
+
+/** Invalida el reporte cacheado (en memoria) de una empresa/periodo. Se llama
+ *  tras una correccion manual para que el proximo render lo reconstruya. */
+export function invalidateReport(empresaId: string, period: string): void {
+  cacheDelete(`report:${empresaId}:${period}:${categoriesVersion()}`);
 }
 
 /** Construye el reporte mensual completo de una empresa (datos + IA + costos). */

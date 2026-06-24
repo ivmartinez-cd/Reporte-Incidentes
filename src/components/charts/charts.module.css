@@ -89,7 +89,7 @@
 /* Premium Legend Grid layout */
 .legendGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: var(--legend-cols, repeat(2, 1fr));
   gap: 0.6rem 1rem;
   margin-top: 1.2rem;
 }
@@ -103,6 +103,30 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 0.8rem;
+}
+
+/* Cursor sobre segmentos clicables (donut/barras) que aplican filtro. */
+.clickable {
+  cursor: pointer;
+}
+
+/* La leyenda del donut tambien filtra: se comporta como boton. */
+.legendBtn {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: border-color 0.18s var(--ease), opacity 0.18s var(--ease);
+}
+.legendBtn:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+.legendBtn:disabled {
+  cursor: default;
+}
+.legendActive {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary) inset;
 }
 
 .legendLeft {

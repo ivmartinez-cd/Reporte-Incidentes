@@ -1,0 +1,38 @@
+.exportBtn {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #ffffff;
+  background: linear-gradient(180deg, var(--primary), var(--primary-deep));
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: transform 0.12s var(--ease), box-shadow 0.15s var(--ease), filter 0.15s var(--ease);
+  height: 41px;
+  box-shadow: 0 4px 12px -4px rgba(2, 117, 216, 0.4);
+}
+
+.exportBtn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.exportBtn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+
+.exportBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+}

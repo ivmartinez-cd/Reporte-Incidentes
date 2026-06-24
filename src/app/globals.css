@@ -143,6 +143,13 @@ input.field:focus-visible,
 
 /* ---- Primitivas reutilizables ---------------------------------------------- */
 
+/* Chrome de la app (header/nav/controles) que no debe salir en el PDF impreso. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
 /* Fondo translucido pero SIN backdrop-filter: el desenfoque de fondo es de lo
    mas caro de pintar (sobre todo al scrollear). El fondo casi opaco conserva
    el aire "glass" a costo casi nulo. */
@@ -281,4 +288,29 @@ input.field:focus {
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: content-box;
+}
+
+/* ============================================================================
+   Vista de Impresion del Reporte Ejecutivo (Screen & Print)
+   ========================================================================== */
+body:has(.printView) {
+  background: #ffffff !important;
+  color: #1a1f29 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body:has(.printView)::before {
+  display: none !important;
+}
+/* Oculta SOLO el Header del dashboard (hijo directo de body) en la vista de
+   print, no el <header> propio del reporte que vive anidado dentro de .printView. */
+body:has(.printView) > header {
+  display: none !important;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

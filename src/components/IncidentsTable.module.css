@@ -22,7 +22,107 @@
 
 .actions {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+.search {
+  background: var(--input-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.82rem;
+  padding: 0.45rem 0.7rem;
+  min-width: 200px;
+  transition: border-color 0.18s var(--ease);
+}
+.search:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+.search::placeholder {
+  color: var(--text-muted);
+}
+
+/* Encabezados ordenables */
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  padding: 0;
+}
+.sortBtn:hover {
+  color: var(--text);
+}
+.sortActive {
+  color: var(--primary);
+}
+.sortArrow {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+.emptyRow {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem !important;
+  font-size: 0.85rem;
+}
+
+/* Celdas que filtran al tocarlas */
+.filterCell {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-soft);
+  padding: 0.15rem 0.4rem;
+  margin: -0.15rem -0.4rem;
+  text-align: left;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
+}
+.filterCell:hover:not(:disabled) {
+  background: var(--row-hover);
+  color: var(--text);
+}
+.filterActive {
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.badgeBtn {
+  cursor: pointer;
+  transition: filter 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+.badgeBtn:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+.badgeActive {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.subCatBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transition: color 0.15s var(--ease);
+}
+.subCatBtn:hover:not(:disabled) {
+  color: var(--primary);
+}
+.subCatActive {
+  color: var(--primary);
 }
 
 .globalBtn {

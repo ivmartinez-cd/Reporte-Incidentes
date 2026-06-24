@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 
 export default function Header({ user }: { user: string }) {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} no-print`}>
       <div className={styles.brand}>
         <Image
           src="/logo_login.png"

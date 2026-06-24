@@ -9,10 +9,10 @@ const DIR = "data/corpus";
 // Espejo de TAXONOMY_V1 (src/lib/ai/taxonomy.v1.ts) para validar offline.
 const TAX = {
   "Medio de Impresion": ["Atasco de papel (comun)", "Papel especial / Troquelado", "Papel inadecuado / humedad / mala calidad", "Arruga / Toma varias hojas", "Ajuste de bandejas / guias", "Otros - Medio de Impresion"],
-  "Insumos y Toner": ["Toner / Cartucho", "Drum / Unidad de imagen / Revelador", "Calidad por insumo (manchas / impresion clara)", "Otros - Insumos y Toner"],
+  "Insumos y Toner": ["Toner / Cartucho", "Tolva / Contenedor residual", "Drum / Unidad de imagen / Revelador", "Calidad por insumo (manchas / impresion clara)", "Otros - Insumos y Toner"],
   "Hardware y Desgaste": ["Rodillos / Pickup / Separacion", "Fusor / Kit de mantenimiento", "Escaner / ADF", "Parte / Panel / Botonera rota", "Otros - Hardware y Desgaste"],
   "Software, Firmware y Red": ["Configuracion de red / IP", "Driver / PC / Spooler", "Firmware", "Calibracion / Ajuste de imagen", "Otros - Software, Firmware y Red"],
-  "Gestion de Soporte": ["Cierre administrativo / Sin respuesta", "Instructivo / Autoresolucion", "Mal uso / Negligencia", "Diagnostico / Sin falla", "Mantenimiento / Limpieza general", "Otros - Gestion de Soporte"],
+  "Gestion de Soporte": ["Mesa de ayuda / Sin respuesta del cliente", "Instructivo / Autoresolucion", "Mal uso / Negligencia", "Diagnostico / Sin falla", "Mantenimiento / Limpieza general", "Problema externo / Red del cliente", "Otros - Gestion de Soporte"],
   "PENDIENTE": ["PENDIENTE"], // confianza baja: a revisar
 };
 

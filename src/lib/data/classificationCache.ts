@@ -4,6 +4,8 @@ import path from "path";
 export interface CachedClassification {
   categoria: string;
   subcategoria: string;
+  /** "alta" | "media" | "baja" — el gating muestra solo "alta"; el resto va a revision. */
+  confianza?: string;
 }
 
 const filePath = path.join(process.cwd(), "src/lib/data/classification-cache.json");
@@ -39,7 +41,12 @@ export function saveCachedClassifications(items: Record<string, CachedClassifica
   for (const [key, val] of Object.entries(items)) {
     // Evitamos escribir si ya tiene exactamente la misma clasificacion
     const existing = cache[key];
-    if (!existing || existing.categoria !== val.categoria || existing.subcategoria !== val.subcategoria) {
+    if (
+      !existing ||
+      existing.categoria !== val.categoria ||
+      existing.subcategoria !== val.subcategoria ||
+      existing.confianza !== val.confianza
+    ) {
       cache[key] = val;
       changed = true;
     }

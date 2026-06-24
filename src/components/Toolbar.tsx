@@ -1,41 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useTransition, useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 import { periodLabel } from "@/lib/format";
-import DashboardLoading from "@/app/dashboard/loading";
+import { useReportNav } from "./reportNav";
+import ExportPdfButton from "./ExportPdfButton";
 import styles from "./Toolbar.module.css";
 
 /**
- * Controles del reporte. El CLIENTE ya viene elegido a proposito desde la
- * pantalla de seleccion, por eso aqui solo se muestra (con un acceso para
- * cambiarlo) y se ofrece el cambio de periodo (12 opciones, dropdown valido).
+ * Controles base del reporte. El CLIENTE viene elegido desde la pantalla de
+ * seleccion (aqui solo se muestra, con acceso para cambiarlo) y se ofrece el
+ * cambio de periodo. Los filtros transversales NO viven aqui: se aplican de
+ * forma interactiva tocando los graficos o la tabla (ver useReportNav) y se
+ * muestran como chips (ver ActiveFilters).
  */
 export default function Toolbar({
-  empresaId,
   empresaNombre,
   periods,
   selectedPeriod,
 }: {
-  empresaId: string;
   empresaNombre: string;
   periods: string[];
   selectedPeriod: string;
 }) {
-  const router = useRouter();
-  const [pending, startTransition] = useTransition();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  function changePeriod(period: string) {
-    const params = new URLSearchParams({ empresa: empresaId, period });
-    startTransition(() => router.push(`/dashboard?${params.toString()}`));
-  }
+  const { setPeriod, pending } = useReportNav();
 
   return (
     <div className={`${styles.bar} glass`}>
@@ -60,7 +47,7 @@ export default function Toolbar({
           className="select"
           value={selectedPeriod}
           disabled={pending}
-          onChange={(e) => changePeriod(e.target.value)}
+          onChange={(e) => setPeriod(e.target.value)}
         >
           {periods.map((p) => (
             <option key={p} value={p}>
@@ -70,27 +57,17 @@ export default function Toolbar({
         </select>
       </div>
 
+      <div className={styles.field}>
+        <span className={styles.label}>Reporte</span>
+        <ExportPdfButton />
+      </div>
+
       <div className={styles.status} aria-live="polite">
         {pending && <span className={styles.spinner} aria-hidden />}
         <span className={styles.statusText}>
           {pending ? "Generando reporte…" : "Listo"}
         </span>
       </div>
-
-      {pending && mounted && createPortal(
-        <div style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 9999,
-          background: "var(--bg-base)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}>
-          <DashboardLoading />
-        </div>,
-        document.body
-      )}
     </div>
   );
 }

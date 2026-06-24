@@ -50,3 +50,8 @@ export function cacheGet<T>(key: string): T | undefined {
 export function cacheSet<T>(key: string, value: T, ttlSeconds: number): void {
   store.set(key, value, ttlSeconds);
 }
+
+/** Borra una entrada de la cache (para invalidar tras una correccion manual). */
+export function cacheDelete(key: string): void {
+  store.del(key);
+}

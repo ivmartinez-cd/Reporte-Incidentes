@@ -29,6 +29,7 @@ export const TAXONOMY_V1: TaxonomyCategory[] = [
     name: "Insumos y Toner",
     subcategories: [
       "Toner / Cartucho",
+      "Tolva / Contenedor residual",
       "Drum / Unidad de imagen / Revelador",
       "Calidad por insumo (manchas / impresion clara)",
       "Otros - Insumos y Toner",
@@ -93,18 +94,35 @@ REGLAS ESPECIFICAS:
   "Hardware y Desgaste" SOLO si hubo REEMPLAZO o REPARACION de pieza por desgaste/
   rotura (fusor, rodillos pickup/retard/separacion, kit mantenimiento, panel/botonera,
   cover, fuente).
-- PAPEL ESPECIAL / TROQUELADO: si el contexto indica papel troquelado/especial =>
-  "Papel especial / Troquelado", AUNQUE la solucion mencione limpieza o rodillos
-  (el problema de fondo es el medio, no el equipo).
-- PAPEL INADECUADO: si el problema es papel humedo, de mala calidad, resma
-  inadecuada, gramaje equivocado => "Papel inadecuado / humedad / mala calidad"
-  (distinto de troquelado y de atasco comun).
+- PAPEL ESPECIAL / TROQUELADO: el problema NO es que el papel sea troquelado en si,
+  sino que (sobre todo en Dia) el troquelado viene MAL CORTADO / mal troquelado /
+  humedo y genera tanto ATASCOS como problemas de CONFIGURACION (escala/orientacion/
+  tamano). Todo eso => "Papel especial / Troquelado", AUNQUE la solucion mencione
+  limpieza, rodillos o reconfiguracion (el problema de fondo es el medio).
+- PAPEL INADECUADO: papel humedo / de mala calidad / resma inadecuada / gramaje
+  equivocado que NO es troquelado => "Papel inadecuado / humedad / mala calidad".
+- PROBLEMA EXTERNO: si la falla es de la infra del cliente y NO del equipo (boca de
+  red rota, cable de red del sitio, red caida, certificados/permisos de terceros,
+  corte de luz) y el equipo esta OK => "Gestion de Soporte" > "Problema externo /
+  Red del cliente".
 - CONFIGURACION/ASISTENCIA AL USUARIO con equipo OK (se explico como configurar,
   red, driver) => "Software, Firmware y Red" (o "Gestion de Soporte" si fue solo
   instructivo/autoresolucion sin tocar el equipo).
 - ESCANER / ADF (vidrio/platina, alimentador ADF, rodillos de ADF, calibracion de
-  escaneo) => SIEMPRE "Hardware y Desgaste" > "Escaner / ADF", sea limpieza,
-  config o reemplazo de pieza. Es un dominio propio.
+  escaneo, escaner bloqueado, reset/config del escaner) => SIEMPRE "Hardware y
+  Desgaste" > "Escaner / ADF", sea limpieza, config, reset admin o reemplazo de
+  pieza. Es un dominio propio. NUNCA a Software ni a Diagnostico por ser escaner.
+- LIMPIEZA / REUBICACION / LUBRICACION SIN reemplazar pieza (ej. "se coloca/reubica
+  pickup", "lubricacion de modulo", "se limpia rodillo") para destrabar un atasco =>
+  va al SINTOMA (Medio de Impresion > Atasco), NO a Hardware. Hardware solo si se
+  REEMPLAZO/REPARO una pieza.
+- TOLVA / CONTENEDOR RESIDUAL de toner (vaciar/lavar tolva, botella/contenedor
+  residual, "sustituya unidad de recogida de toner") => "Insumos y Toner" >
+  "Tolva / Contenedor residual" (NO "Toner / Cartucho" ni "Otros").
+- CABLE DE RED / CONECTIVIDAD que arregla el tecnico (cambia cable de red, configura
+  IP, instala certificados) => "Software, Firmware y Red" (Config red / IP), aunque
+  el cable sea del sitio. "Problema externo / Red del cliente" SOLO si el problema
+  queda en la infra del cliente y NO se resolvio desde el equipo.
 - DIAGNOSTICO SIN FALLA: si el tecnico reviso/testeo y el equipo quedo OK SIN
   reparar ni reemplazar nada (no se reprodujo/encontro la falla) => "Gestion de
   Soporte" > "Diagnostico / Sin falla".
@@ -116,10 +134,20 @@ REGLAS ESPECIFICAS:
   (ej. limpiar para destrabar un atasco), va a la categoria del sintoma (Medio).
 - CALIBRACION / AJUSTE DE IMAGEN (imagen corrida, registro, alineacion) =>
   "Software, Firmware y Red" > "Calibracion / Ajuste de imagen".
+- REPARAR/CAMBIAR una parte del FUSOR (una de detack, bujes, rodillo de fusor,
+  hot roll) => "Hardware y Desgaste" > "Fusor / Kit de mantenimiento".
+- CONFIGURAR (red/IP/bandejas/tipo o tamano de papel/driver), AUNQUE sea guiando
+  al usuario en remoto => "Software, Firmware y Red" (Config red/IP o Driver/PC),
+  NO "Instructivo / Autoresolucion". Instructivo/Autoresolucion SOLO si NO se toco
+  ninguna config tecnica y el cliente lo resolvio por su cuenta.
+- AJUSTE/RECONFIGURACION de bandejas hecho para DESTRABAR un atasco => "Medio de
+  Impresion" > "Atasco de papel (comun)". Usar "Ajuste de bandejas / guias" SOLO
+  cuando el ajuste de la guia/bandeja ES la solucion central (no un atasco).
 
 CONFIANZA:
-- Si no hay match claro dentro de una categoria => "Otros - <categoria>".
+- Elegi SIEMPRE la subcategoria ESPECIFICA que mejor aplique. Usa "Otros - <cat>"
+  SOLO si NINGUNA subcategoria especifica de esa categoria aplica de verdad.
 - Si ni la categoria esta clara => marcar PENDIENTE (no inventar).
 `.trim();
 
-export const TAXONOMY_VERSION = "v1.3-2026-06-24";
+export const TAXONOMY_VERSION = "v1.6-2026-06-24";

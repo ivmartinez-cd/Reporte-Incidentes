@@ -1,0 +1,384 @@
+/* ============================================================================
+   Canal Directo · Tema de Impresion para Reporte Ejecutivo PDF
+   ========================================================================== */
+
+.printPage {
+  background: #ffffff;
+  color: #1a1f29;
+  font-family: var(--font-body);
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Forzar tema claro en las variables de globals.css para todos los componentes hijos */
+.printPage {
+  --bg-base: #ffffff;
+  --bg-deep: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-glass: #ffffff;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --primary: #0163b8;
+  --primary-deep: #014c8c;
+  --text: #1a1f29;
+  --text-soft: #475569;
+  --text-muted: #64748b;
+  --input-bg: #f8fafc;
+  --row-hover: #f1f5f9;
+  --chart-grid: #e2e8f0;
+  --chart-axis: #64748b;
+  --shadow: none;
+  --shadow-glow: none;
+  --legend-cols: 1fr; /* Force 1-column legend layout for printing so category names don't wrap and overlap */
+}
+
+/* --- Encabezado --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Logo de marca (naranja) directo sobre el PDF blanco, sin fondo. */
+.logo {
+  display: block;
+  height: 31px;
+  width: auto;
+}
+
+.headerDivider {
+  color: var(--border-strong);
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.metaRow {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dotDivider {
+  color: var(--text-muted);
+}
+
+.demoBadge {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  font-weight: 600;
+  font-size: 0.65rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.filtersRow {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  margin-top: 0.15rem;
+}
+
+.confidential {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* --- Filtros activos --- */
+.filtersInfo {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.filtersTitle {
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.filterChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.filterChip {
+  background: #e2e8f0;
+  color: #334155;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* --- KPIs --- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.kpiCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.kpiLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpiValue {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.kpiHint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --- Contenedor de Graficos --- */
+.timelineSection {
+  margin-bottom: 1.5rem;
+}
+
+.lastChartSection {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chartCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartCardTitle {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 0.35rem;
+}
+
+.chartWrapper {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+/* --- Tabla de incidentes (Print-optimized) --- */
+.tableSection {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.tableSectionTitle {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.tableContainer {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.table th {
+  background: #f8fafc;
+  color: var(--text-soft);
+  font-weight: 600;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--text);
+  vertical-align: top;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.tableNumber {
+  font-family: monospace;
+  font-weight: 600;
+  color: var(--primary-deep);
+}
+
+.tableDate {
+  white-space: nowrap;
+}
+
+.tableDesc {
+  max-width: 320px;
+  word-break: break-word;
+}
+
+.tableBadge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  margin-bottom: 0.2rem;
+}
+
+.tableSubcat {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-soft);
+}
+
+.tableFooterNote {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  text-align: right;
+  font-style: italic;
+}
+
+/* --- Footer --- */
+.footer {
+  margin-top: 3rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 0.75rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageNumber::after {
+  content: "· p. 1";
+}
+
+/* ============================================================================
+   Reglas Especificas de Impresion (@media print)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 14mm 22mm 14mm;
+  }
+
+  /* Forzar la impresion de fondos y colores de acento (KPIs, badges, bordes,
+     rellenos de los graficos). Sin esto Chrome los descarta por defecto. */
+  .printPage,
+  .printPage * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .printPage {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    background: #ffffff;
+    padding-bottom: 5px;
+  }
+
+  .pageNumber::after {
+    content: "· p. " counter(page);
+  }
+
+  /* Evitar saltos de pagina horribles dentro de bloques clave */
+  .kpiCard,
+  .chartCard,
+  .table tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Forzar que las secciones grandes comiencen en pagina nueva si es necesario */
+  .pageBreakBefore {
+    page-break-before: always;
+    break-before: page;
+  }
+}

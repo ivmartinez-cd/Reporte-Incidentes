@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, Fragment } from "react";
+import { useState, useMemo, Fragment } from "react";
 import { categoryColor } from "@/lib/ai/categories";
+import { dimensionValue, type FilterKey } from "@/lib/filters";
+import { useReportNav } from "./reportNav";
 import type { Incident } from "@/lib/types";
 import styles from "./IncidentsTable.module.css";
 
@@ -83,6 +85,25 @@ function getEstadoStyle(estado?: string) {
   return { color: "var(--warning)", borderColor: "var(--warning)" };
 }
 
+// --- Orden por columna (estado local de la tabla) ---
+type SortKey = "numero" | "fecha" | "sucursal" | "causa" | "categoria";
+type SortDir = "asc" | "desc";
+
+function sortValue(inc: Incident, key: SortKey): string {
+  switch (key) {
+    case "numero":
+      return inc.numero;
+    case "fecha":
+      return inc.fecha;
+    case "sucursal":
+      return dimensionValue(inc, "sucursal");
+    case "causa":
+      return inc.causa ?? "";
+    case "categoria":
+      return dimensionValue(inc, "categoria");
+  }
+}
+
 export default function IncidentsTable({
   incidents,
   limit = 50,
@@ -92,28 +113,69 @@ export default function IncidentsTable({
   limit?: number;
   categoryColors?: Record<string, string>;
 }) {
-  const rows = incidents.slice(0, limit);
+  const { filters, toggle, pending } = useReportNav();
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<{ key: SortKey; dir: SortDir } | null>(null);
+
+  // Busqueda + orden son client-side, sobre los incidentes ya filtrados (server)
+  // por los filtros transversales. La busqueda no toca la URL (es de la vista).
+  const processed = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    let out = incidents;
+    if (q) {
+      out = out.filter((inc) =>
+        [
+          inc.numero,
+          inc.descripcion,
+          inc.causa,
+          inc.solucion,
+          inc.sucursal,
+          inc.tecnico,
+          inc.categoria,
+          inc.subcategoria,
+        ]
+          .filter(Boolean)
+          .some((f) => (f as string).toLowerCase().includes(q)),
+      );
+    }
+    if (sort) {
+      const mult = sort.dir === "asc" ? 1 : -1;
+      out = [...out].sort((a, b) => {
+        const av = sortValue(a, sort.key);
+        const bv = sortValue(b, sort.key);
+        if (sort.key === "numero") {
+          const an = Number(av);
+          const bn = Number(bv);
+          if (!Number.isNaN(an) && !Number.isNaN(bn)) return (an - bn) * mult;
+        }
+        return av.localeCompare(bv, "es", { numeric: true }) * mult;
+      });
+    }
+    return out;
+  }, [incidents, query, sort]);
+
+  const rows = processed.slice(0, limit);
 
   const toggleRow = (id: string) => {
     const next = new Set(expandedIds);
-    if (next.has(id)) {
-      next.delete(id);
-    } else {
-      next.add(id);
-    }
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
     setExpandedIds(next);
   };
 
-  const expandAll = () => {
-    setExpandedIds(new Set(rows.map((r) => r.id)));
-  };
-
-  const collapseAll = () => {
-    setExpandedIds(new Set());
-  };
-
+  const expandAll = () => setExpandedIds(new Set(rows.map((r) => r.id)));
+  const collapseAll = () => setExpandedIds(new Set());
   const allExpanded = rows.length > 0 && expandedIds.size === rows.length;
+
+  // Cicla el orden de una columna: asc -> desc -> sin orden.
+  function cycleSort(key: SortKey) {
+    setSort((prev) => {
+      if (!prev || prev.key !== key) return { key, dir: "asc" };
+      if (prev.dir === "asc") return { key, dir: "desc" };
+      return null;
+    });
+  }
 
   return (
     <div className={`card ${styles.card}`}>
@@ -122,9 +184,17 @@ export default function IncidentsTable({
           <h3 className={styles.title}>Detalle de Incidentes</h3>
           <span className={styles.meta}>
             Mostrando {rows.length} de {incidents.length}
+            {query && " (busqueda)"}
           </span>
         </div>
         <div className={styles.actions}>
+          <input
+            type="search"
+            className={styles.search}
+            placeholder="Buscar en la tabla…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
           {allExpanded ? (
             <button onClick={collapseAll} className={styles.globalBtn}>
               Colapsar Todos
@@ -142,19 +212,27 @@ export default function IncidentsTable({
           <thead>
             <tr>
               <th className={styles.chevronHeader}></th>
-              <th>Numero</th>
-              <th>Fecha</th>
-              <th>Sucursal</th>
+              <SortHeader label="Numero" col="numero" sort={sort} onSort={cycleSort} />
+              <SortHeader label="Fecha" col="fecha" sort={sort} onSort={cycleSort} />
+              <SortHeader label="Sucursal" col="sucursal" sort={sort} onSort={cycleSort} />
               <th>Reporte del cliente</th>
-              <th>Causa</th>
+              <SortHeader label="Causa" col="causa" sort={sort} onSort={cycleSort} />
               <th>Solucion (tecnico)</th>
-              <th>Tipificacion</th>
+              <SortHeader label="Tipificacion" col="categoria" sort={sort} onSort={cycleSort} />
             </tr>
           </thead>
           <tbody>
+            {rows.length === 0 && (
+              <tr>
+                <td colSpan={8} className={styles.emptyRow}>
+                  Sin incidentes para los filtros actuales
+                </td>
+              </tr>
+            )}
             {rows.map((inc) => {
               const isExpanded = expandedIds.has(inc.id);
-              const categoria = inc.categoria ?? "Sin Clasificar";
+              const categoria = dimensionValue(inc, "categoria");
+              const sucursal = dimensionValue(inc, "sucursal");
               const solucion = inc.solucion || "—";
               const estadoEstilo = getEstadoStyle(inc.estado);
 
@@ -181,7 +259,15 @@ export default function IncidentsTable({
                       </a>
                     </td>
                     <td className={styles.nowrap}>{inc.fecha}</td>
-                    <td>{inc.sucursal ?? "—"}</td>
+                    <td>
+                      <FilterCell
+                        dim="sucursal"
+                        value={inc.sucursal ? sucursal : ""}
+                        active={filters.sucursal === sucursal}
+                        pending={pending}
+                        onToggle={toggle}
+                      />
+                    </td>
                     <td className={styles.desc}>
                       {truncateText(inc.descripcion, 75)}
                     </td>
@@ -189,20 +275,30 @@ export default function IncidentsTable({
                     <td className={styles.solucion}>
                       {truncateText(solucion, 75)}
                     </td>
-                    <td>
-                      <span
-                        className={styles.badge}
+                    <td onClick={(e) => e.stopPropagation()}>
+                      <button
+                        type="button"
+                        disabled={pending}
+                        onClick={() => toggle("categoria", categoria)}
+                        className={`${styles.badge} ${styles.badgeBtn} ${filters.categoria === categoria ? styles.badgeActive : ""}`}
                         style={{
                           color: categoryColor(categoria, categoryColors),
                           borderColor: categoryColor(categoria, categoryColors),
                         }}
+                        title={filters.categoria === categoria ? "Quitar filtro" : `Filtrar por ${categoria}`}
                       >
                         {categoria}
-                      </span>
+                      </button>
                       {inc.subcategoria && (
-                        <span className={styles.subCategoryText} title={inc.subcategoria}>
+                        <button
+                          type="button"
+                          disabled={pending}
+                          onClick={() => toggle("subcategoria", inc.subcategoria!.trim())}
+                          className={`${styles.subCategoryText} ${styles.subCatBtn} ${filters.subcategoria === inc.subcategoria.trim() ? styles.subCatActive : ""}`}
+                          title={`Filtrar por ${inc.subcategoria}`}
+                        >
                           {inc.subcategoria}
-                        </span>
+                        </button>
                       )}
                     </td>
                   </tr>
@@ -211,14 +307,14 @@ export default function IncidentsTable({
                       <td colSpan={8} className={styles.detailCellContent}>
                         <div className={styles.detailContent}>
                           <div className={styles.detailGrid}>
-                            
+
                             {/* Columna Izquierda: Informacion de Gestion */}
                             <div className={styles.detailMeta}>
                               <h4 className={styles.detailSectionTitle}>Detalles de Gestion</h4>
-                              
+
                               <div className={styles.metaItem}>
                                 <span className={styles.metaLabel}>Estado</span>
-                                <span 
+                                <span
                                   className={styles.estadoBadge}
                                   style={{
                                     color: estadoEstilo.color,
@@ -237,7 +333,7 @@ export default function IncidentsTable({
                                   </span>
                                 </div>
                               </div>
-                              
+
                               <div className={styles.metaItem}>
                                 <UserIcon />
                                 <div>
@@ -245,7 +341,7 @@ export default function IncidentsTable({
                                   <span className={styles.metaValue}>{inc.solicitante ?? "No especificado"}</span>
                                 </div>
                               </div>
-                              
+
                               <div className={styles.metaItem}>
                                 <TechIcon />
                                 <div>
@@ -253,7 +349,7 @@ export default function IncidentsTable({
                                   <span className={styles.metaValue}>{inc.tecnico ?? "No asignado"}</span>
                                 </div>
                               </div>
-                              
+
                               <div className={styles.metaItem}>
                                 <WorkTypeIcon />
                                 <div>
@@ -267,7 +363,7 @@ export default function IncidentsTable({
                                 <div>
                                   <span className={styles.metaLabel}>Dispositivo</span>
                                   <span className={styles.metaValue}>
-                                    {inc.articulo ?? "Impresora"} 
+                                    {inc.articulo ?? "Impresora"}
                                     {inc.maquina && <span className={styles.serial}> (S/N: {inc.maquina})</span>}
                                   </span>
                                 </div>
@@ -284,21 +380,21 @@ export default function IncidentsTable({
                                 </div>
                               </div>
                             </div>
-                            
+
                             {/* Columna Derecha: Trabajos Realizados y Reporte */}
                             <div className={styles.detailSection}>
                               <div className={styles.textBlock}>
                                 <h4 className={styles.detailSectionTitle}>Reporte del Cliente</h4>
                                 <p className={styles.fullText}>{inc.descripcion}</p>
                               </div>
-                              
+
                               {inc.causa && (
                                 <div className={styles.textBlock}>
                                   <h4 className={styles.detailSectionTitle}>Causa Diagnosticada</h4>
                                   <p className={styles.causaText}>{inc.causa}</p>
                                 </div>
                               )}
-                              
+
                               <div className={styles.textBlock}>
                                 <h4 className={styles.detailSectionTitle}>Historial de Trabajos (Bitacora)</h4>
                                 {inc.trabajos && inc.trabajos.length > 0 ? (
@@ -338,5 +434,66 @@ export default function IncidentsTable({
         </table>
       </div>
     </div>
+  );
+}
+
+/** Encabezado de columna ordenable: cicla asc/desc/sin orden al tocarlo. */
+function SortHeader({
+  label,
+  col,
+  sort,
+  onSort,
+}: {
+  label: string;
+  col: SortKey;
+  sort: { key: SortKey; dir: SortDir } | null;
+  onSort: (key: SortKey) => void;
+}) {
+  const isActive = sort?.key === col;
+  const arrow = !isActive ? "↕" : sort!.dir === "asc" ? "↑" : "↓";
+  return (
+    <th>
+      <button
+        type="button"
+        className={`${styles.sortBtn} ${isActive ? styles.sortActive : ""}`}
+        onClick={() => onSort(col)}
+      >
+        {label}
+        <span className={styles.sortArrow} aria-hidden>
+          {arrow}
+        </span>
+      </button>
+    </th>
+  );
+}
+
+/** Celda que aplica un filtro al tocarla (toggle). Vacia = sin valor. */
+function FilterCell({
+  dim,
+  value,
+  active,
+  pending,
+  onToggle,
+}: {
+  dim: FilterKey;
+  value: string;
+  active: boolean;
+  pending: boolean;
+  onToggle: (key: FilterKey, value: string) => void;
+}) {
+  if (!value) return <>—</>;
+  return (
+    <button
+      type="button"
+      disabled={pending}
+      onClick={(e) => {
+        e.stopPropagation();
+        onToggle(dim, value);
+      }}
+      className={`${styles.filterCell} ${active ? styles.filterActive : ""}`}
+      title={active ? "Quitar filtro" : `Filtrar por ${value}`}
+    >
+      {value}
+    </button>
   );
 }

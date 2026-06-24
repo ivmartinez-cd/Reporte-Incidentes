@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { refineClassificationAction } from "@/app/dashboard/actions";
 
@@ -11,9 +11,7 @@ import { refineClassificationAction } from "@/app/dashboard/actions";
  * refresca la ruta para mostrar el resultado de IA. Si Gemini esta saturado, se
  * queda con el heuristico (sin bucle) y ofrece reintentar.
  *
- * `lastTriggered` evita re-disparar para el MISMO valor de `pending`: tras un
- * refresh parcial, `pending` baja y vuelve a intentar con el resto; si no hubo
- * progreso (mismo numero) no reintenta solo.
+ * Incluye un temporizador en tiempo real para indicar la duración del proceso.
  */
 export default function ClassificationRefiner({
   empresaId,
@@ -25,31 +23,108 @@ export default function ClassificationRefiner({
   pending: number;
 }) {
   const router = useRouter();
-  const [state, setState] = useState<"idle" | "refining" | "failed">("idle");
+  const [isPending, startTransition] = useTransition();
+  const [state, setState] = useState<"idle" | "refining" | "failed" | "success">("idle");
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [finalDuration, setFinalDuration] = useState<number | null>(null);
+
   const lastTriggered = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
+  const lastEmpresaId = useRef(empresaId);
+  const lastPeriod = useRef(period);
 
   function run() {
+    if (startTimeRef.current === null) {
+      startTimeRef.current = Date.now();
+      setElapsedTime(0);
+      setFinalDuration(null);
+    }
     lastTriggered.current = pending;
     setState("refining");
+
     refineClassificationAction(empresaId, period)
       .then((res) => {
-        if (res.progressed) router.refresh();
-        else setState("failed");
+        if (res.progressed) {
+          startTransition(() => {
+            router.refresh();
+          });
+        } else {
+          if (startTimeRef.current) {
+            setFinalDuration((Date.now() - startTimeRef.current) / 1000);
+          }
+          setState("failed");
+          startTimeRef.current = null;
+        }
       })
-      .catch(() => setState("failed"));
+      .catch(() => {
+        if (startTimeRef.current) {
+          setFinalDuration((Date.now() - startTimeRef.current) / 1000);
+        }
+        setState("failed");
+        startTimeRef.current = null;
+      });
   }
 
+  // Efecto para limpiar/reiniciar cuando cambia el contexto (empresa o periodo)
   useEffect(() => {
-    if (pending <= 0) {
+    if (lastEmpresaId.current !== empresaId || lastPeriod.current !== period) {
+      startTimeRef.current = null;
+      setElapsedTime(0);
+      setFinalDuration(null);
       setState("idle");
+      lastTriggered.current = null;
+      lastEmpresaId.current = empresaId;
+      lastPeriod.current = period;
+    }
+
+    if (pending <= 0) {
+      if (state === "refining") {
+        const duration = startTimeRef.current ? (Date.now() - startTimeRef.current) / 1000 : 0;
+        setFinalDuration(duration);
+        setState("success");
+        startTimeRef.current = null;
+
+        const timer = setTimeout(() => {
+          setState("idle");
+        }, 4000);
+        return () => clearTimeout(timer);
+      } else if (state !== "success") {
+        setState("idle");
+      }
       return;
     }
+
     if (lastTriggered.current === pending) return;
+
+    setElapsedTime(0);
+    setFinalDuration(null);
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pending, empresaId, period]);
 
-  if (pending <= 0 || state === "idle") return null;
+  // Efecto para actualizar el temporizador en tiempo real
+  useEffect(() => {
+    if (state !== "refining") return;
+
+    const interval = setInterval(() => {
+      if (startTimeRef.current) {
+        setElapsedTime((Date.now() - startTimeRef.current) / 1000);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [state]);
+
+  if (pending <= 0 && state !== "success") return null;
+  if (state === "idle") return null;
+
+  // Elegante transición de color según el estado
+  let bg = "rgba(1, 76, 140, 0.92)"; // Azul de refinación
+  if (state === "success") {
+    bg = "rgba(22, 101, 52, 0.95)"; // Verde éxito
+  } else if (state === "failed") {
+    bg = "rgba(153, 27, 27, 0.95)"; // Rojo fallo
+  }
 
   return (
     <div
@@ -65,14 +140,15 @@ export default function ClassificationRefiner({
         gap: 10,
         padding: "10px 16px",
         borderRadius: 12,
-        background: "rgba(1, 76, 140, 0.92)",
+        background: bg,
         color: "#fff",
         boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
         fontSize: 14,
         backdropFilter: "blur(8px)",
+        transition: "background-color 0.4s ease, opacity 0.4s ease, transform 0.3s ease",
       }}
     >
-      {state === "refining" ? (
+      {state === "refining" && (
         <>
           <span
             aria-hidden
@@ -87,14 +163,37 @@ export default function ClassificationRefiner({
             }}
           />
           <span>
-            Refinando clasificacion con IA… ({pending} pendiente
-            {pending === 1 ? "" : "s"})
+            Refinando clasificación con IA… ({pending} pendiente
+            {pending === 1 ? "" : "s"}) · <strong>{elapsedTime.toFixed(1)}s</strong>
           </span>
           <style>{`@keyframes cd-refine-spin{to{transform:rotate(360deg)}}`}</style>
         </>
-      ) : (
+      )}
+
+      {state === "success" && (
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ color: "#45f3ff" }}
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Clasificación completada con éxito en <strong>{finalDuration?.toFixed(1)}s</strong>
+        </span>
+      )}
+
+      {state === "failed" && (
         <>
-          <span>⚠ IA saturada; mostrando clasificacion provisional.</span>
+          <span>
+            ⚠ IA saturada; mostrando clasificación provisional ({finalDuration?.toFixed(1)}s)
+          </span>
           <button
             type="button"
             onClick={run}
@@ -106,7 +205,11 @@ export default function ClassificationRefiner({
               padding: "4px 10px",
               cursor: "pointer",
               fontWeight: 600,
+              marginLeft: 4,
+              transition: "transform 0.1s ease",
             }}
+            onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
+            onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
             Reintentar
           </button>

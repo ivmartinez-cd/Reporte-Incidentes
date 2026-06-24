@@ -1,85 +1,66 @@
 [
   {
-    "name": "Hardware y Desgaste",
-    "color": "#0275d8",
-    "description": "Reparacion o sustitucion de componentes fisicos de la impresora (reemplazo de fusores, rodillos pickup/retard de bandeja gastados, sensores sucios, bandas de transferencia, ADF rayado, cables de corriente/power flojos).",
-    "subcategories": [
-      "Fusor / Calor",
-      "Rodillos y Gomas",
-      "Modulo ADF / Escaner",
-      "Conexion Electrica",
-      "Panel / Botones",
-      "Embrague / Clutch",
-      "Componentes Internos",
-      "Unidad Laser (LSU)",
-      "Placa Logica / Controller",
-      "Cubierta / Carcasa",
-      "Carcasa / Cubierta",
-      "Estructura / Chasis",
-      "Motor / Engranajes",
-      "Diagnostico Interno",
-      "Diagnostico / Inspeccion",
-      "Diagnostico de Componentes Internos",
-      "Desgaste / Reparacion",
-      "Drum / Unidad de Imagen",
-      "Bandeja de Papel",
-      "Unidad de Imagen / Drum"
-    ]
-  },
-  {
     "name": "Medio de Impresion",
     "color": "#f0a400",
-    "description": "Incidentes relacionados con el papel y bandejas fisicas. Ejemplos: guias de bandeja desalineadas, resmas de papel humedas, papel de precios troquelado que se traba.",
+    "description": "Problemas del papel y las bandejas: atascos, papel troquelado mal cortado/humedo, papel inadecuado, arrugas/toma de varias hojas, ajuste de guias o bandejas.",
     "subcategories": [
-      "Ajuste de Guias / Bandejas",
-      "Calidad / Humedad del Papel",
-      "Papel Especial (Troquelado)",
-      "Atasco de Papel",
-      "Papel y Bandejas"
-    ]
-  },
-  {
-    "name": "Conectividad y Red",
-    "color": "#2bb6c4",
-    "description": "Perdidas de IP de red del equipo, puertos de red, switches, falso contacto en cables de red, configuraciones de red interna de la empresa.",
-    "subcategories": [
-      "Configuracion IP / Red",
-      "Red Fisica / Cableado",
-      "Configuracion de Red / IP"
+      "Atasco de papel (comun)",
+      "Papel especial / Troquelado",
+      "Papel inadecuado / humedad / mala calidad",
+      "Arruga / Toma varias hojas",
+      "Ajuste de bandejas / guias",
+      "Otros - Medio de Impresion"
     ]
   },
   {
     "name": "Insumos y Toner",
     "color": "#e8743b",
-    "description": "Toner agotado, engranajes/enlaces rotos en el cartucho de toner que impiden el giro (causando atascos falsos), o manchas/rayas debido al cilindro/toner.",
+    "description": "Consumibles: cambio de toner/cartucho, vaciado de tolva/contenedor residual, drum/unidad de imagen/revelador, o calidad de impresion por insumo (manchas, impresion clara).",
     "subcategories": [
-      "Toner Defectuoso",
-      "Limpieza de Componentes de Toner",
-      "Toner / Insumos"
+      "Toner / Cartucho",
+      "Tolva / Contenedor residual",
+      "Drum / Unidad de imagen / Revelador",
+      "Calidad por insumo (manchas / impresion clara)",
+      "Otros - Insumos y Toner"
+    ]
+  },
+  {
+    "name": "Hardware y Desgaste",
+    "color": "#0275d8",
+    "description": "Reemplazo o reparacion de piezas fisicas por desgaste/rotura: fusor/kit, rodillos pickup/retard/separacion, escaner/ADF, panel/botonera/partes rotas.",
+    "subcategories": [
+      "Rodillos / Pickup / Separacion",
+      "Fusor / Kit de mantenimiento",
+      "Escaner / ADF",
+      "Parte / Panel / Botonera rota",
+      "Otros - Hardware y Desgaste"
+    ]
+  },
+  {
+    "name": "Software, Firmware y Red",
+    "color": "#7b61ff",
+    "description": "Configuracion de red/IP, driver/PC/spooler, firmware, o calibracion/ajuste de imagen. Incluye configurar (aunque sea guiando al usuario en remoto).",
+    "subcategories": [
+      "Configuracion de red / IP",
+      "Driver / PC / Spooler",
+      "Firmware",
+      "Calibracion / Ajuste de imagen",
+      "Otros - Software, Firmware y Red"
     ]
   },
   {
     "name": "Gestion de Soporte",
     "color": "#4dc247",
-    "description": "Tickets de soporte cerrados administrativamente por falta de datos, auto-resoluciones enviando videos/instructivos, o mal uso/negligencia del usuario (como carpetas u objetos apoyados sobre la salida del papel tapando la salida, o vandalismo fisico).",
+    "description": "Casos sin reparacion tecnica de fondo: mesa de ayuda sin respuesta del cliente, instructivo/autoresolucion, mal uso/negligencia, diagnostico sin falla, mantenimiento/limpieza general, problema externo (red del cliente),RD (recambio definitivo).",
     "subcategories": [
-      "Auto-resolucion Asistida",
-      "Negligencia / Mal Uso",
-      "Diagnostico / Verificacion",
-      "Diagnostico sin falla",
-      "Diagnostico General",
-      "Revision General",
-      "Diagnostico / Inspeccion"
-    ]
-  },
-  {
-    "name": "Software y Firmware",
-    "color": "#7b61ff",
-    "description": "Spooler de Windows colgado, drivers corruptos en la PC de facturacion del cliente, configuraciones de tamano de papel en Windows, o actualizaciones de firmware, reinstalacion de firmware (FW) o carga de firmware del equipo.",
-    "subcategories": [
-      "Actualizacion de Firmware",
-      "Soporte Tecnico PC",
-      "Configuracion de Equipo"
+      "Mesa de ayuda / Sin respuesta del cliente",
+      "Instructivo / Autoresolucion",
+      "Mal uso / Negligencia",
+      "Diagnostico / Sin falla",
+      "Mantenimiento / Limpieza general",
+      "Problema externo / Red del cliente",
+      "Otros - Gestion de Soporte",
+      "Recambio Definitivo"
     ]
   }
 ]
