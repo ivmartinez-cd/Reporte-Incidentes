@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 
 const apiKey = process.env.GEMINI_API_KEY || "";
-const model = "gemini-3.5-flash";
+const model = "gemini-2.5-pro";
 
 console.log("Iniciando prueba de API de Gemini...");
 const ai = new GoogleGenAI({ apiKey });
