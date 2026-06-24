@@ -36,3 +36,6 @@ yarn-error.log*
 /skills/
 /homepage.html
 /main.css
+
+# corpus de extracción SOAP — datos confidenciales de clientes, NUNCA commitear
+/data/corpus/
