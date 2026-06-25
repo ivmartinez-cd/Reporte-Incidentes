@@ -73,6 +73,76 @@ function truncateText(text?: string, limit = 75): string {
   return `${text.slice(0, limit)}...`;
 }
 
+// Renderiza el reporte de cliente estructurado en una jerarquia visual limpia
+function renderClientReport(text: string) {
+  if (!text) return <p className={styles.fullText}>—</p>;
+  
+  const parts = text.split(/\s*—\s*/);
+  const motivo = parts[0];
+  const resto = parts.slice(1).join(" — ");
+  
+  // Filtramos 'funcionamiento ok' ya que es una nota de resolucion tecnica, no un reporte del cliente.
+  const items = resto 
+    ? resto.split(/\s*·\s*/)
+        .filter(Boolean)
+        .map(item => item.trim())
+        .filter(item => !item.toLowerCase().includes("funcionamiento ok")) 
+    : [];
+  
+  return (
+    <div className={styles.fullText} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      <div style={{ fontWeight: 600, color: "var(--text)" }}>
+        {motivo}
+      </div>
+      {items.length > 0 && (
+        <ul style={{ paddingLeft: "1.1rem", margin: 0, listStyleType: "disc" }}>
+          {items.map((item, idx) => {
+            const lower = item.toLowerCase();
+            const isInternal = lower.includes("sicop") || lower.includes("llamar a la ma") || lower.includes("153017");
+            
+            let itemStyle = { 
+              color: "var(--text-soft)", 
+              fontSize: "0.85rem",
+              marginTop: "0.2rem",
+              fontStyle: "normal",
+              fontWeight: "normal"
+            };
+            let badge = null;
+            
+            if (isInternal) {
+              itemStyle.color = "var(--text-muted)";
+              itemStyle.fontStyle = "italic";
+              badge = (
+                <span style={{ 
+                  fontSize: "0.65rem", 
+                  marginLeft: "0.4rem", 
+                  color: "#d97706", 
+                  border: "1px solid rgba(217, 119, 6, 0.4)", 
+                  padding: "0.05rem 0.25rem", 
+                  borderRadius: "4px", 
+                  fontStyle: "normal",
+                  background: "rgba(245, 158, 11, 0.05)",
+                  fontWeight: 600
+                }}>
+                  Nota Interna
+                </span>
+              );
+            }
+            
+            return (
+              <li key={idx} style={itemStyle}>
+                {item}
+                {badge}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+
 // Determina los colores de los badges de estado
 function getEstadoStyle(estado?: string) {
   const e = (estado ?? "").toLowerCase();
@@ -385,7 +455,7 @@ export default function IncidentsTable({
                             <div className={styles.detailSection}>
                               <div className={styles.textBlock}>
                                 <h4 className={styles.detailSectionTitle}>Reporte del Cliente</h4>
-                                <p className={styles.fullText}>{inc.descripcion}</p>
+                                {renderClientReport(inc.descripcion)}
                               </div>
 
                               {inc.causa && (
@@ -399,20 +469,90 @@ export default function IncidentsTable({
                                 <h4 className={styles.detailSectionTitle}>Historial de Trabajos (Bitacora)</h4>
                                 {inc.trabajos && inc.trabajos.length > 0 ? (
                                   <div className={styles.timeline}>
-                                    {inc.trabajos.map((trabajo, idx) => (
-                                      <div key={idx} className={styles.timelineItem}>
-                                        <div className={styles.timelineLine}></div>
-                                        <div className={styles.timelineBadge}></div>
-                                        <div className={styles.timelineContent}>
-                                          <p className={styles.timelineDesc}>{trabajo.descripcion}</p>
-                                          {trabajo.observ && (
-                                            <span className={styles.timelineObserv}>
-                                              <strong>Obs:</strong> {trabajo.observ}
-                                            </span>
-                                          )}
+                                    {inc.trabajos.map((trabajo, idx) => {
+                                      const hasTech = trabajo.tecnico && trabajo.tecnico !== "(Ninguno)";
+                                      const isLast = idx === inc.trabajos!.length - 1;
+                                      
+                                      return (
+                                        <div key={idx} className={styles.timelineItem}>
+                                          <div className={styles.timelineLine}></div>
+                                          <div className={styles.timelineBadge} style={{ 
+                                            background: isLast ? "var(--primary)" : "var(--border-strong)",
+                                            borderColor: isLast ? "var(--primary)" : "var(--border-strong)"
+                                          }}></div>
+                                          <div className={styles.timelineContent} style={{ width: "100%" }}>
+                                            <div style={{ 
+                                              display: "flex", 
+                                              alignItems: "center", 
+                                              justifyContent: "space-between",
+                                              flexWrap: "wrap", 
+                                              gap: "0.4rem",
+                                              marginBottom: "0.3rem"
+                                            }}>
+                                              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                                <span style={{ 
+                                                  fontWeight: 700, 
+                                                  fontSize: "0.85rem",
+                                                  color: "var(--text)"
+                                                }}>
+                                                  Instancia {idx + 1}
+                                                </span>
+                                                {trabajo.estado && (
+                                                  <span style={{ 
+                                                    fontSize: "0.7rem", 
+                                                    fontWeight: 600,
+                                                    padding: "0.05rem 0.35rem",
+                                                    borderRadius: "4px",
+                                                    border: "1px solid",
+                                                    ...(() => {
+                                                      const est = trabajo.estado.toLowerCase();
+                                                      if (est === "finalizado" || est === "cerrado" || est === "resuelto") {
+                                                        return { color: "var(--success)", borderColor: "rgba(77, 194, 71, 0.3)", background: "rgba(77, 194, 71, 0.05)" };
+                                                      }
+                                                      if (est === "en curso" || est === "derivado") {
+                                                        return { color: "var(--primary)", borderColor: "rgba(1, 99, 184, 0.3)", background: "rgba(1, 99, 184, 0.05)" };
+                                                      }
+                                                      return { color: "var(--text-soft)", borderColor: "var(--border)", background: "var(--input-bg)" };
+                                                    })()
+                                                  }}>
+                                                    {trabajo.estado}
+                                                  </span>
+                                                )}
+                                              </div>
+                                              <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "flex", gap: "0.6rem" }}>
+                                                {trabajo.fecha && <span>{trabajo.fecha}</span>}
+                                                {hasTech && (
+                                                  <>
+                                                    <span>·</span>
+                                                    <span style={{ fontWeight: 500, color: "var(--text-soft)" }}>
+                                                      Téc: {trabajo.tecnico}
+                                                    </span>
+                                                  </>
+                                                )}
+                                              </div>
+                                            </div>
+                                            
+                                            {/* Tareas Realizadas (si las hay) */}
+                                            {trabajo.descripcion ? (
+                                              <p className={styles.timelineDesc} style={{ margin: 0, fontWeight: 500, color: "var(--text)" }}>
+                                                {trabajo.descripcion}
+                                              </p>
+                                            ) : (
+                                              <p style={{ margin: 0, fontSize: "0.82rem", color: "var(--text-muted)", fontStyle: "italic" }}>
+                                                Sin tareas registradas en esta instancia
+                                              </p>
+                                            )}
+                                            
+                                            {/* Observaciones (si las hay) */}
+                                            {trabajo.observ && trabajo.observ.trim() && (
+                                              <span className={styles.timelineObserv} style={{ display: "block", marginTop: "0.2rem", fontSize: "0.8rem" }}>
+                                                <strong>Obs:</strong> {trabajo.observ}
+                                              </span>
+                                            )}
+                                          </div>
                                         </div>
-                                      </div>
-                                    ))}
+                                      );
+                                    })}
                                   </div>
                                 ) : (
                                   <div className={styles.fallbackSolucion}>

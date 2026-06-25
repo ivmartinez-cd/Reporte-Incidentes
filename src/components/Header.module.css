@@ -3,9 +3,7 @@
   top: 0;
   z-index: 50;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
   padding: 0.85rem 1.6rem;
   margin: 0.9rem;
   border-radius: var(--radius);
@@ -18,6 +16,23 @@
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   contain: paint;
+}
+
+.mainRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brandLine {
+  margin: 0.85rem -1.6rem -0.85rem -1.6rem !important;
+  width: calc(100% + 3.2rem) !important;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: 4px;
 }
 
 :global([data-theme="light"]) .header {

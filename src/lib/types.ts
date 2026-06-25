@@ -50,6 +50,9 @@ export interface Incident {
 export interface IncidentJob {
   descripcion: string;
   observ?: string;
+  fecha?: string;
+  estado?: string;
+  tecnico?: string;
 }
 
 export type IncidentCategory = string;

@@ -26,28 +26,54 @@ async function fetchIncidentJobs(
   id: string,
 ): Promise<{ trabajos: IncidentJob[]; solucion?: string; observaciones?: string }> {
   if (!id) return { trabajos: [] };
-  const raw = await callSoap("getIncidentJobs", { id });
+  // getIncidentInstances requiere el parametro "top" para devolver filas.
+  const raw = await callSoap("getIncidentInstances", { id, top: "50" });
   const rows = parseSoapJson<Record<string, unknown>[]>(raw, []);
 
   const trabajos: IncidentJob[] = rows
     .map((row) => {
-      const r = unwrapRow(row, "Job");
-      const descripcion = pick(r, ["Descripcion", "descripcion"]);
-      const observ = pick(r, ["Observ", "observ", "Observacion"]);
+      const r = unwrapRow(row, "Instance");
+      const descripcion = pick(r, ["Tareas", "tareas", "Descripcion", "descripcion"]);
+      const observ = pick(r, ["Observaciones", "observaciones", "Observ", "observ", "Observacion"]);
+      const fecha = pick(r, ["Fecha", "fecha"]);
+      const estado = pick(r, ["Estado", "estado", "EstadoWeb"]);
+      const tecnico = pick(r, ["Tecnico", "tecnico"]);
+      
       return {
         descripcion: isBlank(descripcion) ? "" : descripcion!.trim(),
         observ: isBlank(observ) ? undefined : observ!.trim(),
+        fecha: isBlank(fecha) ? undefined : fecha!.trim(),
+        estado: isBlank(estado) ? undefined : estado!.trim(),
+        tecnico: isBlank(tecnico) ? undefined : tecnico!.trim(),
       };
     })
-    .filter((j) => j.descripcion || j.observ);
+    .filter((j) => j.descripcion || j.observ || j.estado || j.fecha)
+    .reverse(); // Invertimos para mantener el orden cronológico ascendente (Instancia 1 -> 5)
 
-  // La solucion de soporte tecnico debe ser estrictamente lo que describio el tecnico
-  const descripciones = trabajos.map((j) => j.descripcion).filter(Boolean);
-  const solucion = descripciones.length ? descripciones.join(" · ") : undefined;
+  // La solucion de soporte tecnico se extrae preferentemente de las instancias en estado "Finalizado" (o "Resuelto"/"Cerrado")
+  // para que la IA y las vistas lean la tarea de resolución técnica real y no notas intermedias.
+  const finalizados = trabajos.filter(
+    (j) => {
+      const est = (j.estado || "").toLowerCase();
+      return (est === "finalizado" || est === "resuelto" || est === "cerrado") && j.descripcion;
+    }
+  );
 
-  // Las observaciones reportadas (frecuentemente del cliente) se acumulan por separado
-  const obsList = trabajos.map((j) => j.observ).filter(Boolean);
-  const observaciones = obsList.length ? obsList.join(" · ") : undefined;
+  let solucion: string | undefined;
+  if (finalizados.length > 0) {
+    solucion = finalizados.map((j) => j.descripcion).join(" · ");
+  } else {
+    // Fallback: si ninguna de las etapas finales de resolución tiene descripción, tomamos la de cualquier etapa con contenido
+    const descripciones = trabajos.map((j) => j.descripcion).filter(Boolean);
+    solucion = descripciones.length ? descripciones.join(" · ") : undefined;
+  }
+
+  // Las observaciones reportadas por el cliente se toman únicamente de la primera instancia (apertura / "Pendiente")
+  // para evitar arrastrar notas de derivación, contadores o comentarios del técnico añadidos en etapas posteriores.
+  const observaciones = trabajos.find(j => {
+    const est = (j.estado || "").toLowerCase();
+    return est === "pendiente" || est === "ingresado" || est === "abierto" || est === "creado";
+  })?.observ || trabajos[0]?.observ;
 
   return { trabajos, solucion, observaciones };
 }

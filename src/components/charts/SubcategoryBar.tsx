@@ -26,15 +26,22 @@ function SubcategoryTick({
   y,
   payload,
   isPrint,
+  yAxisWidth = 160,
 }: {
   x?: number;
   y?: number;
   payload?: { value: string };
   isPrint: boolean;
+  yAxisWidth?: number;
 }) {
   if (!payload) return null;
   const val = payload.value;
-  const formatted = isPrint && val.length > 38 ? `${val.slice(0, 35)}...` : val;
+  
+  // Calculate average character width and max characters that fit the yAxisWidth.
+  // We leave a 12px margin on the left of YAxis to avoid clipping.
+  const charWidth = isPrint ? 5.5 : 6.2;
+  const maxChars = Math.floor((yAxisWidth - 12) / charWidth);
+  const formatted = val.length > maxChars ? `${val.slice(0, Math.max(5, maxChars - 3))}...` : val;
 
   return (
     <text
@@ -54,7 +61,7 @@ export default function SubcategoryBar({
   data,
   categoryColors,
   height,
-  yAxisWidth = 120,
+  yAxisWidth = 160,
   isPrint = false,
 }: {
   data: Datum[];
@@ -99,7 +106,7 @@ export default function SubcategoryBar({
                 type="category"
                 dataKey="name"
                 width={yAxisWidth}
-                tick={<SubcategoryTick isPrint={isPrint} />}
+                tick={<SubcategoryTick isPrint={isPrint} yAxisWidth={yAxisWidth} />}
                 axisLine={false}
                 tickLine={false}
               />

@@ -13,6 +13,10 @@
 
 /* Forzar tema claro en las variables de globals.css para todos los componentes hijos */
 .printPage {
+  /* Colores oficiales del Manual de Marca (Canal Directo) */
+  --cd-orange: #F7941D;
+  --cd-grey: #58595B;
+
   --bg-base: #ffffff;
   --bg-deep: #ffffff;
   --surface: #ffffff;
@@ -20,8 +24,12 @@
   --surface-glass: #ffffff;
   --border: #e2e8f0;
   --border-strong: #cbd5e1;
-  --primary: #0163b8;
-  --primary-deep: #014c8c;
+  
+  /* Acentos corporativos adaptados para alto contraste en impresion */
+  --primary: #d17300;
+  --primary-deep: #a85c00;
+  --accent: var(--cd-grey);
+  
   --text: #1a1f29;
   --text-soft: #475569;
   --text-muted: #64748b;
@@ -39,49 +47,77 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom: 2px solid var(--primary);
-  padding-bottom: 0.75rem;
-  margin-bottom: 1.5rem;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(
+    to right,
+    var(--cd-orange) 0%,
+    var(--cd-orange) 65%,
+    var(--cd-grey) 65%,
+    var(--cd-grey) 100%
+  ) 1;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.8rem;
 }
 
-.brand {
+.titleGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
-.logoRow {
+.title {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.brandSubtitle {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.1rem 0 0.2rem 0.1rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  line-height: 1.2;
+}
+
+.logoContainer {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  padding-bottom: 0.2rem;
 }
 
 /* Logo de marca (naranja) directo sobre el PDF blanco, sin fondo. */
 .logo {
   display: block;
-  height: 31px;
+  height: 36px;
   width: auto;
-}
-
-.headerDivider {
-  color: var(--border-strong);
-  font-weight: 300;
-  font-size: 1.2rem;
-}
-
-.title {
-  font-family: var(--font-title);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--primary);
 }
 
 .metaRow {
   font-size: 0.82rem;
-  color: var(--text-soft);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.metaRow strong {
+  color: var(--text-soft);
+  font-weight: 600;
 }
 
 .dotDivider {
@@ -288,7 +324,7 @@
 }
 
 .tableDesc {
-  max-width: 320px;
+  max-width: 480px;
   word-break: break-word;
 }
 

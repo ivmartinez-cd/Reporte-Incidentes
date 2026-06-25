@@ -25,7 +25,9 @@ export default function LoginForm() {
           className={styles.logo}
           priority
         />
+        <div className="brandLine" style={{ margin: "0.5rem 0 1.2rem" }} />
         <h1 className={styles.title}>Reportes de Incidentes</h1>
+
 
         <form action={action}>
           <div className={styles.group}>
@@ -58,7 +60,7 @@ export default function LoginForm() {
 
           <button
             type="submit"
-            className={`btn btn-accent ${styles.submit}`}
+            className={`btn btn-primary ${styles.submit}`}
             disabled={pending}
           >
             {pending ? "Verificando…" : "Ingresar"}

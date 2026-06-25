@@ -60,23 +60,13 @@ export default async function PrintPage({
       <div className={`printView ${styles.printPage}`}>
         {/* Encabezado Principal */}
         <header className={styles.header}>
-          <div className={styles.brand}>
-            <div className={styles.logoRow}>
-              {/* Logo naranja de marca: se ve bien sobre el blanco del PDF, sin
-                  fondo. <img> plano (no next/image) para que pinte de inmediato. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className={styles.logo}
-                src="/logo_login.png"
-                alt="Canal Directo"
-                width={140}
-                height={31}
-              />
-              <span className={styles.headerDivider}>—</span>
-              <h1 className={styles.title}>Reporte de Incidentes — {report.empresa.nombre}</h1>
-            </div>
+          <div className={styles.titleGroup}>
+            <h1 className={styles.title}>Reporte de Incidentes</h1>
+            <h2 className={styles.subtitle}>{report.empresa.nombre}</h2>
             <div className={styles.metaRow}>
-              Periodo: {periodLabel(period)} · Generado {new Date(report.generatedAt).toLocaleDateString("es-AR")}
+              <span>Periodo: <strong>{periodLabel(period)}</strong></span>
+              <span className={styles.dotDivider}>·</span>
+              <span>Generado {new Date(report.generatedAt).toLocaleDateString("es-AR")}</span>
               {report.isMock && (
                 <>
                   <span className={styles.dotDivider}>·</span>
@@ -84,6 +74,18 @@ export default async function PrintPage({
                 </>
               )}
             </div>
+          </div>
+          <div className={styles.logoContainer}>
+            {/* Logo naranja de marca: se ve bien sobre el blanco del PDF, sin
+                fondo. <img> plano (no next/image) para que pinte de inmediato. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className={styles.logo}
+              src="/logo_login.png"
+              alt="Canal Directo"
+              width={160}
+              height={36}
+            />
           </div>
         </header>
 
@@ -142,15 +144,14 @@ export default async function PrintPage({
                   <th>Numero</th>
                   <th>Fecha</th>
                   <th>Sucursal</th>
-                  <th>Reporte del Cliente</th>
-                  <th>Causa</th>
+                  <th>Tarea Realizada</th>
                   <th>Tipificacion</th>
                 </tr>
               </thead>
               <tbody>
                 {topIncidents.length === 0 ? (
                   <tr>
-                    <td colSpan={6} style={{ textAlign: "center", padding: "1rem" }}>
+                    <td colSpan={5} style={{ textAlign: "center", padding: "1rem" }}>
                       Sin incidentes en el periodo
                     </td>
                   </tr>
@@ -163,11 +164,8 @@ export default async function PrintPage({
                         <td className={styles.tableDate}>{inc.fecha}</td>
                         <td>{inc.sucursal || "—"}</td>
                         <td className={styles.tableDesc}>
-                          {inc.descripcion.length > 120
-                            ? `${inc.descripcion.slice(0, 120)}...`
-                            : inc.descripcion}
+                          {inc.solucion || "—"}
                         </td>
-                        <td>{inc.causa || "—"}</td>
                         <td>
                           <span
                             className={styles.tableBadge}

@@ -7,6 +7,10 @@
   /* === TEMA OSCURO — gama corporativa #363955 (indigo) === */
   color-scheme: dark;
 
+  /* Colores oficiales del Manual de Marca (Canal Directo) */
+  --cd-orange: #F7941D;        /* Institucional */
+  --cd-grey: #58595B;          /* MPS / Gris institucional */
+
   /* Fondo y superficies */
   --bg-deep: #24263b;
   --bg-base: #2c2f47;
@@ -16,15 +20,15 @@
   --border: rgba(255, 255, 255, 0.09);
   --border-strong: rgba(255, 255, 255, 0.16);
 
-  /* Acentos corporativos */
-  --primary: #0275d8;
-  --primary-deep: #014c8c;
-  --accent: #f0a400;           /* naranja accion */
-  --accent-deep: #c98700;
+  /* Acentos corporativos - Solo Institucional */
+  --primary: var(--cd-orange);
+  --primary-deep: #cc740c;
+  --accent: var(--cd-grey);
+  --accent-deep: #404142;
 
   /* Semanticos */
   --success: #4dc247;
-  --warning: #f0a400;
+  --warning: var(--cd-orange);
   --danger: hsl(348, 83%, 62%);
 
   /* Texto */
@@ -41,19 +45,23 @@
 
   /* Tipografia */
   --font-title: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
-  --font-body: var(--font-roboto), "Roboto", system-ui, sans-serif;
+  --font-body: var(--font-source-sans), "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
 
   /* Radios / sombras / transicion */
   --radius: 16px;
   --radius-sm: 10px;
   --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.55);
-  --shadow-glow: 0 0 0 1px var(--border), 0 24px 60px -28px rgba(2, 117, 216, 0.4);
+  --shadow-glow: 0 0 0 1px var(--border), 0 24px 60px -28px rgba(247, 148, 29, 0.35);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-theme="light"] {
   /* === TEMA CLARO — gama corporativa #F5F6E6 (crema) === */
   color-scheme: light;
+
+  /* Colores oficiales del Manual de Marca (Canal Directo) */
+  --cd-orange: #F7941D;
+  --cd-grey: #58595B;
 
   --bg-base: #f5f6e6;
   --bg-deep: #e8e9d8;
@@ -63,9 +71,11 @@
   --border: rgba(54, 57, 85, 0.14);
   --border-strong: rgba(54, 57, 85, 0.26);
 
-  /* Azul un poco mas profundo: mejora el contraste sobre fondos claros. */
-  --primary: #0163b8;
-  --primary-deep: #014c8c;
+  /* Acentos corporativos - Naranja adaptado para contraste accesible en fondo claro */
+  --primary: #d17300;
+  --primary-deep: #a85c00;
+  --accent: var(--cd-grey);
+  --accent-deep: #404142;
 
   --text: #363955;
   --text-soft: #4c5578;
@@ -78,7 +88,7 @@
   --chart-axis: #69739a;
 
   --shadow: 0 14px 40px -18px rgba(54, 57, 85, 0.22);
-  --shadow-glow: 0 0 0 1px var(--border), 0 20px 50px -20px rgba(2, 117, 216, 0.18);
+  --shadow-glow: 0 0 0 1px var(--border), 0 20px 50px -20px rgba(209, 115, 0, 0.18);
 }
 
 * {
@@ -193,6 +203,7 @@ input.field:focus-visible,
 .btn-primary {
   background: linear-gradient(180deg, var(--primary), var(--primary-deep));
   color: #fff;
+  box-shadow: 0 10px 26px -10px rgba(247, 148, 29, 0.45);
 }
 .btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
@@ -314,3 +325,20 @@ body:has(.printView) > header {
     print-color-adjust: exact;
   }
 }
+
+/* Línea institucional decorativa (Naranja y Gris) */
+.brandLine {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--cd-orange) 0%,
+    var(--cd-orange) 65%,
+    var(--cd-grey) 65%,
+    var(--cd-grey) 100%
+  );
+  border-radius: 2px;
+  margin: 1rem 0;
+  border: none;
+}
+
