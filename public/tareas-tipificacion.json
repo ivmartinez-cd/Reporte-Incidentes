@@ -1,0 +1,811 @@
+{
+  "total_incidentes": 784,
+  "categorias": {
+    "Gestion de Soporte": {
+      "subcategorias": {
+        "Diagnostico / Sin falla": {
+          "tareas": [
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración de red/IP",
+              "cantidad": 1
+            }
+          ],
+          "total": 12
+        },
+        "Instructivo / Autoresolucion": {
+          "tareas": [
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración de red/IP",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración del equipo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 1
+            }
+          ],
+          "total": 8
+        },
+        "Mal uso / Negligencia": {
+          "tareas": [
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Retiro de papel atascado",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 1
+            }
+          ],
+          "total": 6
+        },
+        "Mantenimiento / Limpieza general": {
+          "tareas": [
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 13
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 7
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 7
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 1
+            }
+          ],
+          "total": 30
+        },
+        "Mesa de ayuda / Sin respuesta del cliente": {
+          "tareas": [
+            {
+              "tarea": "Configuración del equipo",
+              "cantidad": 8
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 1
+            }
+          ],
+          "total": 14
+        },
+        "Problema externo / Red del cliente": {
+          "tareas": [
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 1
+            }
+          ],
+          "total": 3
+        },
+        "Recambio Definitivo": {
+          "tareas": [
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 1
+            }
+          ],
+          "total": 3
+        }
+      },
+      "total": 76
+    },
+    "Hardware y Desgaste": {
+      "subcategorias": {
+        "Escaner / ADF": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 5
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Cambio de ADF/Escáner",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de cable de red",
+              "cantidad": 1
+            }
+          ],
+          "total": 28
+        },
+        "Fusor / Kit de mantenimiento": {
+          "tareas": [
+            {
+              "tarea": "Cambio de fusor",
+              "cantidad": 60
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 35
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 28
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 22
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 20
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 18
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 13
+            },
+            {
+              "tarea": "Cambio de panel/display",
+              "cantidad": 12
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 12
+            },
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 6
+            },
+            {
+              "tarea": "Retiro de papel atascado",
+              "cantidad": 5
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de ADF/Escáner",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de cable de red",
+              "cantidad": 1
+            }
+          ],
+          "total": 243
+        },
+        "Otros - Hardware y Desgaste": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 22
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 19
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 15
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 13
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 11
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 10
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 7
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Cambio de cable de red",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Cambio de disco rigido",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de panel/display",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 1
+            }
+          ],
+          "total": 110
+        },
+        "Parte / Panel / Botonera rota": {
+          "tareas": [
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 19
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 18
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 15
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 14
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 13
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 9
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 8
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de ADF/Escáner",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Retiro de papel atascado",
+              "cantidad": 1
+            }
+          ],
+          "total": 104
+        },
+        "Rodillos / Pickup / Separacion": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 38
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 30
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 26
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 17
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 14
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 12
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 5
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de panel/display",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Retiro de papel atascado",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de fusor",
+              "cantidad": 1
+            }
+          ],
+          "total": 153
+        }
+      },
+      "total": 638
+    },
+    "Insumos y Toner": {
+      "subcategorias": {
+        "Calidad por insumo (manchas / impresion clara)": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 2
+            }
+          ],
+          "total": 10
+        },
+        "Drum / Unidad de imagen / Revelador": {
+          "tareas": [
+            {
+              "tarea": "Cambio de drum",
+              "cantidad": 7
+            },
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 5
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Configuración del equipo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 1
+            }
+          ],
+          "total": 22
+        },
+        "Tolva / Contenedor residual": {
+          "tareas": [
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Retiro de papel atascado",
+              "cantidad": 2
+            }
+          ],
+          "total": 4
+        },
+        "Toner / Cartucho": {
+          "tareas": [
+            {
+              "tarea": "Cambio de toner",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de panel/display",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 1
+            }
+          ],
+          "total": 11
+        }
+      },
+      "total": 47
+    },
+    "Medio de Impresion": {
+      "subcategorias": {
+        "Ajuste de bandejas / guias": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 5
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            }
+          ],
+          "total": 13
+        },
+        "Arruga / Toma varias hojas": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de bandeja",
+              "cantidad": 1
+            }
+          ],
+          "total": 5
+        },
+        "Atasco de papel (comun)": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 17
+            },
+            {
+              "tarea": "Retiro de papel atascado",
+              "cantidad": 15
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 12
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 9
+            },
+            {
+              "tarea": "Soporte remoto/Instructivo",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Corrección por mal uso",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de componente",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 1
+            }
+          ],
+          "total": 64
+        },
+        "Papel especial / Troquelado": {
+          "tareas": [
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 1
+            }
+          ],
+          "total": 4
+        },
+        "Papel inadecuado / humedad / mala calidad": {
+          "tareas": [
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            }
+          ],
+          "total": 4
+        }
+      },
+      "total": 90
+    },
+    "Software, Firmware y Red": {
+      "subcategorias": {
+        "Configuracion de red / IP": {
+          "tareas": [
+            {
+              "tarea": "Configuración de red/IP",
+              "cantidad": 10
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 8
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 5
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de disco rigido",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de cable de red",
+              "cantidad": 1
+            }
+          ],
+          "total": 28
+        },
+        "Driver / PC / Spooler": {
+          "tareas": [
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 3
+            },
+            {
+              "tarea": "Configuración de red/IP",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Cambio de rodillos/pickup",
+              "cantidad": 2
+            },
+            {
+              "tarea": "Limpieza general del equipo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Cambio de cable de red",
+              "cantidad": 1
+            }
+          ],
+          "total": 14
+        },
+        "Firmware": {
+          "tareas": [
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Actualización/Carga de firmware",
+              "cantidad": 2
+            }
+          ],
+          "total": 6
+        },
+        "Otros - Software, Firmware y Red": {
+          "tareas": [
+            {
+              "tarea": "Diagnóstico/Sin falla detectada",
+              "cantidad": 4
+            },
+            {
+              "tarea": "Configuración del equipo",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Reset de equipo/contadores",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Configuración de bandejas",
+              "cantidad": 1
+            },
+            {
+              "tarea": "Mantenimiento preventivo",
+              "cantidad": 1
+            }
+          ],
+          "total": 8
+        }
+      },
+      "total": 56
+    }
+  }
+}

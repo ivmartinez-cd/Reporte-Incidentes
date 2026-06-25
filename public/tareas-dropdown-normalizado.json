@@ -1,0 +1,135 @@
+[
+  {
+    "id": 1,
+    "tarea": "Limpieza del equipo",
+    "cantidad": 23,
+    "ejemplos": [
+      "se vacía tolva. se limpia equipo. se prueba ok.",
+      "cambio de fusor,  limpieza y  chequeo general del equipo"
+    ]
+  },
+  {
+    "id": 2,
+    "tarea": "Cambio de rodillos/pickup",
+    "cantidad": 11,
+    "ejemplos": [
+      "cambio de pickup y retard",
+      "cambio de rubber retard,  limpieza de laser y fusor"
+    ]
+  },
+  {
+    "id": 3,
+    "tarea": "Diagnóstico/Sin falla",
+    "cantidad": 10,
+    "ejemplos": [
+      "se revisa equipo. testeo. ok",
+      "se verifica funcionamiento ok del equipo \nfalla presentada por hojas troqueladas"
+    ]
+  },
+  {
+    "id": 4,
+    "tarea": "Cambio de fusor",
+    "cantidad": 8,
+    "ejemplos": [
+      "leo necesita imagen de la impresion mp. tiempo estimado: · se aguarda respuesta ",
+      ". tiempo estimado:.. · se reemplazo fusor"
+    ]
+  },
+  {
+    "id": 5,
+    "tarea": "Retiro de papel atascado",
+    "cantidad": 6,
+    "ejemplos": [
+      "se envia por wati, consultar datos de red · control de equipo. control de fusor.",
+      ". tiempo estimado:.. · se retiro atasco de papel y se cambio fusor"
+    ]
+  },
+  {
+    "id": 6,
+    "tarea": "Mantenimiento preventivo",
+    "cantidad": 6,
+    "ejemplos": [
+      "ariel se comunica con la usuaria, indica que no puede que pase el 22/05 pero ari",
+      "mantenimiento limpieza funciona ok"
+    ]
+  },
+  {
+    "id": 7,
+    "tarea": "Limpieza de rodillos",
+    "cantidad": 4,
+    "ejemplos": [
+      "control de equipo. ajuste de guías de papel. limpieza de rodillos pickup. rotaci",
+      ". tiempo estimado:martes 26 · se realiza limpieza y aplicacion de restaurador ca"
+    ]
+  },
+  {
+    "id": 8,
+    "tarea": "Cambio de toner/cartucho",
+    "cantidad": 3,
+    "ejemplos": [
+      "se realizó el cambio de tolva residual de toner por una de backup que tenía el u",
+      ". tiempo estimado:.. · se solicito mantenimiento, y se encontro que la impresora"
+    ]
+  },
+  {
+    "id": 9,
+    "tarea": "Actualización de firmware",
+    "cantidad": 3,
+    "ejemplos": [
+      "se demora hasta el 26/03 · se cambió disco rígido y se actualizó firmware. teste",
+      "49.xx.xx: a 49 error might happen at any time for multiple reasons. although som"
+    ]
+  },
+  {
+    "id": 10,
+    "tarea": "Configuración de bandejas",
+    "cantidad": 3,
+    "ejemplos": [
+      ". tiempo estimado:.. · se aguarda viaje · se retiro atasco, configuracion de ban",
+      "se consulta al usuario lo que leo necesita mp. tiempo estimado: · se aguarda res"
+    ]
+  },
+  {
+    "id": 11,
+    "tarea": "Cambio de bandeja",
+    "cantidad": 3,
+    "ejemplos": [
+      "cambio de fusor y soporte de bandeja mp, limpieza",
+      "cambio de pick up roller bandeja 2, cambio de clutch bandeja 2( clutch usado de "
+    ]
+  },
+  {
+    "id": 12,
+    "tarea": "Soporte técnico remoto",
+    "cantidad": 2,
+    "ejemplos": [
+      ". tiempo estimado: · se intenta a hablar con el contacto via wati pero no recibe",
+      "no conecta por vpn, se contacta al local via whatsapp para revisar la falla · se"
+    ]
+  },
+  {
+    "id": 13,
+    "tarea": "Limpieza de fusor",
+    "cantidad": 2,
+    "ejemplos": [
+      "revisión de equipo limpieza interna se cambió fusor ; rubber retard y cover cass",
+      "revisión de equipo limpieza interna se cambió fusor"
+    ]
+  },
+  {
+    "id": 14,
+    "tarea": "Reset de equipo",
+    "cantidad": 1,
+    "ejemplos": [
+      ". tiempo estimado:14/05/2026 14:30 · se realiza reseteo de equipo y se realiza p"
+    ]
+  },
+  {
+    "id": 15,
+    "tarea": "Cambio de drum/revelador",
+    "cantidad": 1,
+    "ejemplos": [
+      "cambio de unidad de revelador"
+    ]
+  }
+]

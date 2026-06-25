@@ -39,3 +39,7 @@ yarn-error.log*
 
 # corpus de extracción SOAP — datos confidenciales de clientes, NUNCA commitear
 /data/corpus/
+/corpus/
+
+# zip de archivos de trabajo
+/archivos_trabajo.zip

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "tarea": "Cambio de fusor",
+    "cantidad": 82,
+    "ejemplo": "error de fusor — fallas: mensaje de error /aviso en el panel"
+  },
+  {
+    "id": 2,
+    "tarea": "Mantenimiento preventivo",
+    "cantidad": 68,
+    "ejemplo": "verificar fallas con el log de errores/solucionar errores — "
+  },
+  {
+    "id": 3,
+    "tarea": "Diagnóstico/Sin falla",
+    "cantidad": 65,
+    "ejemplo": "se limpia platina y equipo. se prueba ok"
+  },
+  {
+    "id": 4,
+    "tarea": "Limpieza del equipo",
+    "cantidad": 40,
+    "ejemplo": "ajuste de acople de camilla de transferencia,  limpieza y ch"
+  },
+  {
+    "id": 5,
+    "tarea": "Cambio de rodillos/pickup",
+    "cantidad": 27,
+    "ejemplo": "cambio de rubber retard,  lubricacion de clutch bandeja 1, l"
+  },
+  {
+    "id": 6,
+    "tarea": "Cambio de bandeja",
+    "cantidad": 17,
+    "ejemplo": "no reconoce insumo — fallas: otro (describa abajo),no salen "
+  },
+  {
+    "id": 7,
+    "tarea": "Retiro de papel atascado",
+    "cantidad": 15,
+    "ejemplo": "prt mono hp m501dn — fallas: mensaje de error /aviso en el p"
+  },
+  {
+    "id": 8,
+    "tarea": "Configuración de bandejas",
+    "cantidad": 13,
+    "ejemplo": "verificar fallas con el log de errores/solucionar errores — "
+  },
+  {
+    "id": 9,
+    "tarea": "Limpieza de rodillos",
+    "cantidad": 11,
+    "ejemplo": "revisión de equipo limpieza interna se cambió pickup roller "
+  },
+  {
+    "id": 10,
+    "tarea": "Reset de equipo",
+    "cantidad": 11,
+    "ejemplo": "toma varias hojas|indeterminado|reseteo del equipo y reempla"
+  },
+  {
+    "id": 11,
+    "tarea": "Configuración de red",
+    "cantidad": 10,
+    "ejemplo": "no se comunica a la red — fallas: no salen las impresiones y"
+  },
+  {
+    "id": 12,
+    "tarea": "Cambio de toner/cartucho",
+    "cantidad": 7,
+    "ejemplo": "se realizó el cambio de tolva residual de toner por una de b"
+  },
+  {
+    "id": 13,
+    "tarea": "Actualización de firmware",
+    "cantidad": 4,
+    "ejemplo": "verificar fallas con el log de errores/solucionar errores — "
+  },
+  {
+    "id": 14,
+    "tarea": "Cambio de drum/revelador",
+    "cantidad": 4,
+    "ejemplo": "imprime mal ( mancha las hojas) — no enviar instructivo de r"
+  },
+  {
+    "id": 15,
+    "tarea": "Limpieza de fusor",
+    "cantidad": 3,
+    "ejemplo": "arruga papel — no enviar instructivo de reseteo, por temas s"
+  },
+  {
+    "id": 16,
+    "tarea": "Soporte técnico remoto",
+    "cantidad": 1,
+    "ejemplo": "no conecta por vpn, se contacta al local via whatsapp para r"
+  },
+  {
+    "id": 17,
+    "tarea": "Corrección por mal uso",
+    "cantidad": 1,
+    "ejemplo": "prt mono hp m501dn — fallas: otro (describa abajo),,. mensaj"
+  },
+  {
+    "id": 18,
+    "tarea": "Cambio de cable/conector",
+    "cantidad": 1,
+    "ejemplo": "se reinicia — fallas: otro (describa abajo),,. mensaje de er"
+  }
+]

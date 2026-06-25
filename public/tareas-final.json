@@ -1,0 +1,96 @@
+{
+  "total_tareas": 18,
+  "tareas": [
+    {
+      "id": 1,
+      "tarea": "Cambio de fusor",
+      "emoji": "🔧"
+    },
+    {
+      "id": 2,
+      "tarea": "Cambio de rodillos/pickup",
+      "emoji": "🔧"
+    },
+    {
+      "id": 3,
+      "tarea": "Cambio de bandeja",
+      "emoji": "🔧"
+    },
+    {
+      "id": 4,
+      "tarea": "Cambio de toner/cartucho",
+      "emoji": "🔧"
+    },
+    {
+      "id": 5,
+      "tarea": "Cambio de drum/revelador",
+      "emoji": "🔧"
+    },
+    {
+      "id": 6,
+      "tarea": "Cambio de ADF/escáner",
+      "emoji": "🔧"
+    },
+    {
+      "id": 7,
+      "tarea": "Cambio de panel/display",
+      "emoji": "🔧"
+    },
+    {
+      "id": 8,
+      "tarea": "Cambio de cable/conector",
+      "emoji": "🔧"
+    },
+    {
+      "id": 9,
+      "tarea": "Limpieza del equipo",
+      "emoji": "🧹"
+    },
+    {
+      "id": 10,
+      "tarea": "Limpieza de rodillos",
+      "emoji": "🧹"
+    },
+    {
+      "id": 11,
+      "tarea": "Mantenimiento preventivo",
+      "emoji": "⚙"
+    },
+    {
+      "id": 12,
+      "tarea": "Reset de equipo",
+      "emoji": "↻"
+    },
+    {
+      "id": 13,
+      "tarea": "Configuración de red/IP",
+      "emoji": "🌐"
+    },
+    {
+      "id": 14,
+      "tarea": "Configuración de bandejas",
+      "emoji": "⚙"
+    },
+    {
+      "id": 15,
+      "tarea": "Actualización de firmware",
+      "emoji": "💾"
+    },
+    {
+      "id": 16,
+      "tarea": "Retiro de papel atascado",
+      "emoji": "📄"
+    },
+    {
+      "id": 17,
+      "tarea": "Diagnóstico/Sin falla",
+      "emoji": "🔍"
+    },
+    {
+      "id": 18,
+      "tarea": "Soporte técnico remoto",
+      "emoji": "📞"
+    }
+  ],
+  "descripcion": "Lista de tareas para seleccionar en la app del tecnico. Cada tarea se mapea automaticamente a categoria y subcategoria."
+}
