@@ -273,12 +273,37 @@ input.field:focus {
   fill: var(--row-hover);
 }
 
-/* Transicion suave al alternar tema (se aplica solo durante el cambio de tema para evitar lag al hacer scroll) */
+/* Transicion suave al alternar tema (evitamos el comodin * para no animar SVGs/Recharts y prevenir caidas bruscas de FPS) */
 @media (prefers-reduced-motion: no-preference) {
   .theme-transitioning,
-  .theme-transitioning * {
-    transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
-      color 0.25s var(--ease) !important;
+  .theme-transitioning body,
+  .theme-transitioning header,
+  .theme-transitioning main,
+  .theme-transitioning section,
+  .theme-transitioning footer,
+  .theme-transitioning table,
+  .theme-transitioning tr,
+  .theme-transitioning th,
+  .theme-transitioning td,
+  .theme-transitioning h1,
+  .theme-transitioning h2,
+  .theme-transitioning h3,
+  .theme-transitioning h4,
+  .theme-transitioning p,
+  .theme-transitioning span,
+  .theme-transitioning strong,
+  .theme-transitioning button,
+  .theme-transitioning input,
+  .theme-transitioning select,
+  .theme-transitioning a,
+  .theme-transitioning .card,
+  .theme-transitioning .glass,
+  .theme-transitioning .btn,
+  .theme-transitioning .select,
+  .theme-transitioning .field {
+    transition: background-color 0.25s var(--ease),
+      border-color 0.25s var(--ease),
+      color 0.2s var(--ease) !important;
   }
 }
 
