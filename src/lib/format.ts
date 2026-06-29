@@ -26,6 +26,29 @@ export function calcCheckDigit(numStr: string): string {
   return String((10 - (sum % 10)) % 10);
 }
 
+/** Etiqueta legible para un rango de N meses terminando en `period`. */
+export function periodRangeLabel(period: string, months: number): string {
+  if (months <= 1) return periodLabel(period);
+  const [y, m] = period.split("-").map(Number);
+  const end = new Date(y, (m ?? 1) - 1, 1);
+  const start = new Date(y, (m ?? 1) - months, 1);
+  const startStr = `${MESES[start.getMonth()]} ${start.getFullYear()}`;
+  const endStr = `${MESES[end.getMonth()]} ${end.getFullYear()}`;
+  return `${startStr} – ${endStr}`;
+}
+
+/** Genera el array de periodos "YYYY-MM" de un rango: N meses terminando en `period`. */
+export function buildPeriodRange(period: string, months: number): string[] {
+  if (months <= 1) return [period];
+  const [y, m] = period.split("-").map(Number);
+  const out: string[] = [];
+  for (let i = months - 1; i >= 0; i--) {
+    const d = new Date(y, (m ?? 1) - 1 - i, 1);
+    out.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+  }
+  return out;
+}
+
 /** Lista de los ultimos N periodos "YYYY-MM" hasta el mes indicado (o actual). */
 export function recentPeriods(count = 12, from?: Date): string[] {
   const base = from ?? new Date();

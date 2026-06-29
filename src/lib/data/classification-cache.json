@@ -2120,9 +2120,9 @@
     "confianza": "alta"
   },
   "No reconoce Bandeja 1 — Fallas: Arruga las Hojas,Atasca el Papel,Hace Ruido. Mensaje de error: . Observaciones: tarda bastante en enviar la hoja|EQ - Equipo|Limpieza de ruedas de bandeja 2. el problema de que no reconoce la bandeja es un tema a revisar del sistema de Oca..": {
-    "categoria": "Medio de Impresion",
-    "subcategoria": "Atasco de papel (comun)",
-    "confianza": "baja"
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
   },
   "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Se atasca el papel y no imprime nada|EQ - Equipo|Se cambia Fusor \nAl probarlo se comprueba atasco en deflector de fusor (plástico roto)\nSe saca deflector del fusor usado y se intercambia por el fusor nuevo": {
     "categoria": "Hardware y Desgaste",
@@ -2137,7 +2137,7 @@
   "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|atasca papel": {
     "categoria": "Medio de Impresion",
     "subcategoria": "Atasco de papel (comun)",
-    "confianza": "baja"
+    "confianza": "alta"
   },
   "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento,Imprime de manera defectuosa,. Mensaje de error: . Observaciones: Las hojas salen manchadas.|EQ - Equipo|se cambia fusor no se ficha porque es reutilizado": {
     "categoria": "Hardware y Desgaste",
@@ -2206,8 +2206,8 @@
   },
   "Atasca Papel|CN - Configuracion/Instalacion|Se revisa equipo. Se realiza configuración de papel. Testeo. OK": {
     "categoria": "Software, Firmware y Red",
-    "subcategoria": "Otros - Software, Firmware y Red",
-    "confianza": "media"
+    "subcategoria": "Calibracion / Ajuste de imagen",
+    "confianza": "alta"
   },
   "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: falta limpieza.|EQ - Equipo|Limpieza de equipo. Pruebas generales. Equipo funcionando": {
     "categoria": "Gestion de Soporte",
@@ -2381,8 +2381,8 @@
   },
   "MFP Mono A3 Samsung SL-K4350LX — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones: La tapa de costado que tiene la impresora esta dañada, una de sus soportes se rompio. Igualmente esta imprimiendo con error ya que se traba. Se necesita mantenimiento.|EQ - Equipo|Solucionado.\r\n\r\nFavor cerrar ticket.\r\n\r\nGracias": {
     "categoria": "Gestion de Soporte",
-    "subcategoria": "Diagnostico / Sin falla",
-    "confianza": "baja"
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
   },
   "Verificar fallas con el log de errores/solucionar errores — Mensaje de error: System is initializing. Observaciones: Cambiar disco, llevar firmware|Indeterminado|Se realiza cambio de disco rígido y configuración de red. Equipo queda operando correctamente. Pruebas ok": {
     "categoria": "Software, Firmware y Red",
@@ -3002,6 +3002,1951 @@
   "Instalacion de equipo — No enviar instructivo de reseteo, por temas sindicales no les permiten tocar las impresoras.|EQ - Equipo|se instala y configura equipo backup en la caja 1 ya que no les funciona la que tenían instala y necesitaban si o si usarla. queda ok": {
     "categoria": "Software, Firmware y Red",
     "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: Papel no recogido. Observaciones:|EQ - Equipo|se saca papel atascado.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel|EQ - Equipo|se realizaron varias pruebas con el usuario y funciona correctamente": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: No salen las impresiones y el panel no indica ningun error,,No salen las impresiones y el panel no indica ningun error. Mensaje de error: . Observaciones: No me esta imprimiendo|MU - Mal Uso|se conectan cable de red correctamente.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Cambiar parte plástica por rotura — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones:|NE - Negligencia/Accidente|cambio de bandeja, se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: No salen las impresiones y el panel no indica ningun error,Salen las hojas en blanco,Hace Ruido. Mensaje de error: . Observaciones: Buen dia salen las impreciones en blanco y hace ruido\nObs. Pre-Correctivo: Front cover y tapa trasera rotas|NE - Negligencia/Accidente|se cambia frente completo y tapa trasera \nverifica funcionamiento ok del equipo \nlimpieza general": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Mensaje de error: System is initializing. Observaciones: Cambiar disco, llevar firmware|EQ - Equipo|Se realiza cambio de disco rígido y configuración de red. Equipo queda operando correctamente. Pruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Error de fusor — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Solicitamos seguimiento o indicaciones por \"ERROR FALLO FUSER\".|EQ - Equipo|cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Sensor CTD Sucio — Observaciones: Hola Buenas Tardes. en la impresora aparece un cartel que dice, el sensor CTD esta sucio. El centro de atención Hudson descendente, donde se encuentra la impresora, atiende de lunes a viernes de 7 a 15 hs.Saludos Verificar funcionaminto de la unidad de imagen|EQ - Equipo|se limpia sensor ctd, se revisa unidad de imagen y se encuentra bien. si el error persiste se recomienda cambiar módulo completo de duplex": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones: EL CENTRO DE BERAZATEGUI ESTA ABIERTO DE 9 A 17HS MANO A LA PLATA|EQ - Equipo|se restauran gomas de pick up y de módulo duplex. se revisa fusor.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: ATASCA PAPEL EN LA BANDEJA 2 Y A VECES NO LA RECONOCE|EQ - Equipo|se restauran gomas de bandeja adicional y se limpian sensores . se realizan varias pruebas y funciona ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Otro (describa abajo),Otro (describa abajo),. Mensaje de error: . Observaciones: No imprime y titila la pantalla.|EQ - Equipo|se cambia cable de red.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,Toma varias hojas. Mensaje de error: . Observaciones:|EQ - Equipo|se restauran gomas de módulo duplex. se revisa fusor": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Arruga / Toma varias hojas",
+    "confianza": "alta"
+  },
+  "MFP Mono Samsung SL-M5370LX — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: No escanea automáticamente|EQ - Equipo|cambio de pick up retard adf , limpieza y chequeo general del equipo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Escaner / ADF",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Se atasca el papel en la parte de abajo y del costado|EQ - Equipo|se desarma registro y se realiza limpieza en sensores , se restauran gomas del mismo y se restauran gomas de módulo duplex . se realizan más de 50 copias para pruebas y no atasco ninguna": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Imprime de manera defectuosa,Parte plastica rota o pieza suelta /rota,Solicita Mantenimiento. Mensaje de error: Bandeja 1 Rota. Observaciones:|EQ - Equipo|reparación de guía de bandeja 1 \ny cambio de fusor dañado": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Atasca el Papel,Hace Ruido. Mensaje de error: . Observaciones:|EQ - Equipo|Se revisa equipo. Se cambian mp feed y fusor por falla. Limpieza, testeo. OK": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Atasca el Papel,Toma varias hojas,Solicita Mantenimiento. Mensaje de error: . Observaciones:|EQ - Equipo|Se revisa equipo. Se cambian fusor y cover cassette por falla. Limpieza, testeo. OK": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: solicito servicio tecnico para la impresora de la caja 9, repuesto de la bandeja 1.|EQ - Equipo|cambio de bandeja 1 rota": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Observaciones: Errores 30.03.46, 13.B9.D2, 98.00.07, 44.03.0B|EQ - Equipo|se verifica que el error era por causa de un archivo que le generaba ese error \nse limpian rodillos retard y pick up y queda op la máquina": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "media"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Atasca el Papel,Solicita Mantenimiento,Imprime de manera defectuosa. Mensaje de error: . Observaciones:|EQ - Equipo|Reparación": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "baja"
+  },
+  "No imprime — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: los documentos figuran como pendientes de impresión en la cj01. por lo que como solución rápida hacemos en traspaso a la cj02, pero nos complica en normal funcionamiento|EQ - Equipo|se cambia controller ya que la original entraba en un bucle de reinicio constante. después de cambiar la controller, cambiamos el número de serie con la app SPDS. se prueba y queda ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "media"
+  },
+  "Atasco de papel 1 — No enviar instructivo de reseteo, por temas sindicales no les permiten tocar las impresoras.|EQ - Equipo|Reparación de equipo": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "baja"
+  },
+  "Atasca Papel — No enviar instructivo de reseteo, por temas sindicales no les permiten tocar las impresoras.|EQ - Equipo|el usuario nos me comentaba que el equipo tenía mucho olor a quemado y que atascaba , revisamos la unidad de fusor y vimos que estaba en malas consecuencias, limpiamos el equipo completo y reemplazamos la unidad de control y rodillos retard y el equipo quedó en funcionamiento ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|Reparación y cambio de partes": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "baja"
+  },
+  "No se comunica a la Red — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|Control de equipo. Limpieza de fusor. Papeles atascados en fusor. Limpieza interna. Limpieza de rodillos pickup. Control de registro. Limpieza externa. Se le indica a los usuarios rotar las hojas ya que se encontraron humedas.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel inadecuado / humedad / mala calidad",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|EQ - Equipo|configuración correcta de bandeja y PC . se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Driver / PC / Spooler",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones: EL FUSOR SE ENCUTRA DERRETIDO|Indeterminado|Se revisa equipo y se verifica fusor derretido, se cambia y se prueba con usuarios. Equipo operativo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Llevar y reemplazar lo que haga falta de los rodillos de toma bandeja 2 (x3), bandeja 1 (x2), fusor, reemplazar de ser necesario. CVerificar funsionaminto de los clutch. Verificar funcionamiento del dúplex en legal y en A4|EQ - Equipo|atasca papel": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasco en Duplex — Fallas: Arruga las Hojas,,. Mensaje de error: . Observaciones: ARRUGA EN LA PARTE SUPERIOR DE LA HOJA Y CASI SIEMPRE CUANDO IMPRIME DOBLE FAZ|EQ - Equipo|mantenimiento y cambio rodillos toma papel": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Arruga / Toma varias hojas",
+    "confianza": "alta"
+  },
+  "Imprime mal (claro toda la hoja) — Fallas: Imprime de manera defectuosa,Salen las hojas en blanco,. Mensaje de error: . Observaciones:|EQ - Equipo|Se cambia fusor, pickup roller y cover front. Se limpia equipo. se prueba ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Atasco papel en fusor !!!|Indeterminado|cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones: al enviar una impresión la maquina genera mucho ruido al tomar el papel para imprimir|Indeterminado|Se verifica ruido al imprimir, se cambia rubber retard. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Imprime de manera defectuosa,Atasca el Papel,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio pickup rollers y retard": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Arruga las Hojas,Atasca el Papel,. Mensaje de error: display acusa error sensor de toner. Observaciones:|EQ - Equipo|Se realiza cambio de fusor y sensor de tóner. Equipo funcionando correctamente.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Resetear mantenimiento — Fallas: Mensaje de error /aviso en el panel de control,Mensaje de error /aviso en el panel de control,. Mensaje de error: . Observaciones: Mensaje en pantalla.\r\nSUSTITUIR NUEVO RODILLO BANDEJAL.|Indeterminado|Se realizo una limpieza general del equipo y se resetearon los contadores": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: SALEN LAS HOJAS MANCHADAS|CN - Configuracion/Instalacion|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Hace Ruido,Solicita Mantenimiento,. Mensaje de error: . Observaciones:|Indeterminado|Se reacondiciona fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Atasca el Papel,. Mensaje de error: . Observaciones:|Indeterminado|Se reemplaza bandeja uno (bandeja principal)": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Hace Ruido|EQ - Equipo|reemplazo de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Bandeja 2 rota — Segun informe del tecnico, esta rota la bandeja 2 auxiliar|EQ - Equipo|bandeja 2 rota": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "250 Atasco de papel (Bandeja Multiuso)|EQ - Equipo|Reparación del equipo": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: toma papel errático, o no levanta la hoja.|EQ - Equipo|Cambio de ruedas de bandeja 1": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 654DN — Fallas: Arruga las Hojas,Atasca el Papel,Mensaje de error /aviso en el panel de control. Mensaje de error: 200.13 Atasco de papel, compr cartucho.. Observaciones: ATASCA CONSTANTEMENTE LAS HOJAS.\r\nMUESTRA MENSAJE DE ERROR.\r\nVUELVE A ATASCAR.\r\n\r\nLA DEL MISMO MODELO DEL SECTOR DE PREPARACION FUNCIONA SIN PROBLEMAS HACE AÑO SIN PARAR NI ATASCAR, PERO ESTA ATASCA CONSTANTEMENTE, QUEDA HOJA DEBAJO DE TAMBOR TONNER, QUEDA HOJA TRABADA EN LA SUBIDA DE BANDEJA, SE LIBERA, IMPRIME UN PAR DE COPIAS Y VUELVE A ATASCAR SIN PARAR. QUEDO APAGADA, SE ESTA USANDO UNA VIEJITA DE BACKUP.|EQ - Equipo|se le realizó un testeo al equipo completo por fallas de atasco de papel, lo único que se hizo fue limpiar, engrasar bujes, y cambiar papel por qué estaba húmedo , testo ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel inadecuado / humedad / mala calidad",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: MANCHA LAS HOJAS CON UNA LINEA NEGRA CONTINUA|EQ - Equipo|Se realizo cambio de fusor, manteniminto de equipo, reemplazo de toner ya que el mismo estaba dañado, reseteo de contadores.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,Hace Ruido. Mensaje de error: . Observaciones: Favor de enviar lo antes posible un técnico. Ya que es la única impresora que tenemos en este sector.\r\n\r\nGracias.|Indeterminado|Se realiza cambio de fuente de alimetancion pero la falla persiste, se da aviso a Leo, se realizan pruebas pero si cambio, desde CD se decide realizar un RD. se finaliza caso.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( sale borrosa la impresión ) — FUSOR|EQ - Equipo|reemplazo de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasco en Duplex — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: SE TRABA EL PAPEL EN HOJA SIMPLE COMO DUPLICADA|EQ - Equipo|mantenimiento y retiro atasco en sensor de arrastre": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Aviso en el display|EQ - Equipo|se hizo reseteo de contadores": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: En el momento de hacer el doble faz, no devuelve la hoja se rompió las trabas del dúplex trasero|EQ - Equipo|limpieza de láser, cambio de dúplex y retard de bandeja 2": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se restauran gomas de pick up y retard. se realiza limpieza en general": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Pieza rota — Fallas: Parte plastica rota o pieza suelta /rota,Hace Ruido,Atasca el Papel. Mensaje de error: . Observaciones: se solicita urgente técnico , la impresora ha dejado de funcionar.-|Indeterminado|REEMPLAZO DE TRANFER ROLL (2)": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones: Buenas Tarde, La Manija / Agarre / Apertura de La Bandeja De Encuentra Partida, al Igual Que Final De La Bandeja.|Indeterminado|Se reemplazo tray 1 ( se utulizo la del backup)": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Solicita Mantenimiento,Hace Ruido. Mensaje de error: . Observaciones:|EQ - Equipo|Se reemplazó bandeja dúplex": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Mensaje de error /aviso en el panel de control,Solicita Mantenimiento,Atasca el Papel. Mensaje de error: . Observaciones: en el display me pide costantemente cambiar toner cuando este es nuevo|TN - Toner|Se carga PDI: 437188-1 (Recambio por falla) - Se despacharon 4 hoy por OCA (JP)": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "Salen hojas blancas — Fallas: Atasca el Papel,Salen las hojas en blanco,Arruga las Hojas. Mensaje de error: . Observaciones:|EQ - Equipo|reemplazo fusor y rear frame": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: El mismo problema que ayer.|EQ - Equipo|se cambia main motor y fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Atasca el Papel,Hace Ruido,Parte plastica rota o pieza suelta /rota. Mensaje de error: . Observaciones:|EQ - Equipo|Solicitud de reemplazo de equipo": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Otro (describa abajo),. Mensaje de error: error fuser. Observaciones: EL ERROR QUE MARCA ES ATASCO,PERO AL REVISARLA NO SE DETECTA  DONDE QUEDA EL PAPEL PORQUE AL PARECER NO LEVANTA LA HOJA PARA LA IMPRESION(SE REVISO EL FUSOR Y TODO LO DEMAS Y NO SE OBSERVA PARTE ROTA)|Indeterminado|Se comprueba falla y se realiza el cambio de pickup roller x2. El equipo queda funcionando correctamente. Pruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Arruga las Hojas,Imprime de manera defectuosa,Otro (describa abajo). Mensaje de error: . Observaciones: las impresiones salen con manchas de tinta sobre el margen izquierdo|EQ - Equipo|se cambia toner y clutch, retard más cover de bandeja 1. no solo eso sino que se doblo y enderezó la chapa de la bandeja para que tome hasta la última hoja. se prueba con el usuario y queda ok": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|EQ - Equipo|limpieza de equipo ok. se realizó un testeo del equipo y encontramos que el fusor marcaba las impresiones, se armó fusor nuevo y quedó en funcionamiento ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Arruga las Hojas,Atasca el Papel,Parte plastica rota o pieza suelta /rota. Mensaje de error: . Observaciones: Atasca papel en Bandeja 1 \r\nAruga las hojas|Indeterminado|Se realiza cambio de fusor y rodillos de las bandejas, se prueba con usuarios. Equipo operativo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Atasca el papel a la salida|EQ - Equipo|se limpia y reubica mecanismo de salida": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se saca papel atascado en fusor.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones: La Bandeja Nº 1 Estaría Rota Debido a Que Tenemos Que Suplementarla Para Que Tome Las Hojas. MDA CD: Cambiar pick up y retard, llevar fusor. realizar manteniminto completo limpieza de duplex/equipo. Resetar mantenimiento|EQ - Equipo|Se reemplazo tray 1.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Arruga Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: atasco papel y sale una leyenda la cual no deja imprimir. Se solicita al tecnico urgente|Indeterminado|Se coloca Flag de bandeja Standar que se había salido": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Otros - Medio de Impresion",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Atasca el Papel,Mensaje de error /aviso en el panel de control,Hace Ruido. Mensaje de error: error fuser. Observaciones: se cambio fusor y tóner y sigue haciendo ruido en la parte donde va el tóner ,puede ser en la parte del rodamiento|Indeterminado|Se cambia fusor y se retiran restos de plastico en habitaculo de fusor. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasco en Duplex — Fallas: Atasca el Papel,Otro (describa abajo),. Mensaje de error: . Observaciones: Atasco en bandeja duples, nos fijamos y no hay nada. Se solicita con urgencia al tecnico|Indeterminado|Se chequea y se prueba equipo": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|Cambio rueda alimentación": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Resetear mantenimiento — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: sustituir nuevo rodillo de bandeja. Observaciones:|XX - Otros|Se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 654DN — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: TONER FALLADO.|EQ - Equipo|se realiza prueba con otro toner ya que el instalado estaba recién puesto, sacado de caja pero fallaba. no imprime todo la hoja. se coloca uno de marca next y funciona correctamente": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Mensaje de error /aviso en el panel de control,. Mensaje de error: . Observaciones:|EQ - Equipo|se saca papel atascado en fusor y se cambia detack en fusor.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Toma varias hojas — Fallas: Toma varias hojas,,. Mensaje de error: . Observaciones: TOMA DOS HOJAS CONTINUADAS (NO DOS HOJAS JUNTAS O TRES)|EQ - Equipo|limpieza de equipo, cambio retatd y pickup de bandeja 1": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Otros - Medio de Impresion",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia módulo mp y retard+cover casette de bandeja 1. se realiza mantenimiento y se resetean valores. queda ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: NO IMPRIME|Indeterminado|reparacion de fusor se reemplaza presur": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia retard , se restaura goma de pick up , se revisa fusor. y se realiza limpieza": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Otro (describa abajo),,. Mensaje de error: Sustituir rodillo bandeja 1. Observaciones:|CN - Configuracion/Instalacion|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Atasca Papel en Duplex — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Atasca papel legal cuando imprime en doble fas.|Indeterminado|Se realizo limpieza interna y se saco papel atascado en duplex.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se retiran pedazos de papel atascados en el registro, se cambia rodillo retard y cover casette de bandeja 1. se capacita a usuario por si le vuelve a pasar, para que intente retirar el atasco antes de volver a colocar la bandeja. queda ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "FUSER ERROR — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: problemas con el fusor, se puso un fusor de otra maquina para verificar y funciono correctamente, favor solicitamos el cambio del mismo|Indeterminado|Se cambia fusor. Equipo operativo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "929 Service toner sensor — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: 929.02 SERVICE TONER SENSOR|EQ - Equipo|se limpia sensor de toner.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Mensaje de error /aviso en el panel de control,Atasca el Papel,. Mensaje de error: . Observaciones: Atasco el papel y no se ve donde.|EQ - Equipo|Se reemplazo fusor y  soporte de sensor de salida de papel, reseteo de contadores de manteimiento.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Repite la imagen|EQ - Equipo|revisión de equipo limpieza de hot roller y pressure roller": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: problema en la plaqueta|EQ - Equipo|cambio de fusor y controller, mantenimiento limpieza funciona ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: cambiar plastico\nObs. Pre-Correctivo: Frente completo|NE - Negligencia/Accidente|se cambia frente completo y retard bja 1\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Pierde Datos — Horario: de 8 a 14 hs. Cambiar controller solicitarla a operaciones con número de serie, retard y pickup. Rodillos de bandeja dos: pickup, retard y feed|Indeterminado|Se realiza cambio de placa controller y rubber retard, se realizan pruebas en contacto con Leonardo y se configuran margenes de hojas, se realizan pruebas pruebas con usuarios. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Hace Ruido,Atasca el Papel,. Mensaje de error: . Observaciones:|EQ - Equipo|Se realizo cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Atasca el Papel,,. Mensaje de error: 900.24 FIRMWARE ERROR. Observaciones:|EQ - Equipo|limpieza de equipo ok. cambio de fusor por atasco de papel , detac destruido": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Parte plastica rota o pieza suelta /rota,Atasca el Papel,. Mensaje de error: . Observaciones: puerta suelta \r\natasca papel al imprimir telegramas|EQ - Equipo|cambio de retard, limpieza de rodillos de bandeja adicional ,pick up y acomodar puerta frontal": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: en impresiones doble faz|EQ - Equipo|cambio de dúplex retard y cover cassette": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: atasca duplex\nObs. Pre-Correctivo: Frente completo|EQ - Equipo|se cambia duplex\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: Buen día, aparentemente sería como la vez anterior. Tira atasco en la bandeja 1 pero no hay hoja atascada; se van cambiando las bandejas según necesidad porque no reconoce la bandeja 1. Verificar con Soporte de la mesa de ayuda Canal Directo Leonardo Pressburger|EQ - Equipo|cambio pickups rollers": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Posiblemnete este deformado el pressure roller del fusor - Prioridad|EQ - Equipo|Control Funcionamiento, Limpieza general.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Sustituir nuevo rodillo bandejs 1. llevar fusor, bandeja 1, rodillos|EQ - Equipo|cambio de pick up de bandeja y plásticos.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Parte plastica rota o pieza suelta /rota,Hace Ruido,. Mensaje de error: . Observaciones: Buenos días , se informa que esta impresora comenzó a fallar donde tiene la bandeja uno rota , además el rodillo cuando funciona comenzó a hacer fuertes ruidos y no sabemos si esta para cambiarlo o bien envíen a alguien para su servicio técnico urgente, quedo a la espera gracias.-|EQ - Equipo|se cambió tapa frontal y se cambió fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Hace Ruido,Parte plastica rota o pieza suelta /rota,. Mensaje de error: . Observaciones: Se solicita al técnico urgente; pide cambio de rodillos|EQ - Equipo|Se cambia rodillo ya se resetean los contadores": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones:|Indeterminado|Se realiza cambio de fusor y se prueba con usuarios. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Parte plastica rota o pieza suelta /rota,Solicita Mantenimiento,Solicita Mantenimiento. Mensaje de error: . Observaciones:|Indeterminado|Se verifico fuente de alimentación quemada y lampara de fusor rota.\r\nSe cambio fuente y unidad de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,Otro (describa abajo),. Mensaje de error: . Observaciones: SALEN LAS HOJAS MANCHADAS, PROBAMOS TONNER NUEVO Y EL PROBLEMA PERSISTE.|EQ - Equipo|revisión de equipo se cambió pcr": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Calidad por insumo (manchas / impresion clara)",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 654DN — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia lsu y fusor. se realizan varias pruebas y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia fusor, retard bja 1 y 2, pickup bja 1\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Claro hacia uno de los márgenes ) — Fallas: Atasca el Papel,Otro (describa abajo),. Mensaje de error: . Observaciones: La impresora atasca el pape en la parte donde se encuentra el cartucho de tóner, detectamos que es un sensor (patita plástica) que queda trabada y no vuelve a la posición que debe quedar y ahí se traba la hoja.|EQ - Equipo|Se realizo cambio de fusor.\r\nse verifica con toner de prueba que la falla que hace al imprimir es por el cartucho que tenia instalado.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Toma varias hojas,,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de cajón adicional, fusor, pickup y bandeja mp funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "No enciende — Fallas: No enciende / No reacciona a ningún comando,,. Mensaje de error: . Observaciones:|EQ - Equipo|Se realiza cambio de fuente alimentación, cambio de HVPS, controller board pero problema persiste. En contacto con Leonardo se determina cambio de equipo directo.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: la impresora todo el tiempo marca que tiene atasco de papel, siendo que no hay nada atascado ni en las bandejas y tampoco en el fusor. Descartando el atasco físico, entiendo que puede tratarse de algún sensor.|XX - Otros|Consulta del cliente: Buenos días, ya se solucionó el inconveniente, ya está imprimiendo de manera correcta. Desestimar la solicitud.-": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Atasca hoja para imprimir telegramas, atasca papel en doble faz(la hoja queda atascada)|EQ - Equipo|se cambia módulo duplex": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Atasca el Papel,. Mensaje de error: . Observaciones:|EQ - Equipo|limpieza del equipo ok . cambio de fusor arrugaba las hojas": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Mensaje de error /aviso en el panel de control,Atasca el Papel,. Mensaje de error: . Observaciones: Buenas tardes.\r\nLa impresora esta estuvo atascando el papel de la bandeja 1, y ahora indica atasco de papel en bandeja 1 pero no tiene nada...por lo menos a la vista.\r\n\r\nSaludos.\r\nAtte Sergio Galván|EQ - Equipo|remuevo atasco , botón de power responde recién luego de algún intento, es probable que en algún momento haya que cambiar fuente": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Atasca el Papel,Solicita Mantenimiento,No salen las impresiones y el panel no indica ningun error. Mensaje de error: ATASCADO. Observaciones: Buenos dias la impresora en cuestion hace mucho ruido, atasca los papeles y se requiere mantenimiento para limpieza|EQ - Equipo|cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Arruga Papel — Fallas: Arruga las Hojas,,. Mensaje de error: . Observaciones: la hoja queda arrugada y trabada en fusor.|EQ - Equipo|cambio de fusor.  pruebas cpm usuario ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Arruga Papel — Fallas: Arruga las Hojas,,. Mensaje de error: . Observaciones:|EQ - Equipo|reparar toma de papel": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 642N — Fallas: Atasca el Papel,Atasca el Papel,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de bandeja adicional": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Ajuste de bandejas / guias",
+    "confianza": "alta"
+  },
+  "Pieza rota — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones: Hace ruido de rodamientos rotos. Cambie el toner para descartar que este roto el toner pero sigue con el mismo ruido a rodamientos rotos.|EQ - Equipo|se reemplaza fusor y se prueba con usuario. ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Arruga las Hojas,,. Mensaje de error: . Observaciones: ARRUGA LAS HOJAS|Indeterminado|reemplazo de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Solicita mantenimiento — Fallas: Arruga las Hojas,Solicita Mantenimiento,. Mensaje de error: . Observaciones:|Indeterminado|Se verifica falla y se procede con cambio de fusor, pickup roller (2) y rubber retard. Pruebas de funcionamiento ok, equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Hace Ruido|EQ - Equipo|se cambia retard, se restaura gomas de pick up y módulo duplex": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia retard bja 1 y 2\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "FUSER ERROR — Cambio de fusor|Indeterminado|Se cambia fusor, fuser wiper cover y cover wick.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: sigue igual, se atasca cuando sale doble fz . Observaciones: Buenas tardes.\r\nPor medio del presente se solicita servicio técnico para la reparación de la misma.\r\nLeyenda Band.Sal.llena Retirer Papel.\r\nZDBXBJCH2000NER|EQ - Equipo|se cambia display completo con plásticos ya que estaba roto la banderita el sensor de bandeja de salida.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasco de papel 2|EQ - Equipo|Se configura correctamente el tamaño de papel del duplex": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,. Mensaje de error: . Observaciones: Se informa que la impresora atasca las hojas al imprimir y las que arruga el papel  en uno de los lados|EQ - Equipo|Se cambia fusor. Se limpia equipo. se prueba ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Otro (describa abajo),. Mensaje de error: . Observaciones: Error: 201.04 Atasco de papel.compr.cartucho .|Indeterminado|Se reacondiciona fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Solicitamos service con prioridad atento a que es una impresora de paqueteria\r\nla cual se usa para sacar recorridos. gracias\nObs. Pre-Correctivo: Proviene del preventivo 831244-2\r\nbdja. 2 aveces no toma papel (brazo con problema)|EQ - Equipo|reubicacion de brazo toma papel, limpieza de rodillos": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Buenas,\r\nInformo que el inconveniente persiste.\r\nDesde la bandeja 1, al momento de retorno de la hoja, el papel se vuelve a atascar.\r\nSi bien luego de la intervención el equipo funcionó correctamente en un primer momento, actualmente presenta nuevamente la misma falla.\r\nSolicito, por favor, la revisión del equipo, ya|Indeterminado|Se chequeo funcionamiento en impresiones doble faz ya que el problema de traba surjia en doble faz, luego de hacer unas 30 impresiones de ambos lados no presento traba de papel · El tecnico avisa que fue no detecta los atascos mencionados": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Sensor no detecta el toner. Pide sustitución, lo cambiamos por otro pero sigue igual.|EQ - Equipo|se limpia sensor de toner y se cambia fusor (se reutiliza uno de otro servicio por eso no se ficha)": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fusor en mal estado y bandeja de hojas|Indeterminado|Se reemplaza fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Se atasca bandeja inferior, sale varias hojas cuando sale, o si sale la impresion hace ruido al momento|EQ - Equipo|Reemplazo de equipo": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "200 Atasco de papel (Debajo del Cartucho) — 200.13 atasco de papel y cartucho|EQ - Equipo|revisión de equipo se reparo actuador de sensor input y módulo mp se ajusto y lubrico registro doblaba la hoja pruebas de impresión con usuarios por bandeja 1 y 2": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Atasca el Papel,Imprime de manera defectuosa. Mensaje de error: . Observaciones:|EQ - Equipo|mantenimiento y retiro atasco papel": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 654DN — Fallas: Atasca el Papel,Solicita Mantenimiento,. Mensaje de error: . Observaciones: 200.13 atasco de papel compr. cartucho       el tema es que no se observa nada que este atascado|EQ - Equipo|cambio sensor input, limpieza de equipo": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia retard y cover cassette de bandeja 1, se limpia equipo (muy sucio), se capacita a usuario para que sepa activar la sustitución de papel, se resetean contadores. queda ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia fusor x atascos const, se cambia retard y cover cassette de bandeja 1. se cambia front cover y bandeja trasera ambas rotas. queda ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Al imprimir una tanda de 28 hojas, se atasca continuamente.|EQ - Equipo|establezco el duplex en posición legal": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones:|EQ - Equipo|la impresora hacia ruido por 2 razones la primera tapa trasera blanca salida y el insumo \ntambién no tomaba por la bandeja uno pero era porque los rodillos estaban violetas por las hojas de oca y eso hacía que patine y no tome bien \nentonces limpie los rodillos": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel inadecuado / humedad / mala calidad",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Atasca el Papel,,Otro (describa abajo). Mensaje de error: display acusa error sensor de toner. Observaciones:|EQ - Equipo|Se cambia fusor y sensor de toner. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Observaciones: 929.02 service toner sensor|EQ - Equipo|cambio de insumo , no detectaba el insumo y también limpie los rodillos de Toma de las 2 bandejas": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Imprime de manera defectuosa,. Mensaje de error: . Observaciones:|EQ - Equipo|limpieza de rodillos y sensores reemplazo de cartucho de toner": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Atasco papel|EQ - Equipo|Incidente realizado el 22/05 falta subir las cosa sMP": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Cambiar parte plástica por rotura|EQ - Equipo|cambio de bandeja 1, reset contadores, limpieza de equipo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Cambiar parte plástica por rotura — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: imprime con líneas transversales\nObs. Pre-Correctivo: Proviene del preventivo 833525-8\r\nSe observa soporte de rubber retard da?ado y tapa trasera no cierre correctaemente.|EQ - Equipo|reemplazo de tray 1, cover rear y cartucho de toner": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "FUSER ERROR — Fallas: Atasca el Papel,Hace Ruido,Otro (describa abajo). Mensaje de error: service error fusor. Observaciones:|EQ - Equipo|Se cambia cover wick y main motor.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones: Ruido en el equipo .- verificar por técnico|EQ - Equipo|SE CAMBIA POR EQUIPO BACKUP SAMSUNG SL-M4020ND NRO DE SERIE ZDBXB8GJ7A0061H CON CONTADOR DE PAGINAS EN 10": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: ATASCA PAPEL CONSTANTEMENTE BANDEJA 1. POR FAVOR, DE SER POSIBLE VENIR A LA BREVEDAD. GRACIAS!|EQ - Equipo|reemplazo de input sensor y rodillo de transferencia": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Arruga las Hojas,. Mensaje de error: mensaje de error, sustitución de rodillo. Observaciones:|EQ - Equipo|Cambio de ruueda y limpieza de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,Hace Ruido. Mensaje de error: . Observaciones:|EQ - Equipo|limpieza de eje de ruedas de bandeja 1": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,. Mensaje de error: . Observaciones:|EQ - Equipo|revisión de equipo no estaba reconociendo papel la bandeja 1 se cambió actuadores de bandeja 1 pruebas de impresión con usuarios": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 654DN — Fallas: Arruga las Hojas,Hace Ruido,Parte plastica rota o pieza suelta /rota. Mensaje de error: . Observaciones: bandeja 2 rota|EQ - Equipo|cambio de bandeja adicional por plástico roto, las hojas se arrugaban por mala colocación de los usuarios": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Hace Ruido,. Mensaje de error: . Observaciones: se solicita urgente al tecnico|Indeterminado|Se cambian componentes del fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasco en Duplex — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: en duplex|EQ - Equipo|se cambia fusor y retard bja 1\nlimpieza modulo de salida\nreajusta guia de duplex \n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Pieza rota — Fallas: Atasca el Papel,,. Mensaje de error: 200.13 Atasco de papel, compr cartucho.. Observaciones: Problable rotura del pestillo que detecta el paso de la hoja debido a probable sobrecarga de papel en bandeja nro 2.|NE - Negligencia/Accidente|se realizó una visita al equipo y revisando dimos con que el sensor input no estaba en el lugar que corresponde, se armó el sensor se acomodo y el equipo quedó en funcionamiento": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|Indeterminado|Se cambia pickup roller, rubber retard y MP Unit. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Otro (describa abajo),. Mensaje de error: . Observaciones: Se solicita mantenimiento de la maquina. Al imprimir varias hojas el papel queda atascado.|EQ - Equipo|se realizó la visita al equipo, se limpio el equipo y se cambio un repuesto que es fusor por ruido y se engrasaron bujes testo ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "PRT Mono Lexmark Optra T 654DN — Fallas: No salen las impresiones y el panel no indica ningun error,No enciende / No reacciona a ningún comando,. Mensaje de error: . Observaciones: CUANDO SE APAGA Y SE PRENDE DE NUEVO DESPUES DE 30 O 40 MINUTOS SALEN IMPRECIONES|EQ - Equipo|el equipo funciona perfectamente, el problema que tienen los usuarios es que cuando mandan a imprimir desde su programa de remitos les tarda 40 minutos o más, es tema de la red de ellos ya que haciendo pruebas de impresión directa desde Word, excel, paint, imprime instantáneamente, se hizo ping desde varias computadoras y el tiempo de respuesta promedio son 120ms (se adjunta en foto)": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Problema externo / Red del cliente",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones: Atasca papel en bandeja tamaño legal.|Indeterminado|Se revisa equipo en contacto con Leonardo, se verifican atascos al realizar impresiones duplex, se limpia equipo, se revisa camino de hoja, se revisan actuadores regi , se revisan engranajes y se intercambia clutch regi con clutch MP pero problema persiste. Se determina por indicación de Leonardo soporte que se  realizara cambio de equipo": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Recambio Definitivo",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Frente bandeja 1 rota|EQ - Equipo|Se realiza el cambio de plaza controller y bandeja 2. Se realizan pruebas de funcionamiento y el equipo queda funcionando correctamente.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasco en Duplex — Fallas: Atasca el Papel,,. Mensaje de error: sigue igual, se atasca cuando sale doble fz . Observaciones: ATASCA EL PAPEL CUANDO IMPRIMIMOS DOBLE FAZ|EQ - Equipo|cambio de dúplex y controller": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones:|EQ - Equipo|mantenimiento y reset contadores": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones:|EQ - Equipo|mantenimiento retiro atasco papel en fusor": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Solicita Mantenimiento,. Mensaje de error: . Observaciones: Tiramos la impresión y empieza el proceso pero se cancela pone el led en rojo y anula la impreso trabando la hoja a la mitad|EQ - Equipo|Reparación": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Atasca el Papel,Hace Ruido. Mensaje de error: . Observaciones:|EQ - Equipo|revisión de equipo el fusor arruga y atasca se cambió partes de fusor ( pressure roller hot roller detack bujes y rulemanes ) pruebas de impresión con usuarios por bandeja 1 y 2": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Arruga las Hojas,Atasca el Papel,. Mensaje de error: . Observaciones: Generalmente atasca el papel Oficio|EQ - Equipo|se revisa fusor y mecanismos de salida": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Toma varias hojas,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de bja por roturas plásticas.  ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|limpieza de dúplex y cambio de retard de bandeja": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: MISMO INCONVENIENTE DE SIEMPRE.|EQ - Equipo|cambio de fuente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Observaciones: MANCHA EL PAPEL. RODILLOS SUCIOS.|EQ - Equipo|cambio de pick up retard y retard de bandeja adicional": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Rayas verticales ) — Fallas: Imprime de manera defectuosa,Toma varias hojas,. Mensaje de error: . Observaciones: En el medio de la hoja sale en blanco. MDA CD: verificar láser|EQ - Equipo|se realizó extracción de papel dentro de la unidad láser y se realizó limpieza de dúplex": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Bandeja 2 rota — Observaciones: Rotura de bandeja legal y oficio|Indeterminado|Se avisa al cliente que cuando llegue la parte nos avise para retirar la rota MP": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: realiza cuatro o cinco impresiones , o a veces una y se traban las hojas|EQ - Equipo|Se reemplazo rubber retard de tray 1.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|mantenimiento y cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Bandeja 2 rota — MSG: CAMBIO DE RODILLO DE BANDEJA 1|EQ - Equipo|se realizo limpieza del equipo y se cambió bandeja": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: EN LA BANDEJA  1 SE ROMPIO LA PERILLA QUE REGULA LA MEDIDA DE LA HOJA, LO QUE PROVOCA ERROR DE ATASCO DE HOJA.|EQ - Equipo|cambio de bandeja y tapa trasera": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Actualizar el firmware a la versión V4.00.02.22. El equipo tiene el error en el display C2 1712. No reconose el toner|Indeterminado|Se actualizo el firmware del equipo": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Firmware",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: No reconoce el insumo,,. Mensaje de error: ?C2-1712. Observaciones: Por favor urgente ver que no acepta el nuevo tonner para cambiar. MDA CD: Actualizar el firmware a la versión:  M332x_382x_402x_FW_V4.00.02.22, solicitar a La mesa de ayuda Leo|Indeterminado|Se actualizo firmware del equipo y se limpiaron ruedas pickup": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Firmware",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas, atasca papel, aviso en el display (resetear manteniminto) Mensaje de error: ?C2-1712. Observaciones: cambiar rodillo bandeja n° 1. MDA CD: Actualizar el firmware a la versión:  M332x_382x_402x_FW_V4.00.02.22, solicitar a La mesa de ayuda Leo|Indeterminado|Se reemplazo rueda pick up y limpieza de alimentacion de papel.\r\nLimpieza de interior del equipo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Mensaje de error: Atasco de papel en bandeja 1. Observaciones: Solicitamos por favor nos envien el tecnico.Ya que la impresora indica que hay un atasco de papel en la bandeja 1, pero no tiene nada y no permite utilizar dicha bandeja.Saludos.Atte Sergio Galván|EQ - Equipo|cambio rodillos bbandeja te 1": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia módulo completo con bandeja 2. sumando al cambio de bandeja 1, queda totalmente operativa.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Temas rodillos y se traba|EQ - Equipo|se cambia retard bja 1\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Se escucha ruido cerca del fusor|Indeterminado|REEMPLAZO FUSOR": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Se escucha ruido cerca del Fusor|EQ - Equipo|REEMPLAZO FUSOR": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Bandeja 1 Rota — Fallas: Arruga las Hojas,Atasca el Papel,Solicita Mantenimiento. Mensaje de error: Bandeja 1 Rota. Observaciones:|EQ - Equipo|clear memory, no sé podía entrar al menú de red para cambiar la IP": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Observaciones: Papel no recog. Pulse [OK] para continuar|CN - Configuracion/Instalacion|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,Imprime de manera defectuosa,. Mensaje de error: . Observaciones:|XX - Otros|Se cierra por falta de respuesta, dispositivo operativo por SDS y VPN": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se saca papel atascado": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: Configuración de impresión|Indeterminado|CanalDirecto\tBuenos días, ya se configuró la impresora, la bandeja uno y dos en A4 tipo normal. Y vimos que cambiaron el toner, saludos": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Driver / PC / Spooler",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,No salen las impresiones y el panel no indica ningun error. Mensaje de error: No imprime. Observaciones:|XX - Otros|Usuaria cambia el cable de red y se solucionan los inconvenientes. IM": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Existe un atasco de papel en la parte posterior de la impresora que no se logra sacar y no permite imprimir|EQ - Equipo|Se eliminó el atasco en el interior del equipo. Limpieza del fusor, pickup rollers, front cover, unidad duplex, bandeja cassette, interior y exterior del equipo. Pruebas de impresión ok.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones: No salen las impresiones y no larga error|XX - Otros|Se consulta con la usuaria y nos indica que el problema fue resuelto. Damos por finalizada la gestión": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "Pieza suelta — Llevar Bandeja Multiuso + Toner (Vieytes)|NE - Negligencia/Accidente|revisión,  colocación de guia cubre transfer,  cambio de cartucho  y pruebas ok con usuaria": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "No toma papel — Mensaje de error: Papel no recog.. Observaciones: No hy papel atascado, apagamos y encendimos varias veces y sigue igual. MDA CD: Papel no recog. Pulse [OK] para continuar.|EQ - Equipo|Control de equipo. Papel atascado en rodillos pickup. Limpieza de rodillos pickup. Ajuste de guías de papel. Limpieza externa. Configuración de papel.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Papel no recog. Pulse [OK] para continuar.|MU - Mal Uso|liberación de atasco de papel en fusor y modulo de registro,  limpieza": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|EQ - Equipo|se configuro la IP, máscara y Gateway (por alguna razón se había desconfigurado)": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Atasco de papel puerta trasera|EQ - Equipo|se realizó chequeo, el toner está dañado,.el.mismo debe ser reemplazado": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Atasca el Papel,No salen las impresiones y el panel no indica ningun error,Imprime de manera defectuosa. Mensaje de error: . Observaciones: Imprimo bien de a ratos después empiezan a salir las hojas con una mancha negra|EQ - Equipo|Control de equipo. Control de fusor. Control de drum. Limpieza de drum. Papel atascado en rodillo drum. Limpieza externa e interna. Limpieza de rodillos pickup.": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Drum / Unidad de imagen / Revelador",
+    "confianza": "alta"
+  },
+  "Pieza suelta — Fallas: Parte plastica rota o pieza suelta /rota,Hace Ruido,Otro (describa abajo). Mensaje de error: No funciona. Observaciones: Hace ruido, no imprime, pieza suelta|NE - Negligencia/Accidente|Control de equipo. Papel atascado en rodillos pickup. Nivelador plástico de cantidad de hojas suelto, se coloca nuevamente en su lugar. Ajuste de guías de papel sueltas. Limpieza de rodillos pickup. Limpieza externa e interna. Configuración de papel.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,Atasca el Papel,Arruga las Hojas. Mensaje de error: No pone nada. Observaciones: No imprime|EQ - Equipo|cambio de IP\ntenía la configuración de IP mal, además de tener otra IP configurada \nse configura la IP correcta": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: En el display , papel no recog|EQ - Equipo|desatasque de papel del registro": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Toma varias hojas,Arruga las Hojas,. Mensaje de error: . Observaciones: Buenas! La impresora no nos esta funcionando ya que agarra muchas hojas y se traba \r\nAguardamos respuesta!|EQ - Equipo|Se realiza limpieza general de equipo. se prueba con distintos tipos de papel. resultado ok.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Otros - Medio de Impresion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Solicita Mantenimiento,. Mensaje de error: . Observaciones: Se atasca el papel y no se puede seguir operando ya que el papel queda en la parte interna|EQ - Equipo|Se eliminó el atasco en el fusor. Se cambiaron las hojas. Limpieza de los pickup rollers, front cover, interior y exterior del equipo. Pruebas de impresión con el usuario.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Abrimos todas las puertas no podemos desatascar|CN - Configuracion/Instalacion|Consulta del cliente: Buenos dias ya se resolvió no hace falta q llegue el tecnico": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: Mala impresión|CN - Configuracion/Instalacion|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — - Revisar Fusor y Rodillos (cambiar de ser necesario), realizar mantenimiento\r\n- Tiene muchos errores por tamaño de papel incorrecto, revisar que el tamaño esté bien configurado en los drivers.|EQ - Equipo|cambio de fusor y kit pickup mantenimiento limpieza funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — - Cambiar Kits de mantenimiento, y realizar mantenimiento \r\n- Tiene muchos errores 53.01.21 (guías de papel en posición incorrecta, verificar)|EQ - Equipo|cambio de Fusor y kit pickup mantenimiento limpieza funciona correctamente, se realizaron pruebas con el usuario más de 70 impresiones.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — - Cambiar Kits de mantenimiento, y realizar mantenimiento \r\n- Verificar y limpiar contactos de acople del fusor (está tirando errores), Leonardo Pressburger MDA CD: Virificar antes de realizar cualquier reemplazo de reempuesto que es necesario cambiarlo. Hablar con LP|EQ - Equipo|cambio de Fusor y kit pickup mantenimiento limpieza funciona correctamente, se realizaron pruebas con el usuario": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,Solicita Mantenimiento,. Mensaje de error: . Observaciones: No imprime|Indeterminado|Se configura papel y se da aviso al cliente mediante bitácora": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Driver / PC / Spooler",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — Actualizar FW a última versión (Realizando los pasos correctos para una instalación limpia, ver con Leo Pressburger), llevar al FW \"2509515_000446\", reforzar con los usuarios el tema del manejo del papel y verificar la configuración en el Driver.|EQ - Equipo|Se cambia fusor y kit de pickups. Se realiza format disk y partial clean. se carga fw 5.9.2.3. se limpia equipo. se prueba ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — Actualizar FW a última versión (Realizando los pasos correctos para una instalación limpia, ver con Leo Pressburger),  llevar al FW \"2509515_000433\", reforzar con los usuarios el tema del manejo del papel y verificar la configuración en el Driver.|EQ - Equipo|Se cambian kits de pickups. Se realiza format disk, partial y carga de fw 5.9.2.3. se limpia equipo. se prueba ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — Actualizar FW a última versión (Realizando los pasos correctos para una instalación limpia, ver con Leo Pressburger) y reforzar con los usuarios el tema del manejo del papel.|EQ - Equipo|limpieza de equipo ok.cambio de fusor y pickup,testeo ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — Actualizar FW a última versión (Realizando los pasos correctos para una instalación limpia, ver con Leo Pressburger) y reforzar con los usuarios el tema del manejo del papel.|EQ - Equipo|limpieza de equipo ok. cambio de fusor y rodillos pickup,testeo ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — Actualizar FW a última versión (Realizando los pasos correctos para una instalación limpia, ver con Leo Pressburger) y reforzar con los usuarios el tema del manejo del papel.|EQ - Equipo|Se revisa equipo. Se reemplazan fusor y pick ups. Limpieza gral, testeo. OK": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Kit de mantenimiento bajo — Actualizar FW a última versión (Realizando los pasos correctos para una instalación limpia, ver con Leo Pressburger). Reforzar con los usuarios el tema del manejo del papel.|EQ - Equipo|Se revisa equipo. Se cambian fusor y pick ups. Limpieza gral, testeo. OK": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Imprime de manera defectuosa,Toma varias hojas,Atasca el Papel. Mensaje de error: . Observaciones:|XX - Otros|revisión,  pruebas con diferentes resmas de papel ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel inadecuado / humedad / mala calidad",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones: La impresora no imprime|XX - Otros|Se habló con soporte día ticket 6338190. se indicó que el cable de red se encuentra conectado a línea de cajas y no a eccommerce, por faltante de boca disponible. limpieza de equipo. pruebas provisorias de red ok.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Problema externo / Red del cliente",
+    "confianza": "alta"
+  },
+  "Arruga Papel — Fallas: Arruga las Hojas,Solicita Mantenimiento,. Mensaje de error: . Observaciones: Papel no recog. Pulse [OK] para continuar.|EQ - Equipo|Control de equipo. Control de rodillos pickup. Papel atascado en rodillos pickup. Ajuste de guías de papel. Limpieza interna. Limpieza externa.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|XX - Otros|Usuario informa \"Buenas tardes ya se pudo solucionar.\". Damos por finalizada la gestión": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|Control de equipo. Control de fusor. Control de rodillos. Limpieza interna y externa. Rotación de hojas. Se indica a usuarios como rotar las hojas y como almacenarlas para que no se humedezcan.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Configuracion de red|CN - Configuracion/Instalacion|Control de equipo. Configuración de papel. Ajuste de guías de papel. Limpieza externa. El usuario informa que durante la noche se produjo un corte de luz. El usuario indica que configuro la red mediante asistencia telefónica de canal directo.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Salen defazadas ,osea al cortar las etiquetas lo hace sobre la descripsion del producto quedando asi sin poder leer|EQ - Equipo|Hola Flaca, si es para anular. No hay avisos hace 280 hojas de atascos o tamaño de papel inesperado. Gracias, saludos": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Se atasco en una zona donde no podemos sacar el papel|NE - Negligencia/Accidente|cambio de fusor,  limpieza y chequeo general del equipo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "No reconoce Insumo — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: No me lee esl papel cargado|MU - Mal Uso|chequeo de configuración de tamaño y tipo de papel de la impresora,  limpieza": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Calibracion / Ajuste de imagen",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: No me lee esl papel cargado, MDA CD: Papel no recog. Pulse [OK] para continuar|EQ - Equipo|Control de equipo. Papel atascado en rodillos pickup. Limpieza de rodillos. Control de unidad de imagen. Control de fusor. Limpieza externa. Configuración de papel.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Pieza rota — Fallas: Parte plastica rota o pieza suelta /rota,Atasca el Papel,Mensaje de error /aviso en el panel de control. Mensaje de error: Se rompió un fierrito. Observaciones:|EQ - Equipo|revisión de equipo se quitó atasco de papel en registro se colocó soporte de transfer suelto pruebas de impresión con usuarios": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se libera atasco en fusor\n\npruebas ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No toma papel — Atasca el Papel. Mensaje de error: . Observaciones: No imprime Papel no recog. Pulse [OK] para continuar.|EQ - Equipo|se retira pedazo de papel troquelado atascado en el registro. se capacita a las usuarias. queda ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel especial / Troquelado",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: Solicita Mantenimiento,Atasca el Papel,Parte plastica rota o pieza suelta /rota. Mensaje de error: . Observaciones:|NE - Negligencia/Accidente|se cambia guia debajo de registro \n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Papel no recog. Pulse [OK] para continuar.|EQ - Equipo|Control de equipo. Papel atascado en rodillos pickup. Limpieza de rodillo. Limpieza interna y externa. Se indica a los usuarios como rotar hojas para que estas no se rompan.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningún error,,. Mensaje de error: . Observaciones:|EQ - Equipo|se reconecta cable de red\n\npruebas ok": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,Salen las hojas en blanco,Mensaje de error /aviso en el panel de control. Mensaje de error: . Observaciones: No imprime nada|Indeterminado|Buen dia estimados, se ve en el log de errores que hubo varios mensajes de \"tamaño de papel inesperado\" se configura remotamente el equipo con los tamaños correctos. Damos por finalizado el tkt, si continuan con problemas por favor dar aviso. Saludos.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Calibracion / Ajuste de imagen",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|Indeterminado|Se cierra por falta de respuesta, el equipo imprimió durante toda la semana": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones: NO hay conexion con el equipo.|EQ - Equipo|configurar red , se había cambiado el ip": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|se configuro IP pruebas de impresión con usuarios": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: Sale descalibrada la impresión de las hojas troqueladas|Indeterminado|Sin respuesta del usuario, se visualiza que se realizaron varias copias luego del ultimo mensaje": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Error conexion|XX - Otros|En comunicación con la usuaria Brisa determinamos que el problema radica en la ficha del cable de red, luego de realizar multiples pruebas. Se le informó que debe comunicarse con su soporte para que realicen el cambio del mismo. Damos por finalizada la gestión.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Problema externo / Red del cliente",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,Toma varias hojas,No salen las impresiones y el panel no indica ningun error. Mensaje de error: Introduzca unidad usa con al menos 16gb disponibles. Observaciones: Solo deja imprimir el manual para hacer el procedimiento con el usb|CN - Configuracion/Instalacion|revisión de equipo se modificó área de impresión en la configuración de impresión PDF pruebas de impresión con usuarios": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Driver / PC / Spooler",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|Indeterminado|Usuario indica: El inconveniente quedó solucionado.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Parte plastica rota o pieza suelta /rota,Arruga las Hojas. Mensaje de error: No imprime x que se salio una parte de adentro donde ca el toner. Observaciones:|EQ - Equipo|se coloca chapa suelta de la base del transfer, se limpia interior y se explica al usuario el problema de las hojas troqueladas (se adjunta imágen de resma).": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel especial / Troquelado",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: Mensaje de error /aviso en el panel de control,Mensaje de error /aviso en el panel de control,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|se reconecta cable de red y se reconfigura ip\n\npruebas ok": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|Indeterminado|Se realizo cambio de kit, el mismo lo teia de backup": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Solicita Mantenimiento,. Mensaje de error: . Observaciones: La impresora deja un msj de atasco de papel...Se la reviso x todos lados y no tiene nada atascado|EQ - Equipo|se retiran papeles atascados en el interior, se limpia interior y se retiran hojas troqueladas en mal estado que estaban en la bandeja (se adjunta imagen). queda operativa.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel especial / Troquelado",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,Solicita Mantenimiento. Mensaje de error: . Observaciones: la impresora dice papel atascado se saca el papel y vuelve a atascarse.|NE - Negligencia/Accidente|se observa que el fusor se encontraba dañado se realizó el cambio, e hicieron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Arruga las Hojas,Atasca el Papel,Toma varias hojas. Mensaje de error: . Observaciones: En realidad anda pesimo|CN - Configuracion/Instalacion|En la fecha se configuro el equipo y se realizaron priebas de los informes, el equipo estaba operativo.\r\n\r\nSi por wati el cliente no hablo, se puede cerrar.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Entrega de Insumo — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: Imprime desencuadrada las hojas. BUSCAR INSUMO DE POR VIEYTES.|EQ - Equipo|Se revisa equipo y se cambia toner. Testeo. OK": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Se retiró la parte del cartucho porque decía que tenía un papel atascado detrás del cartucho Y no se puede volver a meter el cartucho Y saltó un resorte del cartucho|EQ - Equipo|revisión de equipo se colocó cartucho correctamente pruebas de impresión con usuarios": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Toner / Cartucho",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,Salen las hojas en blanco,Toma varias hojas. Mensaje de error: . Observaciones: LA PC MANDA LA INFORMACION PARA IMPRIMIR PERO LA IMPRESORA DICE \"CANCELADO\" NO HAY PAPEL ATASCADO|EQ - Equipo|cambio de configuración en la PC, se realizaron pruebas y funciona correctamente": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Driver / PC / Spooler",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|configuración de bandeja, mantenimiento limpieza funciona ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Ajuste de bandejas / guias",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: Inprime defectuoso|CN - Configuracion/Instalacion|Usuaria confirma que el equipo imprime correctamente. Damos por finalizada la gestión": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "Detecta mal tamaño de papel — Dice papel no reconocido y no imprime .|EQ - Equipo|desatasque de papel del registro y reparación de guía de fusor": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No toma papel — Observaciones: Papel no recog. Pulse [OK] para continuar|XX - Otros|Informan de la tienda que después de seguir el instructivo, el equipo vuelve a estar operativo. Damos por finalizada la gestion.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,No salen las impresiones y el panel no indica ningun error,No salen las impresiones y el panel no indica ningun error. Mensaje de error: . Observaciones:|XX - Otros|Equipo operativo, la usuaria no dio respuesta.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Salen mal centrada la impresión en las hojas troqueladas|MU - Mal Uso|Se cierra por falta de respuesta, equipo imprimiendo correctamente.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,Otro (describa abajo),. Mensaje de error: . Observaciones: Las etiquetas las imprime cortadas en el nombre, y no imprime doble cara|XX - Otros|Damos por finalizada la gestión por falta de respuesta de la sucursal": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: Atasca el Papel,Salen las hojas en blanco,Toma varias hojas. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Cartucho negro bajo dice la impresora.\r\nY no imprimí o tarda en imprimir|Indeterminado|En calle 28/05/2026 2610800000000206433 MP": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "baja"
+  },
+  "Atasca Papel — Al imprimir hojas troqueladas se traban|NE - Negligencia/Accidente|Se coloca pickup en bandeja. se limpia equipo. se prueba ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel especial / Troquelado",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|revisión  y pruebas ok": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Mensaje de error /aviso en el panel de control,Hace Ruido. Mensaje de error: Atasco en área de cartucho . Observaciones: Ya liberamos el atasco , evidentemente quedó algo que no vemos,|EQ - Equipo|se realizó cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cierra por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Solicita Mantenimiento,Imprime de manera defectuosa,Toma varias hojas. Mensaje de error: . Observaciones:|Indeterminado|[07:49:23] Tienda179: Ya solucione\r\n[07:49:29] Tienda179: Gracias\r\n[07:50:19] MDA Canal Directo: como estas? el equipo está operativo? les hemos enviado mails informando que habiamos hecho la configuración remota el 26/05 y no tuvimos respuestas, pudieron imprimir bien desde entonces?\r\n[07:51:08] Tienda179: Si si .. no habia visto el mails\r\n[07:51:26] MDA Canal Directo: barbaro, cerramos el incidente. Gracias por confirmar": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: No está imprimiendo correctamente los precios|EQ - Equipo|Se realizaron varias pruebas con los usuarios: ambas hojas de precios salen bien dentro del espacio de cada troquelado.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: No imprimi|Indeterminado|imprimiendo MP": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Ajuste de bandejas / guias",
+    "confianza": "alta"
+  },
+  "No levanta la bandeja — Error al levantar la bandeja 2. Abra la bandeja y compruebe las guías del papel.|EQ - Equipo|revisión,  colocación flag elevación,  pruebas ok con usuaria": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|NE - Negligencia/Accidente|Control de equipo. Control de fusor. Control de clutches. Ganchitos atascados debajo de registro. Limpieza externa": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Calibracion / Ajuste de imagen",
+    "confianza": "alta"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: No está imprimiendo correctamente los precios|CN - Configuracion/Instalacion|Control de configuración de papel. Configuración de ajuste de impresión en Chrome. Se indica a los usuarios como elegir el ajuste según su necesidad del momento. Para precios blancos: fit to paper, mientras que para precios oferta: custom 96/97": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|revisión de equipo estaba mal la configuración de red se configuro IP correcta limpieza interna pruebas de impresión con usuarios": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: Esta en modo reposo y no imprime aunque mandes los archivos|CN - Configuracion/Instalacion|configuración y pruebas ok con usuaria": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel inadecuado / humedad / mala calidad",
+    "confianza": "alta"
+  },
+  "Mantenimiento y Limpieza — Fallas: Toma varias hojas,Imprime de manera defectuosa. Mensaje de error: No hay mensaje . Observaciones: NOTA mda CD, deben configura el tamaño correcto de papel desde la PC.|EQ - Equipo|Control de equipo. Ajuste de guías de papel. Limpieza de rodillos pickup. Rotación de hojas por humedad. Se le indica a los usuarios como rotar las hojas para evitar atascos y que se peguen. Se muestra al usuario como modificar el tamaño de hoja según la situación lo requiera.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: papel no recoge|EQ - Equipo|Tienda 01077 AR\r\n8:45 (hace 3 minutos)\r\npara Mesa, riveror262, cjarruaa73\r\n\r\nhola buen dia , muchisimas gracias , ya lo solucionamos": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: No enciende / No reacciona a ningún comando,,. Mensaje de error: . Observaciones: Buenas tardes estimados, se solicita revisar la impresora por qué no enciende. MDA CD: Insumo bajo|XX - Otros|Se realizan las configuraciones pertinentes y se verifica por sds que el equipo reporta impresiones. Se da aviso al cliente y damos por finalizada la gestión": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Instructivo / Autoresolucion",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,No salen las impresiones y el panel no indica ningun error,. Mensaje de error: . Observaciones: Hola cada vez que se mnd aa imprimí la impresora no lo hace queda como preparada ero nada más|XX - Otros|Usuario informa que el equipo se encuentra imprimiendo normalmente. (LT)": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Cuando se quiere imprimir, dice atasco en bandeja 2, eliminar atasco\r\nPero ya no tiene ningún atasco a la vista. MDA CD: no se comunica a la red, verificar IP y configurar de ser necesario, ver log de errores y solucionar fallas|EQ - Equipo|Se eliminó el atasco en el interior del equipo. Se colocó el obturador del fusor. Limpieza del fusor, pickup rollers, front cover, unidad duplex, bandeja cassette, interior y exterior del equipo. Pruebas de impresión ok.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: No salen las impresiones y el panel no indica ningun error,Solicita Mantenimiento,Imprime de manera defectuosa. Mensaje de error: . Observaciones: Imprime la hoja en blanco|XX - Otros|Equipo operando correctamente, se cierra por falta de respuesta.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones: No imprime|XX - Otros|Equipo operando correctamente, se cierra por falta de respuesta.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Imprime de manera defectuosa,Toma varias hojas. Mensaje de error: . Observaciones:|EQ - Equipo|Cambio del rodillo de separación. Limpieza de pickup rollers, front cover, unidad duplex, bandeja cassette, interior y exterior del equipo. Pruebas de impresión ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Mensaje de error /aviso en el panel de control: MDA CD, errores del monitor: 99.07.20, 32.08.A2,, 98.00.07 Se deriva el caso para verificar y hacer el manteniminto correspondiente|EQ - Equipo|Se realiza format. se instala fw 5.9.2.3. de limpia equipo. se prueba ok.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Firmware",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Imprime de manera defectuosa,Toma varias hojas. Mensaje de error: . Observaciones: Buenas solicito una nueva o que se cambie la tinta y se solucionen las fallas marcadas MDA CD: informar a LP en el sitip que es lo que le ocurre al equipo.|EQ - Equipo|Cambio de rodillo de separación de bandeja cassette y cartucho. Limpieza pickup rollers, front cover, unidad duplex, bandeja cassette, interior y exterior del equipo. Pruebas de impresión ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Actualizar Firmware — Observaciones: MODO REPOSO MDA CD: no se comunca a la red, actualizar firmware un problema recurrente de que pierda la configuración|EQ - Equipo|Control de equipo. Se intenta actualizar firmware pero la PC está totalmente bloqueada tanto navegador como mediante USB. Se realiza una restauración de valores de fabrica. Se configura nuevamente la red. Se realizan al menos 4 pruebas desconectando el cable power para ver si mantenía la IP correcta y fueron exitosas. A diferencia de otras oportunidades el cable de red no estaba conectado correctamente está vez.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "No toma papel — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: Salió una hoja toda cortada y desde ahí no imprime .\r\nPapel no recogido|EQ - Equipo|revisión de equipo se quitó resto de papel en registro limpieza interna pruebas de impresión con usuarios": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Dar aviso a LP cuando el equipo  este conectado a la red.|EQ - Equipo|revisión de equipo limpieza se configuro IP correcta  pruebas de impresión con usuarios": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: \tAtasco en área de cartucho.\r\nAbra puerta frontal y elimine atasco.|NE - Negligencia/Accidente|Control de equipo. Control de fusor. Papel atascado en fusor y en rodillos pickup. Se indica a los usuarios como retirar papeles de forma segura y como rotar las hojas. Limpieza externa.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones: No imprime a menos que se pulse ok  varias veces|XX - Otros|Confirman desde la tienda el correcto funcionamiento del equipo.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se quitó atasco del área de salida, se realizaron pruebas y funciona correctamente": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,Atasca el Papel,. Mensaje de error: . Observaciones MDA: en el sitio escribirle a Leo Pressburger para verificar el equipo remotamente|EQ - Equipo|configuración de IP": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|revisión,  configuración de bandejas, pruebas ok con usuaria": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Ajuste de bandejas / guias",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Observaciones: No imprime hoja A4|Indeterminado|Se retiro papel atascado en el registro": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Cambiar kit de rodillos bandeja 2. Revisar fusor.|EQ - Equipo|cambio de pickup y retard": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Fallas: No enciende / No reacciona a ningún comando,No salen las impresiones y el panel no indica ningun error,. Mensaje de error: . Observaciones:|XX - Otros|Se visualiza que el equipo está activo e imprimiendo. Se adjunta evidencia y se cierra caso.": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Mensaje de error /aviso en el panel de control,Salen las hojas en blanco,Imprime de manera defectuosa. Mensaje de error: . Observaciones:|MU - Mal Uso|configuración de tipo y tamaño de papel en la impresora (A4), limpieza de equipo": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Calibracion / Ajuste de imagen",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Verificar estado e integridad del kit de mantenimiento completo (feed rollers, pickup rollers y retard rollers). Realizar reinstalación limpia de firmware debido a presencia de errores 98.00.07 y múltiples eventos de apagado/encendido forzado registrados en el equipo. MDA CD: hablar con Leo estando en el sitio.|EQ - Equipo|cambio pickup, cambio retard, actualización firmware y limpieza de equipo": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Firmware",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Imprime de manera defectuosa,. Mensaje de error: . Observaciones: Actualmente está con atascó de papel en la parte del cartucho|EQ - Equipo|se desatasca papel del registro": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Hace Ruido,Imprime de manera defectuosa,. Mensaje de error: . Observaciones:|EQ - Equipo|la máquina de encuentra con el fusor dañado\nse procede a cambiar el fusor y limpieza de la máquina": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Papel no recog. Pulse [OK] para continuar.|EQ - Equipo|se libera atasco en registro \nlimpieza general \npruebas ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,Toma varias hojas,Atasca el Papel. Mensaje de error: . Observaciones: Hace días que no se puede imprimir|EQ - Equipo|revisión de equipo no podían imprimir porque tenia otra IP se configuro red se cambió retard de bandeja 2": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "98.XY.XY Data corruption has occurred in the firmware volume — Verificar integridad del kit de mantenimieto. Realizar instalacion limpia de firmware (Errores 49.39.01 y 99.07.20)|EQ - Equipo|Se realizó un partial clean, formar disk y se cargó en limpio el firmware 5.7.1.1. Limpieza de pickup rollers, front cover, bandeja cassette, platina, ADF, interior y exterior del equipo. Pruebas de impresión y copia en simple/doble faz ok.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Firmware",
+    "confianza": "alta"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|EQ - Equipo|revisión de equipo limpieza de toner en el  interior del equipo manchaba las hojas se cambió retard de bandeja 2 gastado pruebas de impresión con usuarios": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Calidad por insumo (manchas / impresion clara)",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones:|CN - Configuracion/Instalacion|Se realiza configuración de papel, se comparte instructivo Papel no recogido y se indica al usuario el tamaño de hoja que debe utilizar.": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Driver / PC / Spooler",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Observaciones se imprimen hojas de resumen de red y caracteristicas de impresora, pero no se inicia la impresion de archivos ///MDA CD: Configurar red a los valores: IP 10.120.209.58 Mask 255.255.255.0 GW 10.120.209.254. Hablar con Leo una ves seteado los valores|EQ - Equipo|configuración de ip": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Arruga las Hojas,Hace Ruido,Atasca el Papel. Mensaje de error: . Observaciones:|NE - Negligencia/Accidente|Control de equipo. Control de fusor. Limpieza de rodillos pickup. Banda elástica atascada en ruta de papel. Ajuste de guías de papel rotación de hojas. Configuración de papel": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "No se comunica a la Red — Fallas: No salen las impresiones y el panel no indica ningun error,,. Mensaje de error: . Observaciones: Es como dice en falla 1. Enviamos impresiones y no salen tampoco tira error. Se reinicio la PC y la impresora y sigue igual|CN - Configuracion/Instalacion|revisión,  configuración de bandejas, pruebas ok con usuaria": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "media"
+  },
+  "Imprime desfasado o Entre cortado — Fallas: Arruga las Hojas,Atasca el Papel,Otro (describa abajo). Mensaje de error: imprime corrido, digamos de la mitad de la hoja para abajo como si una parte no la tomara . Observaciones:|CN - Configuracion/Instalacion|Control de equipo. Control de drum. Ajuste de guías de papel. Configuración de papel. Configuración de impresión en A6 y A4. Se indica a los usuarios como configurar correctamente según su requerimiento.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Arruga / Toma varias hojas",
+    "confianza": "alta"
+  },
+  "Configuración de equipo — Observaciones: No imprime, si se envía archivo a imprimir no imprime ni en A6 ni A4. Verificar valores, configurar a Ip 10.120.128.58 Mask 255.255.255.0 GW 10.120.128.254|EQ - Equipo|configuración de IP": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Configuracion de red / IP",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: No enciende / No reacciona a ningún comando,,. Mensaje de error: . Observaciones: La impresora tiene corriente pero no prende pantalla|NE - Negligencia/Accidente|la máquina de encuentra deteriorada en su display con los botones metidos para adentro y el Flex de la máquina dañado \nse procede a cambiar display y queda op": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se realizaron pruebas con el usuario y funciona correctamente, se colocó la hoja del lado del troquel invertido y funciona bien": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel especial / Troquelado",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Toma varias hojas,Salen las hojas en blanco,Atasca el Papel. Mensaje de error: . Observaciones: En un momento da mensaje de que hacia falta mas gigas que agregar y otro me saje decia almacenamiento de trabajos// MDA CD: Atasca papel, Configuración de Almacenamiento de trabajos ya se desactivo|XX - Otros|se verifica funcionamiento ok del equipo \nfalla presentada por hojas troqueladas\n\npruebas ok": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Papel especial / Troquelado",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Atasco de papel lo destrabamos y sigue trabando lo|EQ - Equipo|No presenta atasco. Se realiza Mantenimiento": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "PRT Mono HP M501dn — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: EN EL VISOR DE LA IMPRESORA SE OBSERVA MENSAJE DE ATASCO DE PAPEL EN SECTOR DE CARTUCHO PERO NO SE OBSERVA NADA. EN LA BANDEJA TAMPOCO Y EL PUERTA POSTERIOR TAMPOCO SE OBSRVA NINGUN ATASCO.|EQ - Equipo|Control de equipo. Control de fusor. Papeles atascados en rodillos pickup y ruta de papel. Limpieza de rodillos pickup. Limpieza externa.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — En la bandeja (Trabajan fin de semana)|EQ - Equipo|se cambia bandeja 1 rota. se resetean valores. queda ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Al momento de imprimir hace ruido, temo que se rompa por no tomar medidas de mantenimiento|EQ - Equipo|se cambia retard bja 1\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|luego de varias pruebas se determina una falla en el clutch de la bandeja 1. se cambia dicho clutch y  además el cover casette. se hacen varias pruebas con la usuaria y sale xofrexmabfr.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "MFP Mono Samsung SL-M5360RX — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: POR FAVOR, NECESITAMOS UN DRUM. NO ENVIAR TONER.|XX - Otros|Hola Leandro, buen dia!!El pedido ingresó como pedido de Servicio Técnico y corresponde a insumos.Damos por cerrado el ST y generamos el pedido correcto bajo el número: 436987-7 Saludos,": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Drum / Unidad de imagen / Revelador",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: mancha las hojas|EQ - Equipo|se cambia fusor\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: mancha las hojas|TN - Toner|se cambia retard bja 1\nse indica al usuario falla en insumo\n\nfuncionamiento ok": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Calidad por insumo (manchas / impresion clara)",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia bja 1, duplex y feed mp\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia fusor y retard bja 1\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia retard y pickup bja 1 \n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: No imprime,|EQ - Equipo|se retiran papeles atascados en el registro y se cambia el cover cassette de bandeja 1 porque le faltaban los maylers. queda ok.": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: MANCHA LAS HOJAS Y EN ALGUNAS PARTES DE LA MISMA NO TIENEN TINTA.|EQ - Equipo|se cambia fusor y retard bja 1 \nse cambio insumo\n\npruebas ok": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Calidad por insumo (manchas / impresion clara)",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Claro hacia uno de los márgenes ) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: De un costado sale más clara la impresión|EQ - Equipo|cambio de rubber mantenimiento limpieza funciona ok": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Calidad por insumo (manchas / impresion clara)",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones: ruido anormal de roce al imprimir|EQ - Equipo|cambio de fusor, pickup. se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasco en Duplex — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: Al imprimir en doble cara se traban las hojas.|EQ - Equipo|reparación y cambio de bandeja duplex, se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de fusor, se realizaron pruebas y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Bandeja 1 Rota — Observaciones: Mancha las hojas Obs.  Bandeja 1 y frente completo|EQ - Equipo|se cambia fusor por tener el hot roll marcado, front cover por estar rota y bandeja 1 x atascos. se resetea valores. queda ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — atasca papel en la bandeja 1, tiene restos de papel.|EQ - Equipo|cambio de rubber y pickup mantenimiento limpieza funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de rubber, se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,Parte plastica rota o pieza suelta /rota,. Mensaje de error: . Observaciones: Mancha las Hojas|EQ - Equipo|cambio de rubber y Fusor, se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Se reinicia — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: Impreme las hojas con todos colores , recien cambiado los cartuchos y se reinicia el equipo constantemente.|EQ - Equipo|cambio de cinta de transferencia, se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Pierde Datos — Fallas: Configuracion de scanner /Scanner bloqueado,,. Mensaje de error: . Observaciones: No deja escanear y cuando enciende pide hora y fecha a cada momento|EQ - Equipo|se le cambio pila de controller, se realizaron pruebas y funciona correctamente. el personal de sistemas quedó a averiguar con el sector correspondiente lo de la configuración de scanner para descartar un fallo de la red": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de fusor, pickup y rubber mantenimiento limpieza funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: Error \"Sustituir Rodillo\"|EQ - Equipo|se cambia rodillo retard y cover casette de bandeja 1. se limpian rodillos de bandeja 2. se resetean los valores. queda operativa y ya no realiza ruidos molestos.\nequipo con mucho uso, imprimen desde diferentes pisos los pedidos de medicamentos.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Observaciones: Mancha la hoja de negro. Pedir unidad de imagen, fusor, kit de rodillos bandeja 1 y 2. Limpiar los sensores de la ruta de papel. El equipo necesita un servicio completo. imagen adjunta en la galería del caso.|Indeterminado|Se realiza cambio de drum y se realizan pruebas con usuarios. Se cambian rodillos gastados de bandeja 1, 2, y ADF. Se cambia fusor con marcas. Equipo operativo.": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Drum / Unidad de imagen / Revelador",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Solicita Mantenimiento,Atasca el Papel,Parte plastica rota o pieza suelta /rota. Mensaje de error: bandeja rota. Observaciones: imprime doble faz, arruga la hoja|EQ - Equipo|Control de equipo. Limpieza de fusor. Limpieza de Duplex. Reemplazo de frame rear. Limpieza de bandeja 1. Ajuste de guías de papel. Configuración de papel. Clear memory .": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Resetear mantenimiento — Observaciones: \"Sustituir nuevo rodillo bandeja1\"|EQ - Equipo|revisión de equipo limpieza interna se cambió pickup roller y rubber retard  se reseteo contadores": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de front cover (plástico roto), clear memory por lentitud del equipo y reset contadores": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,Arruga las Hojas,Salen las hojas en blanco. Mensaje de error: . Observaciones: Buen dia, solicito mantenimiento ya que todo el tiempo se atasca papel, no reconoce, se queda trabada por mucho tiempo, hay que estar prendiento y apagando a cada rato la impresora|EQ - Equipo|revisión de equipo se quitó resto de papel en registro limpieza interna se cambió rubber retard y cover cassette": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Atasca Papel|EQ - Equipo|cambio de retard, lo pieza de bandeja adicional (papeles rotos), lube en ejes, limpieza general del equipo, reset contadores": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Arruga Papel|EQ - Equipo|cambio de fusor (arrugaba las hojas), cambio de bandeja 1 (plástico roto), reset contadores, limpieza del equipo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones:|Indeterminado|Se realiza cambio de partes gastadas. Equipo operativo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones:|EQ - Equipo|Se realiza cambio de unidad MP y se realizan pruebas. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Toma varias hojas,. Mensaje de error: . Observaciones:|EQ - Equipo|Se realiza cambio de fusor y limpieza general. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento,,. Mensaje de error: . Observaciones: La impresora se atasca mucho, arruga el papel y si no se sotiene la bandeja no imprime|EQ - Equipo|Cambio del fusor, pickup retard, pickup roller y cover cassette. Reparación del rear cover. Limpieza del front cover, interior y exterior del equipo. Pruebas de impresión con el usuario.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,,. Mensaje de error: . Observaciones: A la hora de imprimir la impresora, hace mucho ruido, como si patinara el rodillo!|EQ - Equipo|Revisión y reparación": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "baja"
+  },
+  "Atasca Papel — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones:|NE - Negligencia/Accidente|se cambia feed mp y bandeja 1\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Hace Ruido,Imprime de manera defectuosa,. Mensaje de error: . Observaciones:|TN - Toner|limpieza  y cambio de pickup retard,  pruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Toma varias hojas,Atasca el Papel,Salen las hojas en blanco. Mensaje de error: . Observaciones:|Indeterminado|limpieza y configuración - control general del equipo ok": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Diagnostico / Sin falla",
+    "confianza": "alta"
+  },
+  "No imprime — Fallas: Salen las hojas en blanco,Arruga las Hojas,Atasca el Papel. Mensaje de error: . Observaciones:|Indeterminado|Revisión y Reparación de rodillos. limpieza. control gral. ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones:|EQ - Equipo|limpieza del equipo, reset contadores, cambio de clutch, cambio de mp, cambio de retard y cambio de pickup": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Mensaje de error: C3-1150. Observaciones: C3-1150 The imaging unit is empty. Immediate user intervention is required to replace the imaging unit. Printing can continue, all other machine services (if installed) are unaffected. Verificar estado de la u. de imagen. y equipo para solicitar partes. Hablar con Leo Pressburger de la mesa de ayuda CD estando en el sitio. Gracias|EQ - Equipo|Limpieza general, cambio de Unidad de Cilindro y control funcionamiento.": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Drum / Unidad de imagen / Revelador",
+    "confianza": "alta"
+  },
+  "MFP Mono A3 Samsung SL-K4350LX — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: reponer toner|Indeterminado|No corresponde ST, se avisa al usuario": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Cambiar parte plástica por rotura — Fallas: Arruga las Hojas,Atasca el Papel,Imprime de manera defectuosa. Mensaje de error: . Observaciones:  atasca el papel todo el tiempo arruga las hojas , creo que ya habria q traer una maquina nueva  o otra|EQ - Equipo|cambio de clutch, reset de contadores, limpieza del equipo,, cambio cluch mp, bandeja 1, registro, de conecto la bandeja 2 a la impresora (plástico roto)": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento,No reconoce el insumo,. Mensaje de error: . Observaciones: Buen día a la impresora se le cambio la unidad de imagen y no la reconoce.\nHorario: hoy y mañana de 8:00 a 17:00|XX - Otros|Se realiza cambio de unidad reveladora y se realizan pruebas. Equipo operativo.": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Drum / Unidad de imagen / Revelador",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: NECESITAMOS 2 TONERS|TN - Toner|se cancela, cargan insumos": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Imprime de manera defectuosa,,. Mensaje de error: PIDE SUSTITUIR NUEVA UNIDAD DE IMAGEN CODIGO DE ERROR C3-1150 Y C6-1120. Observaciones: Las impresiones salen con una mancha negra en la parte derecha de la Hoja|XX - Otros|Damos por finalizada de gestión por falta de respuesta": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mesa de ayuda / Sin respuesta del cliente",
+    "confianza": "alta"
+  },
+  "Error de fusor — Fallas: Solicita Mantenimiento,Mensaje de error /aviso en el panel de control,. Mensaje de error: Aparece el mensaje de: error ?U1-2315. Apague y encienda. ( lo apago y enciendo y sigue apareciendo el mismo error, no me deja imprimir nada.. Observaciones: Necesito mantenimiento urgente, ya que es la única impresora en la sucursal y necesitamos utilizarla.|EQ - Equipo|Cambio del fusor, rear frame, pickup retard, pickup roller, sheet cassette, clutch de bandeja 1 y clutch del registro. Reparación del rear cover y bandeja cassette. Limpieza de pickup rollers, front cover, bandeja cassette, interior y exterior del equipo. Pruebas de impresión en simple/doble faz ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: la calidad de imprecion es totalmente ilegible|EQ - Equipo|Verificación funcionamiento, Limpieza láser": {
+    "categoria": "Software, Firmware y Red",
+    "subcategoria": "Calibracion / Ajuste de imagen",
+    "confianza": "media"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,,. Mensaje de error: . Observaciones: ES PARA LA IMPRESORA DE RECEPCION, SE ATASCA EL PAPEL CADA RATO, DIFICULTANDO EL TRABAJO. MDA CD: cambiar kit de rodillos, Limpiar sensores de salida de bandeja 1, 2 y registro. Verificar errores con el log y solucionar.|EQ - Equipo|Reparación de equipo": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones: se solicita asistencia ya que la impresora no imprime correctamente las impresiones salen cortadas|EQ - Equipo|revisión, configuración bandejas y cambio de pickup retard,  pruebas ok con usuaria": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "media"
+  },
+  "Hace Ruido — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones: Indica atasco de hojas y no se queda trabada en ningun lado, no salen las impresiones.|EQ - Equipo|se cambia fusor por marcas en el hot roll y se cambia retard+cover casette para que agarre la hoja correctamente. se prueba equipo y queda ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Escanea con rayas — Fallas: Configuracion de scanner /Scanner bloqueado,Imprime de manera defectuosa,Solicita Mantenimiento. Mensaje de error: . Observaciones: al hacer fotocopia / scaneo ,aparece una linea negra al costado.|EQ - Equipo|se cambia platina.\nse limpia equipo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Escaner / ADF",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Atasca el Papel,Parte plastica rota o pieza suelta /rota,Salen las hojas en blanco. Mensaje de error: . Observaciones: Se traban las hojas en la bandeja 1.\r\nSolicito servicio de mantenimiento.|EQ - Equipo|se cambia retard y se cambia guía de bandeja rota": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas)|EQ - Equipo|cambio cluch mp, reset contadores": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Rompe las hojas|EQ - Equipo|reset contadores, cambio cover casette, limpieza de equipo": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "baja"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento,,. Mensaje de error: . Observaciones:|Indeterminado|Mantenimimento": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento|Indeterminado|Mantenimiento": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento,,. Mensaje de error: . Observaciones:|Indeterminado|Mantenimiento": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Hace Ruido|EQ - Equipo|Se cambia rubber retard. De limpia equipo. se prueba ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "No toma Papel — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones:|EQ - Equipo|se colocó nueva bandeja / Este codigo de repuesto reemplaza bandeja de equipo de Bckp MP": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Imprime de manera defectuosa,,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio de fusor, se realizaron pruebas con el usuario y funciona correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones:|EQ - Equipo|configuración correcta de bandejas, cambio de rubber. se realizaron varias pruebas con el usuario y funciona correctamente": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Ajuste de bandejas / guias",
+    "confianza": "alta"
+  },
+  "Bandeja 2 rota|EQ - Equipo|Cambio de pickup retard, pickup roller y sheet cassette. Reparación de la bandeja cassette. Limpieza del fusor, pickup rollers, front cover, unidad duplex, bandeja cassette, interior y exterior del equipo. Pruebas de impresión ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "No reconoce Bandeja 1 — Fallas: Imprime de manera defectuosa,Otro (describa abajo),. Mensaje de error: . Observaciones: 1-Imnprime la mitas de la hoja en negro y cuando escaneas lo mismo.\r\n2-No toma la bandeja 1 el tamaño correcto de la hjoa A4|EQ - Equipo|Cambio cajonera papel band 1, reemplazo Cable Flex lampara escaner, lza ruedas Radf y bandejas papel 1, 2 y by pass, funcionamiento Ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Escaner / ADF",
+    "confianza": "alta"
+  },
+  "Aviso en el display — Observaciones: ERROR 630026- INDICA QUE APAGUEMOS Y PRENDAMOS LA IMPRESORA. MDA CD: error de láser|EQ - Equipo|se cambia unidad láser por error U2-1112, se calibra, se imprime hoja de limpieza de fusor, se prueba con los usuarios y sale correctamente.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Otro (describa abajo),,. Mensaje de error: . Observaciones: FALLA FUSOR ROTO|EQ - Equipo|mantenimiento y cambio de fusor": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Mantenimiento y Limpieza|EQ - Equipo|se restauran gomas de pick up, retard, módulo duplex y se revisa fusor. se realiza mantenimiento en general": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Hace Ruido|EQ - Equipo|se restaura goma de retard y pick up. se realiza mantenimiento en general": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Tolva llena|EQ - Equipo|se vacía tolva de desechos y se realiza mantenimiento en general": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Tolva / Contenedor residual",
+    "confianza": "alta"
+  },
+  "Atasca Papel|EQ - Equipo|se realizó extracción de pedazos de plástico del.interior q obstruia el.paso del papel": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Hace Ruido,Atasca el Papel,Toma varias hojas|EQ - Equipo|se cambia retard bja 1\nlimpieza general \n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "Error de fusor — Fallas: Mensaje de error /aviso en el panel de control,,. Mensaje de error: . Observaciones: Error : ?U1 -2315\r\nError : ?U1 -2320|EQ - Equipo|revisión de equipo tira error U1-2315 U1-2320 se cambió fusor pruebas de impresión": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Observaciones: En el panel de control dice hoja atascada pero no se vizualiza ningna hoja!|EQ - Equipo|Se asiste a sitio y se verifica falla que provoca mensajes de atasco de papel. Se comprueba que no exista papel atascado en ruta de papel y se procede a la inspección de rodamientos internos. Se corrige falla existente en el equipo, se realizan pruebas de funcionamiento junto con los usuarios y el equipo queda operando correctamente": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Solicita Mantenimiento,Imprime de manera defectuosa,Atasca el Papel. Mensaje de error: . Observaciones: Sustituir por una unidad de fusor nueva, hace ruido al imprimir y salen algunas impresiones cortadas. A veces se atasca el papel también. Solicitamos mantenimiento urgente. Gracias!|Indeterminado|Se verifica error de fusor y se realiza cambio, se cambian rodillos pickup gastados. Equipo operativo.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Mensaje de error: C6-1120 SUSTITUYA POR UNA UNIDAD DE FUSOR NUEVA.Cambiar kit de rodillos bandeja 1 y 2. Limpiar sensores de salida de bandeja 1, 2 y registro. Limpiar adf y platina. Resetear mantenimiento|EQ - Equipo|mantenimiento y reset contadores": {
+    "categoria": "Gestion de Soporte",
+    "subcategoria": "Mantenimiento / Limpieza general",
+    "confianza": "alta"
+  },
+  "Pieza Rota — Fallas: Parte plastica rota o pieza suelta /rota,,. Mensaje de error: . Observaciones: OFICINA DE VENTAS|Indeterminado|Se realiza el reemplazo de cover front que llego a sucursal, se realiza ademas una limpieza general del equipo, reinicio de contadores y pruebas de funcionamiento. Equipo operando correctamente": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Parte / Panel / Botonera rota",
+    "confianza": "alta"
+  },
+  "Atasca Papel — Fallas: Imprime de manera defectuosa,Arruga las Hojas,Atasca el Papel. Mensaje de error: . Observaciones:|Indeterminado|LIMPIEZA DE FUSOR": {
+    "categoria": "Medio de Impresion",
+    "subcategoria": "Atasco de papel (comun)",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Imprime de manera defectuosa,Hace Ruido,Otro (describa abajo). Mensaje de error: . Observaciones: mancha con tinta las hojas de impresion|TN - Toner|Si ,era eso\r\n\r\nYa funciona ok\r\n\r\nGracias\r\n\r\nSaludos\r\n\r\n HECTOR  HORACIO  RUIZ": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Calidad por insumo (manchas / impresion clara)",
+    "confianza": "alta"
+  },
+  "Hace Ruido — Fallas: Atasca el Papel,Hace Ruido,. Mensaje de error: . Observaciones:|EQ - Equipo|cambio cluch bandeja 1 por ruido, lube en fusor, lube en ejes, limpieza del equipo, reset contadores": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Otros - Hardware y Desgaste",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Fallas: Atasca el Papel,Arruga las Hojas,Solicita Mantenimiento. Mensaje de error: . Observaciones:|EQ - Equipo|revisión de equipo el fusor arruga las hojas se cambió fusor pruebas de impresión con usuarios": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Recambio de Insumo — Cambiar DRUM (Vieytes)|XX - Otros|se realiza cambio de drum\nlimpieza de equipo \n\npruebas ok": {
+    "categoria": "Insumos y Toner",
+    "subcategoria": "Drum / Unidad de imagen / Revelador",
+    "confianza": "alta"
+  },
+  "Verificar fallas con el log de errores/solucionar errores — Observaciones: Buenas se solicita camio de fuzor para la maquina de gernecia esta toda picada y se astaca el papel,tanbien se arruga los papeles y traba la maquina atte. angel davalos. MDA CD, cambiar fusor y kit de rodillos bandeja 1 (3), resetear el manteniminto de las piezas reemplazadas. Limpieza de equipo.|EQ - Equipo|mantenimiento cambio de fusor y rodillos toma papel": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Fusor / Kit de mantenimiento",
+    "confianza": "alta"
+  },
+  "Imprime Mal ( Mancha las hojas) — Fallas: Imprime de manera defectuosa,Solicita Mantenimiento,. Mensaje de error: . Observaciones:|EQ - Equipo|se cambia pickup y retard bja 1 \nse cambia retard bja 2\n\npruebas ok": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
+    "confianza": "alta"
+  },
+  "PRT Mono Samsung SL-M4020ND — Fallas: Solicita Mantenimiento,Mensaje de error /aviso en el panel de control,Salen las hojas en blanco. Mensaje de error: SUSTITUIR RODILLO.. Observaciones:|EQ - Equipo|Reset de contadores. Cambio de pickup retard, pickup roller y sheet cassette. Limpieza del fusor, front cover, unidad duplex, bandeja cassette , interior y exterior del equipo. Pruebas de impresión ok.": {
+    "categoria": "Hardware y Desgaste",
+    "subcategoria": "Rodillos / Pickup / Separacion",
     "confianza": "alta"
   }
 }

@@ -55,6 +55,41 @@
   border-color: var(--primary);
 }
 
+.presets {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.preset {
+  font-family: var(--font-body);
+  background: var(--surface-2);
+  color: var(--text-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease),
+    background 0.18s var(--ease);
+  white-space: nowrap;
+}
+.preset:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--primary);
+}
+.presetActive {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.presetActive:hover:not(:disabled) {
+  color: #fff;
+}
+.preset:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 .status {
   margin-left: auto;
   display: inline-flex;

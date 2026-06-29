@@ -55,3 +55,9 @@ export function cacheSet<T>(key: string, value: T, ttlSeconds: number): void {
 export function cacheDelete(key: string): void {
   store.del(key);
 }
+
+/** Borra todas las entradas cuya clave empieza con el prefijo dado. */
+export function cacheDeletePrefix(prefix: string): void {
+  const keys = store.keys().filter((k) => k.startsWith(prefix));
+  if (keys.length) store.del(keys);
+}

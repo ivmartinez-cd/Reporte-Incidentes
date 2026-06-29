@@ -3,11 +3,19 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { Empresa } from "@/lib/types";
+import { periodLabel, recentPeriods } from "@/lib/format";
 import styles from "./ClientPicker.module.css";
 
 const RECENTS_KEY = "cd:recent-clients";
 const MAX_RECENTS = 5;
 const MAX_RESULTS = 50;
+
+const RANGE_PRESETS = [
+  { value: 1, label: "1 mes" },
+  { value: 3, label: "3 meses" },
+  { value: 6, label: "6 meses" },
+  { value: 12, label: "1 año" },
+] as const;
 
 /** Quita acentos y pasa a minusculas para una busqueda tolerante. */
 function normalize(s: string): string {
@@ -35,7 +43,15 @@ export default function ClientPicker({ empresas }: { empresas: Empresa[] }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const [recents, setRecents] = useState<Recent[]>([]);
+  const [selectedEmpresa, setSelectedEmpresa] = useState<Empresa | null>(null);
   const [navigatingId, setNavigatingId] = useState<string | null>(null);
+  const [selectedMonths, setSelectedMonths] = useState<number>(1);
+  const [selectedMonth, setSelectedMonth] = useState<string>(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  });
+
+  const monthOptions = useMemo(() => recentPeriods(24), []);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -76,9 +92,17 @@ export default function ClientPicker({ empresas }: { empresas: Empresa[] }) {
     } catch {
       /* sin persistencia: continua igual */
     }
-    setNavigatingId(empresa.id);
+    setSelectedEmpresa(empresa);
+    setQuery(empresa.nombre);
     setOpen(false);
-    startTransition(() => router.push(`/dashboard?empresa=${empresa.id}`));
+  }
+
+  function startAnalysis() {
+    if (!selectedEmpresa) return;
+    setNavigatingId(selectedEmpresa.id);
+    const params = new URLSearchParams({ empresa: selectedEmpresa.id, period: selectedMonth });
+    if (selectedMonths > 1) params.set("months", String(selectedMonths));
+    startTransition(() => router.push(`/dashboard?${params.toString()}`));
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -149,6 +173,7 @@ export default function ClientPicker({ empresas }: { empresas: Empresa[] }) {
           disabled={pending}
           onChange={(e) => {
             setQuery(e.target.value);
+            setSelectedEmpresa(null);
             setActive(0);
             setOpen(true);
           }}
@@ -198,9 +223,50 @@ export default function ClientPicker({ empresas }: { empresas: Empresa[] }) {
 
       {open && query && results.length === 0 && (
         <p className={styles.empty}>
-          Sin resultados para “{query}”. Proba con otro nombre o ID.
+          Sin resultados para "{query}". Proba con otro nombre o ID.
         </p>
       )}
+
+      <div className={styles.periodSection}>
+        <span className={styles.periodLabel}>Periodo del reporte</span>
+        <div className={styles.periodRow}>
+          <select
+            className={`select ${styles.monthSelect}`}
+            value={selectedMonth}
+            disabled={pending}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            aria-label="Mes de referencia"
+          >
+            {monthOptions.map((p) => (
+              <option key={p} value={p}>
+                {periodLabel(p)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.presets}>
+          {RANGE_PRESETS.map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              className={`${styles.preset} ${selectedMonths === value ? styles.presetActive : ""}`}
+              disabled={pending}
+              onClick={() => setSelectedMonths(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        className={styles.startButton}
+        disabled={!selectedEmpresa || pending}
+        onClick={startAnalysis}
+      >
+        {pending ? "Iniciando análisis..." : "Iniciar Análisis"}
+      </button>
     </div>
   );
 }

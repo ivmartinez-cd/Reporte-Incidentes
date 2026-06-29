@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { clearSessionCookie } from "@/lib/auth/session";
+import { config } from "@/lib/config";
 import { listIncidents } from "@/lib/soap/incidents";
 import { classifyIncidents, caseKeyForCache } from "@/lib/ai/classify";
 import { logUsage } from "@/lib/ai/costStore";
@@ -26,12 +27,21 @@ export async function logoutAction(): Promise<void> {
  */
 export async function refineClassificationAction(
   empresaId: string,
-  period: string,
+  periods: string[],
 ): Promise<{ progressed: boolean }> {
-  const raw = await listIncidents(empresaId, period);
-  const { usage } = await classifyIncidents(raw); // useAi por defecto: llama a Gemini
-  logUsage(usage);
-  return { progressed: usage.calls > 0 };
+  // Usa el mismo escalado de limite que buildRangeReport: el mes mas antiguo
+  // (periods[0]) recibe el mayor Top para que la ventana del SOAP lo alcance.
+  const base = config.soap.testIncidentLimit;
+  const total = periods.length;
+  let totalCalls = 0;
+  for (let i = 0; i < total; i++) {
+    const limit = (total - i) * base;
+    const raw = await listIncidents(empresaId, periods[i], limit);
+    const { usage } = await classifyIncidents(raw);
+    logUsage(usage);
+    totalCalls += usage.calls;
+  }
+  return { progressed: totalCalls > 0 };
 }
 
 /**
@@ -52,7 +62,7 @@ export async function resolveClassificationAction(
   if (!cat.subcategories.includes(subcategoria)) return { ok: false, error: "subcategoria invalida" };
   const key = caseKeyForCache(inc);
   saveCachedClassifications({ [key]: { categoria, subcategoria, confianza: "alta" } });
-  // Invalida el reporte cacheado para que el refresh muestre la correccion.
-  invalidateReport(empresaId, period);
+  // Invalida el reporte cacheado de todos los periodos para esta empresa.
+  invalidateReport(empresaId);
   return { ok: true };
 }

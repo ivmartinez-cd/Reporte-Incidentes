@@ -55,6 +55,7 @@ export default async function PrintPage({
     <DashboardFilterProvider
       empresaId={empresaId}
       period={period}
+      months={1}
       filters={EMPTY_FILTERS}
     >
       <div className={`printView ${styles.printPage}`}>

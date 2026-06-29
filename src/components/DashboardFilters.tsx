@@ -18,11 +18,13 @@ import styles from "./DashboardFilters.module.css";
 export function DashboardFilterProvider({
   empresaId,
   period,
+  months,
   filters,
   children,
 }: {
   empresaId: string;
   period: string;
+  months: number;
   filters: IncidentFilters;
   children: React.ReactNode;
 }) {
@@ -36,11 +38,12 @@ export function DashboardFilterProvider({
   useEffect(() => setMounted(true), []);
 
   function navigate(
-    patch: Partial<IncidentFilters & { period: string }>,
+    patch: Partial<IncidentFilters & { period: string; months: number }>,
     isHeavy = false,
   ) {
-    const next = { period, ...filters, ...patch };
+    const next = { period, months, ...filters, ...patch };
     const params = new URLSearchParams({ empresa: empresaId, period: next.period });
+    if (next.months > 1) params.set("months", String(next.months));
     if (next.sucursal) params.set("sucursal", next.sucursal);
     if (next.categoria) params.set("categoria", next.categoria);
     if (next.subcategoria) params.set("subcategoria", next.subcategoria);
@@ -55,10 +58,12 @@ export function DashboardFilterProvider({
 
   const value: ReportNav = {
     filters,
+    months,
     pending,
     setFilter: (key, val) => navigate({ [key]: val }),
     toggle: (key, val) => navigate({ [key]: filters[key] === val ? "" : val }),
     setPeriod: (p) => navigate({ period: p }, true),
+    setMonths: (n) => navigate({ months: n }, true),
     clearFilters: () =>
       navigate({ sucursal: "", categoria: "", subcategoria: "" }),
   };

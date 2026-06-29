@@ -198,6 +198,7 @@ export async function listIncidents(
       const isClosed = i.estado === "Resuelto" || i.estado === "Cerrado";
       return i.fecha.startsWith(period) && isClosed;
     });
+    console.log(`[SOAP] empresa=${empresaId} period=${period} limit=${limit} raw=${rows.length} matched=${pageItems.length}`);
 
     // Enriquecimiento por incidente (solucion del tecnico + causa raiz). Se hace
     // DESPUES del slice para no disparar 2×N llamadas sobre todo el listado.

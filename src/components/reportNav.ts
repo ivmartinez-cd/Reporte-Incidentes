@@ -11,14 +11,17 @@ import type { FilterKey, IncidentFilters } from "@/lib/filters";
  */
 export interface ReportNav {
   filters: IncidentFilters;
+  months: number;
   pending: boolean;
   /** Aplica/quita un filtro (toggle): si ya esta ese valor, lo limpia. */
   toggle: (key: FilterKey, value: string) => void;
   /** Fija un filtro a un valor exacto ("" lo limpia). */
   setFilter: (key: FilterKey, value: string) => void;
-  /** Cambia el periodo conservando los filtros vigentes. */
+  /** Cambia el periodo conservando los filtros y el rango vigentes. */
   setPeriod: (period: string) => void;
-  /** Limpia todos los filtros (mantiene cliente y periodo). */
+  /** Cambia la cantidad de meses del rango conservando el periodo de referencia. */
+  setMonths: (months: number) => void;
+  /** Limpia todos los filtros (mantiene cliente, periodo y rango). */
   clearFilters: () => void;
 }
 

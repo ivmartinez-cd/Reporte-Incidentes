@@ -6,23 +6,25 @@ import { useReportNav } from "./reportNav";
 import ExportPdfButton from "./ExportPdfButton";
 import styles from "./Toolbar.module.css";
 
-/**
- * Controles base del reporte. El CLIENTE viene elegido desde la pantalla de
- * seleccion (aqui solo se muestra, con acceso para cambiarlo) y se ofrece el
- * cambio de periodo. Los filtros transversales NO viven aqui: se aplican de
- * forma interactiva tocando los graficos o la tabla (ver useReportNav) y se
- * muestran como chips (ver ActiveFilters).
- */
+const RANGE_PRESETS = [
+  { value: 1, label: "1 mes" },
+  { value: 3, label: "3 meses" },
+  { value: 6, label: "6 meses" },
+  { value: 12, label: "1 año" },
+] as const;
+
 export default function Toolbar({
   empresaNombre,
   periods,
   selectedPeriod,
+  selectedMonths,
 }: {
   empresaNombre: string;
   periods: string[];
   selectedPeriod: string;
+  selectedMonths: number;
 }) {
-  const { setPeriod, pending } = useReportNav();
+  const { setPeriod, setMonths, pending } = useReportNav();
 
   return (
     <div className={`${styles.bar} glass`}>
@@ -40,7 +42,7 @@ export default function Toolbar({
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor="period-select">
-          Periodo
+          Mes de referencia
         </label>
         <select
           id="period-select"
@@ -55,6 +57,23 @@ export default function Toolbar({
             </option>
           ))}
         </select>
+      </div>
+
+      <div className={styles.field}>
+        <span className={styles.label}>Rango</span>
+        <div className={styles.presets}>
+          {RANGE_PRESETS.map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              className={`${styles.preset} ${selectedMonths === value ? styles.presetActive : ""}`}
+              disabled={pending}
+              onClick={() => setMonths(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className={styles.field}>

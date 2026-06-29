@@ -15,11 +15,11 @@ import { refineClassificationAction } from "@/app/dashboard/actions";
  */
 export default function ClassificationRefiner({
   empresaId,
-  period,
+  periods,
   pending,
 }: {
   empresaId: string;
-  period: string;
+  periods: string[];
   pending: number;
 }) {
   const router = useRouter();
@@ -31,7 +31,8 @@ export default function ClassificationRefiner({
   const lastTriggered = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const lastEmpresaId = useRef(empresaId);
-  const lastPeriod = useRef(period);
+  const periodsKey = periods.join(",");
+  const lastPeriodsKey = useRef(periodsKey);
 
   function run() {
     if (startTimeRef.current === null) {
@@ -42,7 +43,7 @@ export default function ClassificationRefiner({
     lastTriggered.current = pending;
     setState("refining");
 
-    refineClassificationAction(empresaId, period)
+    refineClassificationAction(empresaId, periods)
       .then((res) => {
         if (res.progressed) {
           startTransition(() => {
@@ -65,16 +66,16 @@ export default function ClassificationRefiner({
       });
   }
 
-  // Efecto para limpiar/reiniciar cuando cambia el contexto (empresa o periodo)
+  // Efecto para limpiar/reiniciar cuando cambia el contexto (empresa o periodos)
   useEffect(() => {
-    if (lastEmpresaId.current !== empresaId || lastPeriod.current !== period) {
+    if (lastEmpresaId.current !== empresaId || lastPeriodsKey.current !== periodsKey) {
       startTimeRef.current = null;
       setElapsedTime(0);
       setFinalDuration(null);
       setState("idle");
       lastTriggered.current = null;
       lastEmpresaId.current = empresaId;
-      lastPeriod.current = period;
+      lastPeriodsKey.current = periodsKey;
     }
 
     if (pending <= 0) {
@@ -100,7 +101,7 @@ export default function ClassificationRefiner({
     setFinalDuration(null);
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pending, empresaId, period]);
+  }, [pending, empresaId, periodsKey]);
 
   // Efecto para actualizar el temporizador en tiempo real
   useEffect(() => {

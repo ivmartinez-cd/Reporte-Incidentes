@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { getEmpresas, buildReport } from "@/lib/report";
+import { getEmpresas, buildRangeReport } from "@/lib/report";
 import { summarize } from "@/lib/aggregate";
 import { filterOptions, sanitizeFilters, applyFilters } from "@/lib/filters";
-import { recentPeriods, periodLabel, formatInt } from "@/lib/format";
+import { recentPeriods, periodLabel, periodRangeLabel, buildPeriodRange, formatInt } from "@/lib/format";
 import { getCategories } from "@/lib/data/categoriesStore";
 import {
   DashboardFilterProvider,
@@ -22,12 +22,16 @@ import styles from "./dashboard.module.css";
 // El reporte se construye en cada request (datos cacheados aguas abajo).
 export const dynamic = "force-dynamic";
 
+const VALID_MONTHS = [1, 3, 6, 12] as const;
+type ValidMonths = (typeof VALID_MONTHS)[number];
+
 export default async function DashboardPage({
   searchParams,
 }: {
   searchParams: Promise<{
     empresa?: string;
     period?: string;
+    months?: string;
     sucursal?: string;
     categoria?: string;
     subcategoria?: string;
@@ -35,7 +39,7 @@ export default async function DashboardPage({
 }) {
   const sp = await searchParams;
   const empresas = await getEmpresas();
-  const periods = recentPeriods(12);
+  const periods = recentPeriods(24);
 
   // Seleccion explicita obligatoria: sin un cliente VALIDO en la URL, volvemos a
   // la pantalla de seleccion (no autoseleccionamos "el primero").
@@ -48,7 +52,14 @@ export default async function DashboardPage({
   const period =
     sp.period && periods.includes(sp.period) ? sp.period : periods[0];
 
-  const report = await buildReport(empresaId, period);
+  // Rango en meses: 1 (default), 3, 6 o 12.
+  const rawMonths = parseInt(sp.months ?? "1", 10);
+  const months: ValidMonths = (VALID_MONTHS as readonly number[]).includes(rawMonths)
+    ? (rawMonths as ValidMonths)
+    : 1;
+
+  const report = await buildRangeReport(empresaId, period, months);
+  const rangePeriods = buildPeriodRange(period, months);
 
   // Filtros interactivos (sucursal/categoria/subcategoria) que llegan por la URL:
   // se sanean contra las opciones reales del periodo para descartar valores que
@@ -83,6 +94,7 @@ export default async function DashboardPage({
     <DashboardFilterProvider
       empresaId={empresaId}
       period={period}
+      months={months}
       filters={filters}
     >
       <div className={styles.page}>
@@ -90,7 +102,7 @@ export default async function DashboardPage({
           <div>
             <h1 className={styles.h1}>{report.empresa.nombre}</h1>
             <p className={styles.sub}>
-              Reporte de incidentes · {periodLabel(period)}
+              Reporte de incidentes · {periodRangeLabel(period, months)}
               {report.isMock && (
                 <span className={`tag ${styles.mockTag}`}>DATOS DEMO</span>
               )}
@@ -100,6 +112,7 @@ export default async function DashboardPage({
             empresaNombre={report.empresa.nombre}
             periods={periods}
             selectedPeriod={period}
+            selectedMonths={months}
           />
         </section>
 
@@ -143,13 +156,18 @@ export default async function DashboardPage({
         </section>
 
         <section>
-          <IncidentsTable incidents={filteredIncidents} categoryColors={categoryColors} />
+          <IncidentsTable 
+            incidents={filteredIncidents} 
+            categoryColors={categoryColors} 
+            categories={getCategories().map((c) => ({ name: c.name, subcategories: c.subcategories }))}
+            empresaId={empresaId}
+            period={period}
+          />
         </section>
 
         <RevisionPanel
           pendientes={report.incidents
-            .filter((i) => i.categoria === "Pendiente de revision")
-            .map((i) => ({ id: i.id, numero: i.numero, descripcion: i.descripcion, causa: i.causa, solucion: i.solucion }))}
+            .filter((i) => i.categoria === "Pendiente de revision")}
           categories={getCategories().map((c) => ({ name: c.name, subcategories: c.subcategories }))}
           empresaId={empresaId}
           period={period}
@@ -162,7 +180,7 @@ export default async function DashboardPage({
 
         <ClassificationRefiner
           empresaId={empresaId}
-          period={period}
+          periods={rangePeriods}
           pending={report.pending}
         />
       </div>

@@ -44,51 +44,7 @@
   color: var(--primary);
 }
 
-.list {
-  margin-top: 1.1rem;
-  display: flex;
-  flex-direction: column;
-}
 
-/* Cada pendiente: fila con linea separatoria, igual que las filas de la tabla */
-.row {
-  padding: 0.9rem 0;
-  border-top: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-.row:first-child {
-  border-top: none;
-  padding-top: 0;
-}
-.rowSaved {
-  opacity: 0.5;
-}
-
-.info {
-  font-size: 0.85rem;
-  line-height: 1.45;
-  color: var(--text);
-}
-
-.numero {
-  font-variant-numeric: tabular-nums;
-  color: var(--primary);
-  font-weight: 600;
-  margin-right: 0.4rem;
-}
-
-.solucion {
-  display: block;
-  margin-top: 0.3rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-.solucionLabel {
-  font-weight: 600;
-  color: var(--text-soft);
-}
 
 .controls {
   display: flex;

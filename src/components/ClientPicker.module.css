@@ -148,6 +148,70 @@
   border-radius: var(--radius-sm);
 }
 
+/* ---- Selector de periodo ---------------------------------------------------- */
+.periodSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border-strong);
+  margin-top: 0.1rem;
+}
+
+.periodLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.periodRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.monthSelect {
+  width: 100%;
+}
+
+.presets {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.preset {
+  font-family: var(--font-body);
+  background: var(--surface-2);
+  color: var(--text-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.38rem 0.85rem;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease),
+    background 0.18s var(--ease);
+  white-space: nowrap;
+}
+.preset:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--primary);
+}
+.presetActive {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.presetActive:hover:not(:disabled) {
+  color: #fff;
+}
+.preset:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 /* ---- Spinners --------------------------------------------------------------- */
 .fieldSpinner,
 .chipSpinner {
@@ -180,4 +244,36 @@
   .wrap {
     max-width: 100%;
   }
+}
+
+/* ---- Boton Iniciar Analisis ------------------------------------------------- */
+.startButton {
+  font-family: var(--font-body);
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+  width: 100%;
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.startButton:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.startButton:disabled {
+  background: var(--border-strong);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.8;
+  transform: none;
 }
