@@ -239,28 +239,123 @@ DESPUÉS:
 
 ---
 
-## Comparativa de mercado (resumen)
+## Radiografía del formulario actual (webagentes — 2026-06-30)
 
-| Capacidad | Canal Directo actual | Zendesk | ServiceNow | Freshservice |
-|-----------|:---:|:---:|:---:|:---:|
-| Auto-servicio cliente | — | ✅ | ✅ | ✅ |
-| Pre-fill datos usuario/equipo | — | Parcial | ✅ | ✅ |
-| S/N validado contra inventario | Manual | — | ✅ (CMDB) | ✅ |
-| Deflexión KB antes de envío | — | ✅ | ✅ | ✅ |
-| Formulario multi-paso/wizard | — | Parcial | ✅ | ✅ |
-| Tipificación al INICIO | — | Parcial | ✅ | ✅ |
-| Tipificación al CIERRE | — | ✅ | ✅ | ✅ |
-| SLA visible en apertura | — | — | ✅ | ✅ |
-| Confirmación con ETA | — | ✅ | ✅ | ✅ |
+> URL: `webagentes.canaldirecto.com.ar/incidents/add`
+> Serie analizada: `0BLQBJLK100004L` (Samsung MFP Mono A3 SL-K4350LX)
 
-### Mejores prácticas adicionales del mercado (para roadmap futuro)
+### Estructura del formulario
 
-- **Impacto + Urgencia → Prioridad automática** (modelo ITIL): "Solo este equipo / Varios equipos /
-  Toda la empresa" × "No puedo operar / Tengo limitaciones / Es un inconveniente" = P1/P2/P3
-- **Validación S/N en tiempo real**: al ingresar el serial, auto-completa modelo, contrato, garantía
-- **Wizard multi-paso** con barra de progreso (reduce abandono del formulario)
-- **Confirmación visual** con número de ticket y tiempo estimado de respuesta
-- **Portal self-service para el cliente final** (largo plazo)
+```mermaid
+graph TD
+    A["1. Datos del dispositivo"] --> B["2. Datos adicionales"]
+    B --> C["3. Datos de la sucursal"]
+    C --> D["4. Datos del solicitante"]
+    D --> E["5. Datos del destinatario"]
+    E --> F["6. Detalles de falla"]
+```
+
+### Inventario de campos (25 elementos, página plana ~3930px)
+
+| # | Sección | Campo | Tipo | ¿Oblig.? | Observación |
+|---|---------|-------|------|:---:|------|
+| 1 | Dispositivo | Nro. Serie | Texto + Verificar | ✅ | Dispara auto-fill |
+| 2 | Dispositivo | Marca | Readonly (auto) | Auto | Samsung |
+| 3 | Dispositivo | Modelo | Readonly (auto) | Auto | MFP Mono A3 SL-K4350LX |
+| 4 | Adicionales | Ticket relacionado | Texto | ❌ | — |
+| 5 | Adicionales | Origen | Dropdown | ❓ | "Teléfono" visible |
+| 6–9 | Sucursal | Sucursal/Sector/Tel/Dir | Readonly (auto) | Auto | EZE - Hangares |
+| 10–15 | Solicitante | Apellido/Nombre/Tel/Email/Sector/Emails alt. | Texto | ✅/❓ | — |
+| 16–22 | Destinatario | Mismos 6 campos + "Copiar del solicitante" | Texto | ❌ | Ruido visual |
+| 23 | Falla | Falla | ❓ Dropdown/Checks | ✅ | Genérico |
+| 24 | Falla | Agregar/Eliminar falla | Botones | — | — |
+| 25 | Falla | Observaciones | Textarea | ❌ | — |
+
+---
+
+## Problemas detectados vs. mejores prácticas
+
+### 🔴 Críticos
+
+| # | Problema | Impacto | ¿Quién lo resuelve? |
+|---|---------|---------|---------------------|
+| P1 | **Sin categoría/tipificación al abrir** | No se puede reportar distribución de problemas abiertos | Zendesk, Jira, ServiceNow, Freshservice: TODOS lo tienen |
+| P2 | **Sin prioridad/urgencia/impacto** | Todos los tickets pesan igual; no hay ruteo automático | ServiceNow: Impacto × Urgencia = Prioridad automática |
+| P3 | **Campo "Falla" demasiado genérico** | "Atasca papel" = 50% de casos pero mapea a 4 categorías | Freshservice/ServiceNow: sub-categorías condicionales |
+
+### 🟠 Importantes
+
+| # | Problema | Impacto |
+|---|---------|---------|
+| P4 | **Formulario plano** de scroll largo (~3930px) | Fatiga visual, abandono |
+| P5 | **Destinatario ocupa 6 campos** que casi siempre se copian | Ruido innecesario |
+| P6 | **Sin validación en tiempo real** visible | No queda claro qué es obligatorio |
+| P7 | **Sin confirmación post-envío** con ETA | El usuario no sabe qué pasará después |
+
+---
+
+## Comparativa lado a lado: Canal Directo vs. Top 5
+
+| Capacidad | Canal Directo | Zendesk | Jira SM | ServiceNow | Freshservice | Intercom |
+|-----------|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Categoría al abrir** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ (bot) |
+| **Sub-categoría condicional** | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Prioridad / Urgencia** | ❌ | ✅ | ✅ | ✅ (auto) | ✅ | ❌ |
+| **Impacto** | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ |
+| **Formulario multi-paso** | ❌ | Parcial | ✅ | ✅ | ✅ | ✅ (chat) |
+| **Campos condicionales** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Validación en tiempo real** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Auto-fill datos equipo** | ✅ ⭐ | ❌ | Parcial | ✅ (CMDB) | ✅ | ❌ |
+| **Auto-fill datos sucursal** | ✅ ⭐ | ❌ | ❌ | ✅ | Parcial | ❌ |
+| **Deflexión KB** | ❌ | ✅ | ✅ | ✅ | ✅ (Freddy) | ✅ |
+| **Confirmación con ETA** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Adjuntar archivos/fotos** | ❓ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Historial del equipo** | ❌ | ❌ | ❌ | ✅ (CMDB) | ✅ | ❌ |
+
+> **Fortaleza:** auto-completado de equipo y sucursal por S/N es mejor que Zendesk y Jira nativos.
+
+---
+
+## Recomendaciones priorizadas
+
+### Fase 1 — Quick Wins
+
+| # | Mejora | Esfuerzo | Impacto |
+|---|--------|:---:|:---:|
+| 1.1 | Agregar campo **Categoría** (dropdown) al formulario de apertura | Bajo | 🔴 Crítico |
+| 1.2 | Agregar **Subcategoría condicional** según categoría | Medio | 🔴 Crítico |
+| 1.3 | Colapsar "Datos del destinatario" por defecto | Bajo | 🟠 Alto |
+| 1.4 | Marcar campos obligatorios con `*` + validación en tiempo real | Bajo | 🟠 Alto |
+| 1.5 | Reemplazar "Falla" genérico por **árbol de decisión 3 niveles** | Medio | 🔴 Crítico |
+
+### Fase 2 — Mejoras de experiencia
+
+| # | Mejora | Esfuerzo | Impacto |
+|---|--------|:---:|:---:|
+| 2.1 | **Wizard multi-paso** (Equipo → Quién → Falla → Confirmar) | Alto | 🟠 Alto |
+| 2.2 | **Prioridad automática** (Impacto × Urgencia) | Medio | 🟠 Alto |
+| 2.3 | Confirmación post-envío con # ticket y ETA | Bajo | 🟡 Medio |
+| 2.4 | Adjuntar foto del error/falla | Medio | 🟡 Medio |
+
+### Fase 3 — Roadmap futuro
+
+| # | Mejora | Esfuerzo | Impacto |
+|---|--------|:---:|:---:|
+| 3.1 | Historial del equipo visible al cargar S/N | Alto | 🟠 Alto |
+| 3.2 | Portal self-service para cliente final | Muy Alto | 🟡 Medio |
+| 3.3 | Deflexión KB — sugerir soluciones antes de crear ticket | Alto | 🟡 Medio |
+
+---
+
+## Mockups del formulario rediseñado (2026-06-30)
+
+> Mockups en `docs/mockups/` — Wizard de 4 pasos
+
+| Paso | Mockup | Cambio principal |
+|:---:|--------|-----------------|
+| 1 | [paso1-equipo.png](file:///c:/Users/imartinez.CDSA/Desktop/Proyectos/Reporte-incidentes/docs/mockups/paso1-equipo.png) | S/N + auto-fill en paso dedicado |
+| 2 | [paso2-problema.png](file:///c:/Users/imartinez.CDSA/Desktop/Proyectos/Reporte-incidentes/docs/mockups/paso2-problema.png) | Tipificación condicional + categoría sugerida |
+| 4 | [paso4-confirmar.png](file:///c:/Users/imartinez.CDSA/Desktop/Proyectos/Reporte-incidentes/docs/mockups/paso4-confirmar.png) | Resumen + prioridad + ETA antes de enviar |
 
 ---
 
@@ -274,3 +369,5 @@ DESPUÉS:
 - [ ] Diseñar la lógica de `categoriaApertura` en `src/lib/` para el dashboard
 - [ ] Discutir la tipificación al CIERRE: ¿cómo mejora el técnico la categoría hoy? ¿qué falta?
 - [ ] Completar la tabla de lookup con casos edge (síntomas combinados)
+- [ ] Diseñar Paso 3 "Contacto" (mockup pendiente)
+

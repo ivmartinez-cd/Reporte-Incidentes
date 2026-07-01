@@ -1,0 +1,1524 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rediseño del Formulario de Apertura - Canal Directo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #131520;
+      --bg-deep: #0b0c13;
+      --surface: #1a1c2b;
+      --surface-2: #24273c;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --text: #e2e4f0;
+      --text-soft: #a9adc5;
+      --text-muted: #727694;
+      --input-bg: rgba(0, 0, 0, 0.25);
+      --cd-orange: #F7941D;
+      --cd-grey: #58595B;
+      --success: #4caf50;
+      --danger: #ef5350;
+      --warning: #ff9800;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-base: #f4f5f8;
+      --bg-deep: #e9ebf0;
+      --surface: #ffffff;
+      --surface-2: #f1f3f7;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.15);
+      --text: #1e202c;
+      --text-soft: #4a4e69;
+      --text-muted: #7b809a;
+      --input-bg: #f8f9fa;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .headerBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 2rem;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+
+    .logoArea {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .logoArea img, .cover-logo-img {
+      height: 35px;
+      width: auto;
+    }
+
+    .logoDivider {
+      width: 1px;
+      height: 28px;
+      background: var(--border-strong);
+      display: inline-block;
+    }
+
+    .logoTitle {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+
+    .themeToggleBtn {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .themeToggleBtn:hover { background: var(--surface-2); border-color: var(--cd-orange); }
+
+    /* Container */
+    .container {
+      display: flex;
+      max-width: 1440px;
+      margin: 0 auto;
+      min-height: calc(100vh - 65px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 320px;
+      background: var(--bg-deep);
+      border-right: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      position: sticky;
+      top: 65px;
+      height: calc(100vh - 65px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) { .sidebar { display: none; } }
+
+    .sidebarTitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--cd-orange);
+    }
+
+    .navList { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .navItem {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      text-align: left;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-soft);
+      border: 1px solid transparent;
+      background: transparent;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+    }
+
+    .navItem:hover { background: var(--surface-2); color: var(--text); }
+
+    .navItemActive {
+      background: var(--surface);
+      color: var(--cd-orange) !important;
+      border-color: var(--cd-orange);
+      box-shadow: 0 4px 12px rgba(247, 148, 29, 0.1);
+    }
+
+    .navDot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .navItemActive .navDot { background: var(--cd-orange); transform: scale(1.2); }
+
+    .sidebarFooter {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    /* Content */
+    .content {
+      flex-grow: 1;
+      padding: 3rem 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) { .content { padding: 2rem 1.5rem; } }
+
+    .brandLine {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(to right, var(--cd-orange) 0%, var(--cd-orange) 65%, var(--cd-grey) 65%, var(--cd-grey) 100%);
+      border-radius: 3px;
+      margin-bottom: 3rem;
+    }
+
+    /* Section */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin-bottom: 4rem;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.6s var(--ease) both;
+    }
+
+    .section h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2rem;
+      border-bottom: 3px solid var(--cd-orange);
+      padding-bottom: 0.75rem;
+    }
+
+    .section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--cd-orange);
+      margin-top: 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section p {
+      margin-bottom: 1.25rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    .section p strong { color: var(--text); }
+
+    .section ul, .section ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-soft);
+    }
+
+    .section li { margin-bottom: 0.5rem; line-height: 1.6; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 10pt;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    thead { background: var(--bg-deep); }
+
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text); }
+    td { color: var(--text-soft); }
+    tbody tr:hover { background: rgba(247, 148, 29, 0.04); }
+
+    /* Highlight box */
+    .highlight-box {
+      background: var(--bg-deep);
+      border-left: 5px solid var(--cd-orange);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-size: 10.5pt;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .highlight-box strong { color: var(--cd-orange); }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .stat-box {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-strong);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .stat-box:hover { transform: translateY(-3px); border-color: var(--cd-orange); }
+    .stat-box .number { font-size: 2.5rem; font-weight: 800; color: var(--cd-orange); margin-bottom: 0.5rem; font-family: 'Montserrat', sans-serif; }
+    .stat-box .label { font-size: 0.9rem; color: var(--text-soft); font-weight: 600; }
+
+    /* Process flow */
+    .process-flow {
+      background: var(--bg-deep);
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .process-flow p { margin: 0.5rem 0; font-size: 1.05rem; text-align: center; margin-left: 0 !important; }
+    .process-flow p strong { font-family: 'Montserrat', sans-serif; color: var(--text); }
+    .process-flow .arrow { text-align: center; margin: 0.75rem 0; color: var(--cd-orange); font-weight: 800; font-size: 1.8rem; }
+
+    /* Severity badges */
+    .badge-critical { background: var(--danger); color: #fff; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+    .badge-important { background: var(--warning); color: #000; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+    .badge-minor { background: #78909c; color: #fff; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+
+    /* Comparison icons */
+    .icon-yes { color: var(--success); font-weight: 800; }
+    .icon-no { color: var(--danger); font-weight: 800; }
+    .icon-partial { color: var(--warning); font-weight: 800; }
+    .icon-star { color: var(--cd-orange); font-weight: 800; }
+
+    /* Cover */
+    .cover-content { text-align: center; padding: 1rem 0; }
+
+    #cover .cover-logo-img {
+      width: 280px;
+      height: auto;
+      margin: 0 auto 2.5rem auto;
+      display: block;
+    }
+
+    #cover h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      border-bottom: none;
+      padding-bottom: 0;
+      color: var(--text);
+      text-align: center;
+    }
+
+    #cover h1 span { color: var(--cd-orange); }
+
+    #cover h2 {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text-soft);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    /* Wizard stepper */
+    .wizard-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 2rem 0;
+    }
+
+    .wizard-step { display: flex; align-items: center; gap: 0.5rem; }
+
+    .wizard-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      border: 2px solid var(--border-strong);
+      color: var(--text-muted);
+      background: var(--bg-deep);
+      transition: all 0.3s ease;
+    }
+
+    .wizard-circle.active { background: var(--cd-orange); color: #fff; border-color: var(--cd-orange); }
+    .wizard-circle.done { background: var(--success); color: #fff; border-color: var(--success); }
+    .wizard-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+    .wizard-label.active { color: var(--cd-orange); font-weight: 700; }
+    .wizard-label.done { color: var(--success); }
+    .wizard-line { width: 50px; height: 2px; background: var(--border-strong); margin: 0 0.25rem; }
+    .wizard-line.done { background: var(--success); }
+
+    /* Portal comparison grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) { .portal-grid { grid-template-columns: 1fr; } }
+
+    .portal-card {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .portal-card-header {
+      background: var(--surface-2);
+      padding: 0.85rem 1.25rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .portal-card-body { padding: 1.25rem; }
+
+    .portal-card-body ul {
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
+    .portal-card-body li { display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5; }
+
+    .tag-visible {
+      display: inline-block;
+      background: rgba(76, 175, 80, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tag-hidden {
+      display: inline-block;
+      background: rgba(239, 83, 80, 0.12);
+      color: var(--danger);
+      border: 1px solid rgba(239, 83, 80, 0.3);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tag-internal {
+      display: inline-block;
+      background: rgba(247, 148, 29, 0.12);
+      color: var(--cd-orange);
+      border: 1px solid rgba(247, 148, 29, 0.3);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Footer */
+    .mainFooter {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    select option { background-color: var(--surface-2); color: var(--text); }
+
+    /* Mockup screenshots */
+    .mockup-wrap {
+      margin: 1.5rem 0 2rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .mockup-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Isolate inline mockups from .section inherited styles */
+    .mockup-wrap p,
+    .mockup-wrap label,
+    .mockup-wrap span,
+    .mockup-wrap div,
+    .mockup-wrap a,
+    .mockup-wrap strong,
+    .mockup-wrap button {
+      color: inherit;
+      text-align: left;
+      margin: 0;
+      line-height: inherit;
+    }
+
+    .mockup-wrap p { margin-bottom: 0; }
+    .mockup-wrap ul, .mockup-wrap ol { margin-left: 0; margin-bottom: 0; color: inherit; }
+    .mockup-wrap li { margin-bottom: 0; }
+
+    /* Fault tree table */
+    .fault-tree tbody .tree-symptom > td:first-child {
+      font-weight: 700;
+      color: var(--text);
+      background: var(--bg-deep);
+      border-left: 3px solid var(--cd-orange);
+      vertical-align: top;
+      padding-top: 12px;
+    }
+    .fault-tree tbody tr:not(.tree-symptom) td:first-child { display: none; }
+    .cat-hardware  { color: #F7941D; font-weight: 600; font-size: 0.85rem; }  /* Hardware y Desgaste */
+    .cat-consumible{ color: #4caf50; font-weight: 600; font-size: 0.85rem; }  /* Insumos y Toner */
+    .cat-medio     { color: #26a69a; font-weight: 600; font-size: 0.85rem; }  /* Medio de Impresión */
+    .cat-software  { color: #2196F3; font-weight: 600; font-size: 0.85rem; }  /* Software, Firmware y Red */
+    .cat-gestion   { color: #78909c; font-weight: 600; font-size: 0.85rem; }  /* Gestión de Soporte */
+    .fault-tree td { font-size: 0.9rem; }
+    .fault-tree thead th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .fault-tree .subq { color: var(--text-soft); font-style: italic; }
+
+    .tree-legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+      padding: 1rem 1.25rem;
+      background: var(--bg-deep);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .tree-legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="headerBar">
+    <div class="logoArea">
+      <img src="public/logo_login.png" alt="Canal Directo">
+      <span class="logoDivider"></span>
+      <span class="logoTitle">Rediseño del Formulario de Apertura</span>
+    </div>
+    <div>
+      <button class="themeToggleBtn" id="themeToggle">
+        <span id="themeToggleText">Modo Oscuro</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebarTitle">Índice</div>
+      <ul class="navList">
+        <li><button class="navItem navItemActive" onclick="scrollToSection('cover')"><span class="navDot"></span>Portada</button></li>
+        <li><button class="navItem" onclick="scrollToSection('page1')"><span class="navDot"></span>1. Estado Actual</button></li>
+        <li><button class="navItem" onclick="scrollToSection('page2')"><span class="navDot"></span>2. Brechas vs. Mercado</button></li>
+        <li><button class="navItem" onclick="scrollToSection('page3')"><span class="navDot"></span>3. Benchmark: Top 5</button></li>
+        <li><button class="navItem" onclick="scrollToSection('page4')"><span class="navDot"></span>4. Árbol de Fallas</button></li>
+        <li><button class="navItem" onclick="scrollToSection('page5')"><span class="navDot"></span>5. Propuesta: Wizard</button></li>
+      </ul>
+      <div class="sidebarFooter">
+        Canal Directo S.A.<br>
+        Junio 2026
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="brandLine"></div>
+
+      <!-- PORTADA -->
+      <section id="cover" class="section">
+        <div class="cover-content">
+          <img src="public/logo_login.png" alt="Canal Directo" class="cover-logo-img">
+          <h1>Rediseño del Formulario<br>de <span>Apertura de Incidentes</span></h1>
+          <h2>
+            Estado actual vs. propuesta de mejora para alcanzar el estándar<br>
+            de las plataformas líderes del mercado — aplicado en webagentes y webclientes.
+          </h2>
+          <div class="stats-grid">
+            <div class="stat-box"><div class="number">25</div><div class="label">Campos actuales en el formulario</div></div>
+            <div class="stat-box"><div class="number">6</div><div class="label">Brechas detectadas vs. mercado</div></div>
+            <div class="stat-box"><div class="number">5</div><div class="label">Plataformas líderes comparadas</div></div>
+            <div class="stat-box"><div class="number">13</div><div class="label">Síntomas en el árbol de fallas</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGINA 1: Estado Actual -->
+      <section id="page1" class="section">
+        <h1>1. Estado Actual del Formulario</h1>
+        <p>
+          El formulario de apertura de Servicio Técnico es una <strong>página plana de scroll continuo</strong>, dividida en 6 secciones sin separación visual de pasos. No existe guía progresiva para el usuario ni validación en tiempo real.
+        </p>
+
+        <h2>1.1 Flujo actual</h2>
+
+        <div class="process-flow">
+          <p><strong>1. DATOS DEL DISPOSITIVO</strong></p>
+          <p style="font-size: 9pt;">S/N + Marca + Modelo (auto-fill)</p>
+          <p class="arrow">↓</p>
+          <p><strong>2. DATOS ADICIONALES</strong></p>
+          <p style="font-size: 9pt;">Ticket relacionado + Origen</p>
+          <p class="arrow">↓</p>
+          <p><strong>3. DATOS DE LA SUCURSAL</strong></p>
+          <p style="font-size: 9pt;">Sucursal / Sector / Teléfono / Dirección (auto-fill)</p>
+          <p class="arrow">↓</p>
+          <p><strong>4. DATOS DEL SOLICITANTE</strong></p>
+          <p style="font-size: 9pt;">Apellido / Nombre / Tel / Email / Sector (6 campos)</p>
+          <p class="arrow">↓</p>
+          <p><strong>5. DATOS DEL DESTINATARIO</strong></p>
+          <p style="font-size: 9pt;">Mismos 6 campos + "Copiar del solicitante"</p>
+          <p class="arrow">↓</p>
+          <p><strong>6. DETALLES DE FALLA</strong></p>
+          <p style="font-size: 9pt;">Fallas + Observaciones</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Fortaleza a conservar:</strong> El auto-completado de datos del dispositivo y sucursal al ingresar el S/N
+          es una ventaja diferencial que plataformas como Zendesk o Jira no ofrecen de forma nativa. Esta funcionalidad se mantiene en el rediseño.
+        </div>
+      </section>
+
+      <!-- PAGINA 2: Brechas -->
+      <section id="page2" class="section">
+        <h1>2. Brechas vs. el Mercado</h1>
+        <p>Se identificaron <strong>6 brechas</strong> al comparar el formulario actual contra las mejores prácticas de
+        Zendesk, Jira Service Management, ServiceNow, Freshservice e Intercom.</p>
+
+        <h2>Brechas Críticas</h2>
+        <table>
+          <thead><tr><th>ID</th><th>Brecha</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge-critical">B1</span></td>
+              <td><strong>Sin tipificación al abrir</strong></td>
+              <td>No se puede reportar distribución de problemas abiertos. Todas las plataformas líderes lo capturan en la apertura.</td>
+            </tr>
+            <tr>
+              <td><span class="badge-critical">B2</span></td>
+              <td><strong>Campo "Falla" demasiado genérico</strong></td>
+              <td>"Atasca papel" representa el 50% de los casos pero corresponde a 4 categorías distintas según la causa real. Sin campos condicionales, es imposible distinguirlos al abrir.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Brechas de Experiencia</h2>
+        <table>
+          <thead><tr><th>ID</th><th>Brecha</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge-important">B3</span></td>
+              <td><strong>Formulario plano de scroll largo</strong></td>
+              <td>Fatiga visual y mayor probabilidad de errores u omisiones en los campos.</td>
+            </tr>
+            <tr>
+              <td><span class="badge-important">B4</span></td>
+              <td><strong>Destinatario ocupa 6 campos siempre visibles</strong></td>
+              <td>En la mayoría de los casos el destinatario es igual al solicitante. Genera ruido visual innecesario.</td>
+            </tr>
+            <tr>
+              <td><span class="badge-important">B5</span></td>
+              <td><strong>Sin validación en tiempo real</strong></td>
+              <td>No queda claro qué campos son obligatorios hasta el intento de envío.</td>
+            </tr>
+            <tr>
+              <td><span class="badge-important">B6</span></td>
+              <td><strong>Sin confirmación post-envío</strong></td>
+              <td>El usuario no recibe feedback ni número de ticket después de enviar el formulario.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Referencia: estándar del mercado no adoptado</h2>
+        <p>El siguiente elemento existe en las plataformas líderes pero <strong>no se incorpora en el formulario web</strong> por decisión de diseño — se maneja de forma interna:</p>
+        <table>
+          <thead><tr><th>Elemento</th><th>Zendesk</th><th>Jira SM</th><th>ServiceNow</th><th>Freshservice</th><th>Canal Directo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Lógica de prioridad / urgencia</strong></td>
+              <td class="icon-no">❌</td>
+              <td class="icon-yes">✅</td>
+              <td class="icon-yes">✅</td>
+              <td class="icon-yes">✅</td>
+              <td style="color: var(--cd-orange); font-weight: 700;">Interna</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          La prioridad y urgencia no se exponen en el formulario para evitar que el usuario manipule la clasificación.
+        </p>
+
+        <div class="highlight-box">
+          <strong>Insight clave:</strong> El síntoma "Atasca papel" concentra el 50% de los incidentes, pero se distribuye en
+          4 categorías diferentes (Atasco común, Fusor, Rodillos, Otros). La incorporación de campos condicionales al momento
+          de la apertura permitiría clasificarlos correctamente sin trabajo manual posterior.
+        </div>
+      </section>
+
+      <!-- PAGINA 3: Benchmark -->
+      <section id="page3" class="section">
+        <h1>3. Benchmark: Canal Directo vs. Top 5</h1>
+        <p>
+          Comparación de <strong>8 capacidades clave</strong> del formulario de apertura contra las
+          5 plataformas líderes del mercado de Help Desk / ITSM.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Capacidad</th>
+              <th>Canal Directo</th>
+              <th>Zendesk</th>
+              <th>Jira SM</th>
+              <th>ServiceNow</th>
+              <th>Freshservice</th>
+              <th>Intercom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Tipificación al abrir</td><td class="icon-no">❌</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td></tr>
+            <tr><td>Campos condicionales</td><td class="icon-no">❌</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td></tr>
+            <tr><td>Formulario multi-paso</td><td class="icon-no">❌</td><td class="icon-partial">Parcial</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td></tr>
+            <tr><td>Validación en tiempo real</td><td class="icon-no">❌</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td></tr>
+            <tr><td>Confirmación post-envío</td><td class="icon-no">❌</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td></tr>
+            <tr><td>Adjuntar fotos de la falla</td><td class="icon-no">❌</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td></tr>
+            <tr><td><strong>Auto-fill datos equipo</strong></td><td class="icon-star">✅ ⭐</td><td class="icon-no">❌</td><td class="icon-partial">Parcial</td><td class="icon-yes">✅</td><td class="icon-yes">✅</td><td class="icon-no">❌</td></tr>
+            <tr><td><strong>Auto-fill datos sucursal</strong></td><td class="icon-star">✅ ⭐</td><td class="icon-no">❌</td><td class="icon-no">❌</td><td class="icon-yes">✅</td><td class="icon-partial">Parcial</td><td class="icon-no">❌</td></tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <strong>Resultado:</strong> Canal Directo posee <strong>2 fortalezas únicas</strong> — el auto-fill de datos del equipo y la sucursal al ingresar el S/N — que ninguna plataforma del mercado ofrece de forma nativa. El resto son brechas que el rediseño propuesto cierra.<br><br>
+          <strong>Glosario rápido de los ítems de la tabla:</strong><br>
+          · <strong>Tipificación al abrir:</strong> asignar categoría y subcategoría al incidente en el momento de la apertura, no después.<br>
+          · <strong>Campos condicionales:</strong> preguntas que aparecen o desaparecen según la respuesta anterior (distinto a los asteriscos de campos obligatorios).<br>
+          · <strong>Formulario multi-paso:</strong> dividir el formulario en pantallas separadas en lugar de una sola página larga de scroll.<br>
+          · <strong>Validación en tiempo real:</strong> el campo marca el error en el momento en que se completa, sin esperar al botón "Enviar".<br>
+          · <strong>Confirmación post-envío:</strong> pantalla de cierre con el número de ticket generado, confirmando que la solicitud fue recibida.
+        </div>
+      </section>
+
+      <!-- PAGINA 4: Árbol de Fallas -->
+      <section id="page4" class="section">
+        <h1>4. Árbol de Fallas — Base del Wizard</h1>
+        <p>
+          A partir del corpus de incidentes históricos se construye el árbol de síntomas que alimenta el paso
+          <strong>"Problema"</strong> del wizard. Cada síntoma dispara sub-preguntas condicionales que —
+          combinadas — determinan la tipificación interna automática (invisible para el usuario).
+          Las <strong>categorías y subcategorías son las mismas</strong> que el equipo técnico usa al
+          <em>cerrar</em> el incidente: vocabulario unificado en ambos extremos del flujo.
+        </p>
+
+        <div class="tree-legend">
+          <span class="tree-legend-item"><span class="legend-dot" style="background:#F7941D;"></span>Hardware y Desgaste</span>
+          <span class="tree-legend-item"><span class="legend-dot" style="background:#4caf50;"></span>Insumos y Toner</span>
+          <span class="tree-legend-item"><span class="legend-dot" style="background:#26a69a;"></span>Medio de Impresión</span>
+          <span class="tree-legend-item"><span class="legend-dot" style="background:#2196F3;"></span>Software, Firmware y Red</span>
+          <span class="tree-legend-item"><span class="legend-dot" style="background:#78909c;"></span>Gestión de Soporte</span>
+        </div>
+
+        <h2>Impresoras / MFP</h2>
+        <table class="fault-tree">
+          <thead><tr><th>Síntoma</th><th>Sub-pregunta condicional</th><th>Categoría</th><th>Subcategoría</th></tr></thead>
+          <tbody>
+            <tr class="tree-symptom">
+              <td rowspan="4">Atasca / retiene papel</td>
+              <td class="subq">¿La hoja sale arrugada o con olor a quemado?</td>
+              <td class="cat-hardware">Hardware y Desgaste</td>
+              <td>Fusor / Kit de mantenimiento</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Los rodillos no toman bien el papel o se nota desgaste?</td>
+              <td class="cat-hardware">Hardware y Desgaste</td>
+              <td>Rodillos / Pickup / Separación</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Atasco puntual sin componentes dañados?</td>
+              <td class="cat-medio">Medio de Impresión</td>
+              <td>Atasco de papel (común)</td>
+            </tr>
+            <tr>
+              <td class="subq">¿La hoja sale arrugada a la salida sin falla de fusor?</td>
+              <td class="cat-medio">Medio de Impresión</td>
+              <td>Arruga / Toma varias hojas</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="3">Mala calidad de impresión</td>
+              <td class="subq">¿Manchas, rayas o líneas en la hoja?</td>
+              <td class="cat-consumible">Insumos y Toner</td>
+              <td>Drum / Unidad de imagen</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Impresión muy clara, tenue o páginas en blanco?</td>
+              <td class="cat-consumible">Insumos y Toner</td>
+              <td>Toner / Cartucho</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Tolva o contenedor de residuos lleno?</td>
+              <td class="cat-consumible">Insumos y Toner</td>
+              <td>Tolva / Contenedor residual</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="3">No imprime (sin error en pantalla)</td>
+              <td class="subq">¿Solo falla desde una PC específica?</td>
+              <td class="cat-software">Software, Firmware y Red</td>
+              <td>Driver / PC / Spooler</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Ninguna PC puede imprimir (problema de red)?</td>
+              <td class="cat-software">Software, Firmware y Red</td>
+              <td>Configuración de red / IP</td>
+            </tr>
+            <tr>
+              <td class="subq">¿La impresora no enciende o la pantalla no responde?</td>
+              <td class="cat-hardware">Hardware y Desgaste</td>
+              <td>Otros - Hardware</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="3">Mensaje de error en pantalla</td>
+              <td class="subq">¿Error de toner o cartucho?</td>
+              <td class="cat-consumible">Insumos y Toner</td>
+              <td>Toner / Cartucho</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Error de drum o unidad de imagen?</td>
+              <td class="cat-consumible">Insumos y Toner</td>
+              <td>Drum / Unidad de imagen</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Código de error del sistema o mensaje desconocido?</td>
+              <td class="cat-software">Software, Firmware y Red</td>
+              <td>Firmware</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="2">No escanea</td>
+              <td class="subq">¿Escanea desde pantalla pero no desde la PC?</td>
+              <td class="cat-software">Software, Firmware y Red</td>
+              <td>Driver / PC / Spooler</td>
+            </tr>
+            <tr>
+              <td class="subq">¿No escanea desde ningún lado?</td>
+              <td class="cat-hardware">Hardware y Desgaste</td>
+              <td>Escáner / ADF</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="2">Problema con papel o bandejas</td>
+              <td class="subq">¿Papel especial, troquelado o de medida no estándar?</td>
+              <td class="cat-medio">Medio de Impresión</td>
+              <td>Papel especial / Troquelado</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Papel húmedo, de mala calidad o mal cargado?</td>
+              <td class="cat-medio">Medio de Impresión</td>
+              <td>Papel inadecuado / Humedad</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="2">Ruido extraño al operar</td>
+              <td class="subq">¿Ocurre al tomar o arrastrar el papel?</td>
+              <td class="cat-hardware">Hardware y Desgaste</td>
+              <td>Rodillos / Pickup / Separación</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Ocurre durante la impresión (zona del fusor)?</td>
+              <td class="cat-hardware">Hardware y Desgaste</td>
+              <td>Fusor / Kit de mantenimiento</td>
+            </tr>
+
+            <tr class="tree-symptom">
+              <td rowspan="3">Sin falla aparente / Mantenimiento</td>
+              <td class="subq">¿El equipo funciona bien pero el usuario tiene dudas?</td>
+              <td class="cat-gestion">Gestión de Soporte</td>
+              <td>Diagnóstico / Sin falla</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Solicita mantenimiento preventivo o limpieza?</td>
+              <td class="cat-gestion">Gestión de Soporte</td>
+              <td>Mantenimiento / Limpieza general</td>
+            </tr>
+            <tr>
+              <td class="subq">¿Solicita instructivo o capacitación de uso?</td>
+              <td class="cat-gestion">Gestión de Soporte</td>
+              <td>Instructivo / Autoresolución</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <strong>Cómo funciona en el wizard:</strong> El S/N del equipo seleccionado en el paso 1 determina el tipo
+          de equipo y activa el árbol correspondiente. Las sub-preguntas aparecen de forma condicional — cada respuesta
+          filtra las opciones siguientes. El resultado se guarda internamente como categoría + subcategoría al abrir el
+          ticket, usando el <strong>mismo vocabulario</strong> que el técnico usará al cerrarlo.
+        </div>
+      </section>
+<section id="page5" class="section">
+        <h1>5. Propuesta: Formulario Wizard de 4 Pasos</h1>
+        <p>
+          Reemplazar el formulario plano por un <strong>wizard de 4 pasos</strong> que guía progresivamente al usuario,
+          reduce la carga visual y captura la información necesaria para la tipificación interna automática.
+        </p>
+
+        <div class="wizard-stepper">
+          <div class="wizard-step">
+            <div class="wizard-circle active">1</div>
+            <span class="wizard-label active">Equipo</span>
+          </div>
+          <div class="wizard-line"></div>
+          <div class="wizard-step">
+            <div class="wizard-circle">2</div>
+            <span class="wizard-label">Problema</span>
+          </div>
+          <div class="wizard-line"></div>
+          <div class="wizard-step">
+            <div class="wizard-circle">3</div>
+            <span class="wizard-label">Contacto</span>
+          </div>
+          <div class="wizard-line"></div>
+          <div class="wizard-step">
+            <div class="wizard-circle">4</div>
+            <span class="wizard-label">Confirmar</span>
+          </div>
+        </div>
+
+        <h2>Paso 1 — Equipo</h2>
+        <p>El usuario ingresa el S/N y el sistema auto-completa los datos del equipo y la sucursal. <strong>Igual al formulario actual</strong>, pero presentado en un paso limpio y dedicado.</p>
+        <div class="mockup-wrap" style="background:#f0f0f0;">
+          <!-- Browser chrome -->
+          <div style="background:#e2e2e2;padding:8px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #c8c8c8;">
+            <div style="display:flex;gap:5px;flex-shrink:0;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+            </div>
+            <div style="flex:1;background:white;border-radius:4px;padding:3px 12px;font-size:11px;color:#777;border:1px solid #ccc;font-family:monospace;">webagentes.canaldirecto.com.ar/incidentes/nuevo</div>
+          </div>
+          <!-- Navbar -->
+          <div style="background:#ffffff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #e0e0e0;font-family:sans-serif;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <img src="public/logo_login.png" style="height:32px;width:auto;" alt="Canal Directo">
+              <!-- Navigation capsules matching actual UI -->
+              <div style="display:flex;gap:8px;margin-left:16px;">
+                <span style="background:#F7941D;border:1.5px solid #000000;color:#000000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;cursor:pointer;box-shadow:none;">Servicios Técnicos</span>
+                <span style="background:#F7941D;border:1.5px solid #000000;color:#000000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;cursor:pointer;box-shadow:none;">Insumos</span>
+                <span style="background:#F7941D;border:1.5px solid #000000;color:#000000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;cursor:pointer;box-shadow:none;">Dispositivos</span>
+                <span style="background:#F7941D;border:1.5px solid #000000;color:#000000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;cursor:pointer;box-shadow:none;">Liquidación</span>
+              </div>
+            </div>
+            <!-- User block matching actual UI -->
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#000000;">
+              <div style="width:28px;height:28px;background:#e9ebf0;border:1.5px solid #bdc3c7;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="#5a626a"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;line-height:1.2;align-items:flex-start;">
+                <span style="font-weight:bold;">imartinez</span>
+                <span style="font-size:9px;color:#007bb6;cursor:pointer;text-decoration:none;">salir cambiar clave</span>
+              </div>
+            </div>
+          </div>
+          <!-- Brand line -->
+          <div style="height:3px;background:linear-gradient(90deg,#F7941D 60%,#58595B 100%);"></div>
+          <!-- App body -->
+          <div style="background:#f4f5f8;padding:22px 24px;font-family:sans-serif;color:#000000;">
+            <div style="font-size:14px;color:#000000;margin-bottom:14px;">Empresa: <strong style="font-weight:bold;">Aerolineas Argentinas</strong></div>
+            
+            <!-- Form card -->
+            <div style="background:#ffffff;border:1px solid #cccccc;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow:hidden;">
+              <!-- Gray title bar -->
+              <div style="background:#808080;color:#ffffff;padding:8px 12px;font-size:13px;font-weight:bold;letter-spacing:0.5px;">
+                Solicitud de servicio técnico
+              </div>
+              
+              <div style="padding:22px;">
+                <!-- Stepper -->
+                <div style="display:flex;align-items:center;justify-content:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#F7941D;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">1</div>
+                    <span style="font-size:10px;margin-top:4px;color:#F7941D;font-weight:bold;">Equipo</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:1px;background:#e9ebf0;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#e9ebf0;color:#7b809a;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:1px solid #cccccc;">2</div>
+                    <span style="font-size:10px;margin-top:4px;color:#7b809a;">Problema</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:1px;background:#e9ebf0;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#e9ebf0;color:#7b809a;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:1px solid #cccccc;">3</div>
+                    <span style="font-size:10px;margin-top:4px;color:#7b809a;">Contacto</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:1px;background:#e9ebf0;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#e9ebf0;color:#7b809a;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:1px solid #cccccc;">4</div>
+                    <span style="font-size:10px;margin-top:4px;color:#7b809a;">Confirmar</span>
+                  </div>
+                </div>
+
+                <!-- S/N field -->
+                <div style="margin-bottom:20px;">
+                  <label style="display:block;font-size:11px;color:#333;margin-bottom:6px;font-weight:bold;">Número de serie del equipo <span style="color:#e53e3e;">*</span></label>
+                  <div style="display:flex;gap:8px;max-width:450px;">
+                    <input type="text" value="0BLQBJLK100004L" readonly style="flex:1;padding:6px 10px;border:1px solid #cccccc;border-radius:4px;font-size:12px;font-family:monospace;background:#f8f9fa;color:#555;" />
+                    <button type="button" style="background:#F7941D;color:#ffffff;font-weight:bold;padding:6px 16px;border:none;border-radius:4px;font-size:11px;cursor:pointer;">Verificar</button>
+                  </div>
+                </div>
+
+                <!-- Auto-fill verification indicator -->
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;color:#276749;font-size:11px;font-weight:bold;">
+                  <span style="width:16px;height:16px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">✓</span>
+                  <span>Equipo verificado — datos completados automáticamente</span>
+                </div>
+
+                <!-- Auto-fill panels matching actual UI (green/blue headers) -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+                  <!-- DATO DEL DISPOSITIVO (Green header) -->
+                  <div style="border:1.5px solid #cccccc;border-radius:4px;overflow:hidden;background:#ffffff;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="background:#6B9700;color:#ffffff;padding:6px 10px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">
+                      DATO DEL DISPOSITIVO
+                    </div>
+                    <div style="padding:12px;font-size:11px;line-height:1.6;color:#000000;">
+                      <div style="margin-bottom:6px;"><strong>Nro.Serie:</strong> 0BLQBJLK100004L</div>
+                      <div style="margin-bottom:6px;"><strong>Marca:</strong> Samsung</div>
+                      <div><strong>Modelo:</strong> MFP Mono A3 Samsung SL-K4350LX</div>
+                    </div>
+                  </div>
+                  
+                  <!-- DATO DE LA SUCURSAL (Blue header) -->
+                  <div style="border:1.5px solid #cccccc;border-radius:4px;overflow:hidden;background:#ffffff;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="background:#007bb6;color:#ffffff;padding:6px 10px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">
+                      DATO DE LA SUCURSAL
+                    </div>
+                    <div style="padding:12px;font-size:11px;line-height:1.6;color:#000000;">
+                      <div style="margin-bottom:6px;"><strong>Sucursal:</strong> EZE - Hangares</div>
+                      <div style="margin-bottom:6px;"><strong>Sector:</strong> Avionica - Jefe Cuartito</div>
+                      <div style="margin-bottom:6px;"><strong>Telefono:</strong> 44805036</div>
+                      <div><strong>Domicilio:</strong> Autopistas Tte Gral Richieri Km 33.5 Piso: Dpto: AEROPUERTO EZEIZA (1802) Buenos Aires</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action -->
+                <div style="display:flex;justify-content:flex-end;">
+                  <button type="button" style="background:#F7941D;color:#ffffff;font-weight:bold;padding:8px 20px;border:none;border-radius:4px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">
+                    Siguiente →
+                  </button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+        <h2>Paso 2 — Problema</h2>
+        <p>
+          El usuario selecciona el síntoma principal de un dropdown y completa los campos condicionales que aparecen según la elección. La <strong>tipificación (categoría + subcategoría) se asigna de forma automática e invisible</strong> — no se muestra en el formulario web y se registra en segundo plano exclusivamente para reportes internos.
+        </p>
+
+        <div class="mockup-wrap" style="background:#f0f0f0;">
+          <!-- Browser chrome -->
+          <div style="background:#e2e2e2;padding:8px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #c8c8c8;">
+            <div style="display:flex;gap:5px;flex-shrink:0;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+            </div>
+            <div style="flex:1;background:white;border-radius:4px;padding:3px 12px;font-size:11px;color:#777;border:1px solid #ccc;font-family:monospace;">webagentes.canaldirecto.com.ar/incidentes/nuevo</div>
+          </div>
+          <!-- Navbar -->
+          <div style="background:#ffffff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #e0e0e0;font-family:sans-serif;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <img src="public/logo_login.png" style="height:32px;width:auto;" alt="Canal Directo">
+              <div style="display:flex;gap:8px;margin-left:16px;">
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Servicios Técnicos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Insumos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Dispositivos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Liquidación</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#000;">
+              <div style="width:28px;height:28px;background:#e9ebf0;border:1.5px solid #bdc3c7;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="#5a626a"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;line-height:1.2;align-items:flex-start;">
+                <span style="font-weight:bold;">imartinez</span>
+                <span style="font-size:9px;color:#007bb6;">salir cambiar clave</span>
+              </div>
+            </div>
+          </div>
+          <!-- Brand line -->
+          <div style="height:3px;background:linear-gradient(90deg,#F7941D 60%,#58595B 100%);"></div>
+          <!-- App body -->
+          <div style="background:#f4f5f8;padding:22px 24px;font-family:sans-serif;color:#000;">
+            <div style="font-size:14px;color:#000;margin-bottom:14px;">Empresa: <strong>Aerolineas Argentinas</strong></div>
+            <div style="background:#fff;border:1px solid #ccc;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow:hidden;">
+              <div style="background:#808080;color:#fff;padding:8px 12px;font-size:13px;font-weight:bold;letter-spacing:0.5px;">Solicitud de servicio técnico</div>
+              <div style="padding:22px;">
+                <!-- Stepper: step 1 done, step 2 active -->
+                <div style="display:flex;align-items:center;justify-content:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">✓</div>
+                    <span style="font-size:10px;margin-top:4px;color:#38a169;font-weight:bold;">Equipo</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:2px;background:#38a169;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#F7941D;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">2</div>
+                    <span style="font-size:10px;margin-top:4px;color:#F7941D;font-weight:bold;">Problema</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:1px;background:#e9ebf0;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#e9ebf0;color:#7b809a;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:1px solid #ccc;">3</div>
+                    <span style="font-size:10px;margin-top:4px;color:#7b809a;">Contacto</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:1px;background:#e9ebf0;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#e9ebf0;color:#7b809a;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:1px solid #ccc;">4</div>
+                    <span style="font-size:10px;margin-top:4px;color:#7b809a;">Confirmar</span>
+                  </div>
+                </div>
+
+                <!-- Equipment summary badge -->
+                <div style="background:#333;color:#fff;border-radius:6px;padding:10px 14px;font-size:11px;margin-bottom:20px;max-width:320px;line-height:1.5;">
+                  <strong style="font-size:12px;">Samsung MFP Mono A3 SL-K4350LX</strong><br>
+                  S/N: 0BLQBJLK100004L<br>
+                  <span style="display:inline-flex;align-items:center;gap:4px;margin-top:2px;">📍 EZE - Hangares | Avionica - Jefe Cuartito</span>
+                </div>
+
+                <!-- Symptom dropdown -->
+                <div style="margin-bottom:18px;">
+                  <label style="display:block;font-size:12px;color:#333;margin-bottom:6px;font-weight:bold;">¿Qué problema presenta la impresora? <span style="color:#e53e3e;">*</span></label>
+                  <select style="width:100%;max-width:450px;padding:8px 10px;border:1px solid #ccc;border-radius:4px;font-size:12px;background:#fff;color:#333;">
+                    <option>Traba / atasca el papel</option>
+                  </select>
+                </div>
+
+                <!-- Conditional: frequency -->
+                <div style="margin-bottom:16px;">
+                  <label style="display:block;font-size:12px;color:#333;margin-bottom:8px;font-weight:bold;">¿Con qué frecuencia ocurre? <span style="color:#e53e3e;">*</span></label>
+                  <div style="display:flex;gap:20px;font-size:12px;color:#333;">
+                    <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-weight:normal;">
+                      <input type="radio" name="freq2" style="accent-color:#F7941D;"> Esporádico
+                    </label>
+                    <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-weight:normal;">
+                      <input type="radio" name="freq2" checked style="accent-color:#F7941D;"> Frecuente
+                    </label>
+                    <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-weight:normal;">
+                      <input type="radio" name="freq2" style="accent-color:#F7941D;"> Siempre
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Conditional: additional symptoms -->
+                <div style="margin-bottom:18px;">
+                  <label style="display:block;font-size:12px;color:#333;margin-bottom:8px;font-weight:bold;">¿Síntomas adicionales?</label>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:12px;color:#333;">
+                    <label style="display:flex;align-items:center;gap:5px;font-weight:normal;">
+                      <input type="checkbox" checked style="accent-color:#38a169;"> La hoja sale arrugada
+                    </label>
+                    <label style="display:flex;align-items:center;gap:5px;font-weight:normal;">
+                      <input type="checkbox" style="accent-color:#38a169;"> Se siente olor a quemado
+                    </label>
+                    <label style="display:flex;align-items:center;gap:5px;font-weight:normal;">
+                      <input type="checkbox" style="accent-color:#38a169;"> Hace ruido extraño
+                    </label>
+                    <label style="display:flex;align-items:center;gap:5px;font-weight:normal;">
+                      <input type="checkbox" style="accent-color:#38a169;"> No toma papel de la bandeja
+                    </label>
+                  </div>
+                </div>
+
+
+                <!-- Observations -->
+                <div style="margin-bottom:18px;">
+                  <label style="display:block;font-size:12px;color:#333;margin-bottom:6px;font-weight:bold;">Observaciones <span style="font-weight:normal;color:#7b809a;">(opcional)</span></label>
+                  <textarea style="width:100%;max-width:450px;height:60px;padding:8px 10px;border:1px solid #ccc;border-radius:4px;font-size:12px;resize:vertical;font-family:sans-serif;"></textarea>
+                </div>
+
+                <!-- Attach photo -->
+                <div style="margin-bottom:24px;font-size:12px;color:#007bb6;display:flex;align-items:center;gap:5px;">
+                  <span>📎</span> <a href="#" style="color:#007bb6;text-decoration:underline;">Adjuntar foto del error</a>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <button type="button" style="background:#fff;color:#333;font-weight:bold;padding:8px 18px;border:1.5px solid #ccc;border-radius:4px;font-size:11px;cursor:pointer;">← Anterior</button>
+                  <button type="button" style="background:#F7941D;color:#fff;font-weight:bold;padding:8px 20px;border:none;border-radius:4px;font-size:11px;cursor:pointer;">Siguiente →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Tipificación interna:</strong> La combinación síntoma + detalle determina automáticamente la categoría y subcategoría del incidente. Este dato no es visible en ninguno de los dos portales — se utiliza solo para los reportes del equipo de Servicio Técnico.
+        </div>
+
+        <h2>Paso 3 — Contacto</h2>
+        <p>Datos del solicitante. La sección "Destinatario" se colapsa por defecto con un checkbox
+        <strong>"¿El destinatario es diferente al solicitante?"</strong> — solo se expande si el usuario lo indica.</p>
+
+        <div class="mockup-wrap" style="background:#f0f0f0;">
+          <!-- Browser chrome -->
+          <div style="background:#e2e2e2;padding:8px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #c8c8c8;">
+            <div style="display:flex;gap:5px;flex-shrink:0;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+            </div>
+            <div style="flex:1;background:white;border-radius:4px;padding:3px 12px;font-size:11px;color:#777;border:1px solid #ccc;font-family:monospace;">webagentes.canaldirecto.com.ar/incidentes/nuevo</div>
+          </div>
+          <!-- Navbar -->
+          <div style="background:#ffffff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #e0e0e0;font-family:sans-serif;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <img src="public/logo_login.png" style="height:32px;width:auto;" alt="Canal Directo">
+              <div style="display:flex;gap:8px;margin-left:16px;">
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Servicios Técnicos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Insumos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Dispositivos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Liquidación</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#000;">
+              <div style="width:28px;height:28px;background:#e9ebf0;border:1.5px solid #bdc3c7;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="#5a626a"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;line-height:1.2;align-items:flex-start;">
+                <span style="font-weight:bold;">imartinez</span>
+                <span style="font-size:9px;color:#007bb6;">salir cambiar clave</span>
+              </div>
+            </div>
+          </div>
+          <!-- Brand line -->
+          <div style="height:3px;background:linear-gradient(90deg,#F7941D 60%,#58595B 100%);"></div>
+          <!-- App body -->
+          <div style="background:#f4f5f8;padding:22px 24px;font-family:sans-serif;color:#000;">
+            <div style="font-size:14px;color:#000;margin-bottom:14px;">Empresa: <strong>Aerolineas Argentinas</strong></div>
+            <div style="background:#fff;border:1px solid #ccc;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow:hidden;">
+              <div style="background:#808080;color:#fff;padding:8px 12px;font-size:13px;font-weight:bold;letter-spacing:0.5px;">Solicitud de servicio técnico</div>
+              <div style="padding:22px;">
+                <!-- Stepper: steps 1-2 done, step 3 active -->
+                <div style="display:flex;align-items:center;justify-content:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">✓</div>
+                    <span style="font-size:10px;margin-top:4px;color:#38a169;font-weight:bold;">Equipo</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:2px;background:#38a169;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">✓</div>
+                    <span style="font-size:10px;margin-top:4px;color:#38a169;font-weight:bold;">Problema</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:2px;background:#38a169;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#F7941D;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">3</div>
+                    <span style="font-size:10px;margin-top:4px;color:#F7941D;font-weight:bold;">Contacto</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:1px;background:#e9ebf0;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#e9ebf0;color:#7b809a;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:1px solid #ccc;">4</div>
+                    <span style="font-size:10px;margin-top:4px;color:#7b809a;">Confirmar</span>
+                  </div>
+                </div>
+
+                <!-- DATOS DEL SOLICITANTE panel (orange header like real UI) -->
+                <div style="border:1.5px solid #ccc;border-radius:4px;overflow:hidden;background:#fff;margin-bottom:18px;">
+                  <div style="background:#F7941D;color:#fff;padding:6px 10px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;">DATOS DEL SOLICITANTE</div>
+                  <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div>
+                      <label style="display:block;font-size:10px;color:#555;margin-bottom:4px;font-weight:bold;">Apellido <span style="color:#e53e3e;">*</span></label>
+                      <input type="text" value="Perez" readonly style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-size:11px;background:#f8f9fa;">
+                    </div>
+                    <div>
+                      <label style="display:block;font-size:10px;color:#555;margin-bottom:4px;font-weight:bold;">Nombre <span style="color:#e53e3e;">*</span></label>
+                      <input type="text" value="Juan" readonly style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-size:11px;background:#f8f9fa;">
+                    </div>
+                    <div>
+                      <label style="display:block;font-size:10px;color:#555;margin-bottom:4px;font-weight:bold;">Teléfono e Interno <span style="color:#e53e3e;">*</span></label>
+                      <input type="text" value="12345678" readonly style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-size:11px;background:#f8f9fa;">
+                    </div>
+                    <div>
+                      <label style="display:block;font-size:10px;color:#555;margin-bottom:4px;font-weight:bold;">Email <span style="color:#e53e3e;">*</span></label>
+                      <input type="text" value="juan.perez@example.com" readonly style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-size:11px;background:#f8f9fa;">
+                    </div>
+                    <div style="grid-column:span 2;">
+                      <label style="display:block;font-size:10px;color:#555;margin-bottom:4px;font-weight:bold;">Sector</label>
+                      <input type="text" value="Sistemas" readonly style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-size:11px;background:#f8f9fa;">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Destinatario toggle -->
+                <div style="margin-bottom:20px;padding:12px 14px;border:1px solid #e9ebf0;border-radius:6px;background:#f8f9fa;">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#333;cursor:pointer;font-weight:normal;">
+                    <input type="checkbox" style="accent-color:#F7941D;">
+                    <span>¿El destinatario es diferente al solicitante?</span>
+                  </label>
+                  <div style="font-size:10px;color:#7b809a;margin-top:4px;margin-left:24px;">Si no se marca, los datos del solicitante se copian automáticamente al destinatario.</div>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <button type="button" style="background:#fff;color:#333;font-weight:bold;padding:8px 18px;border:1.5px solid #ccc;border-radius:4px;font-size:11px;cursor:pointer;">← Anterior</button>
+                  <button type="button" style="background:#F7941D;color:#fff;font-weight:bold;padding:8px 20px;border:none;border-radius:4px;font-size:11px;cursor:pointer;">Siguiente →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Paso 4 — Confirmar</h2>
+        <p>Resumen visual completo de la solicitud antes de enviarla, con la posibilidad de volver a editar cualquier paso. Al confirmar, el sistema genera el número de ticket y muestra una pantalla de cierre.</p>
+        <div class="mockup-wrap" style="background:#f0f0f0;">
+          <!-- Browser chrome -->
+          <div style="background:#e2e2e2;padding:8px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #c8c8c8;">
+            <div style="display:flex;gap:5px;flex-shrink:0;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:inline-block;"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:inline-block;"></span>
+            </div>
+            <div style="flex:1;background:white;border-radius:4px;padding:3px 12px;font-size:11px;color:#777;border:1px solid #ccc;font-family:monospace;">webagentes.canaldirecto.com.ar/incidentes/nuevo</div>
+          </div>
+          <!-- Navbar -->
+          <div style="background:#ffffff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #e0e0e0;font-family:sans-serif;">
+            <div style="display:flex;align-items:center;gap:16px;">
+              <img src="public/logo_login.png" style="height:32px;width:auto;" alt="Canal Directo">
+              <div style="display:flex;gap:8px;margin-left:16px;">
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Servicios Técnicos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Insumos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Dispositivos</span>
+                <span style="background:#F7941D;border:1.5px solid #000;color:#000;padding:5px 14px;border-radius:10px;font-weight:bold;font-size:11px;">Liquidación</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#000;">
+              <div style="width:28px;height:28px;background:#e9ebf0;border:1.5px solid #bdc3c7;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="#5a626a"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <div style="display:flex;flex-direction:column;line-height:1.2;align-items:flex-start;">
+                <span style="font-weight:bold;">imartinez</span>
+                <span style="font-size:9px;color:#007bb6;">salir cambiar clave</span>
+              </div>
+            </div>
+          </div>
+          <!-- Brand line -->
+          <div style="height:3px;background:linear-gradient(90deg,#F7941D 60%,#58595B 100%);"></div>
+          <!-- App body -->
+          <div style="background:#f4f5f8;padding:22px 24px;font-family:sans-serif;color:#000;">
+            <div style="font-size:14px;color:#000;margin-bottom:14px;">Empresa: <strong>Aerolineas Argentinas</strong></div>
+            <div style="background:#fff;border:1px solid #ccc;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow:hidden;">
+              <div style="background:#808080;color:#fff;padding:8px 12px;font-size:13px;font-weight:bold;letter-spacing:0.5px;">Solicitud de servicio técnico</div>
+              <div style="padding:22px;">
+                <!-- Stepper: steps 1-3 done, step 4 active -->
+                <div style="display:flex;align-items:center;justify-content:center;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">✓</div>
+                    <span style="font-size:10px;margin-top:4px;color:#38a169;font-weight:bold;">Equipo</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:2px;background:#38a169;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">✓</div>
+                    <span style="font-size:10px;margin-top:4px;color:#38a169;font-weight:bold;">Problema</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:2px;background:#38a169;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#38a169;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">✓</div>
+                    <span style="font-size:10px;margin-top:4px;color:#38a169;font-weight:bold;">Contacto</span>
+                  </div>
+                  <div style="flex:1;max-width:60px;height:2px;background:#38a169;margin-top:-14px;"></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;width:70px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#F7941D;color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;">4</div>
+                    <span style="font-size:10px;margin-top:4px;color:#F7941D;font-weight:bold;">Confirmar</span>
+                  </div>
+                </div>
+
+                <!-- Summary: Equipo -->
+                <div style="margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <span style="font-size:14px;font-weight:bold;color:#333;">Equipo</span>
+                    <a href="#" style="font-size:11px;color:#F7941D;text-decoration:none;font-weight:bold;">Editar</a>
+                  </div>
+                  <div style="font-size:12px;color:#555;line-height:1.6;">
+                    Samsung MFP Mono A3 SL-K4350LX │ S/N: 0BLQBJLK100004L<br>
+                    EZE - Hangares │ Avionica - Jefe Cuartito
+                  </div>
+                </div>
+
+                <!-- Summary: Problema -->
+                <div style="margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <span style="font-size:14px;font-weight:bold;color:#333;">Problema</span>
+                    <a href="#" style="font-size:11px;color:#F7941D;text-decoration:none;font-weight:bold;">Editar</a>
+                  </div>
+                  <div style="font-size:12px;color:#555;line-height:1.6;">
+                    <strong style="color:#555;">Síntoma:</strong> Traba / atasca el papel<br>
+                    <strong style="color:#555;">Frecuencia:</strong> Frecuente<br>
+                    <strong style="color:#555;">Síntomas:</strong> La hoja sale arrugada
+                  </div>
+                </div>
+
+                <!-- Summary: Contacto -->
+                <div style="margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid #e9ebf0;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                    <span style="font-size:14px;font-weight:bold;color:#333;">Contacto</span>
+                    <a href="#" style="font-size:11px;color:#F7941D;text-decoration:none;font-weight:bold;">Editar</a>
+                  </div>
+                  <div style="font-size:12px;color:#555;line-height:1.6;">
+                    <strong>Solicitante:</strong> Juan Perez │ Tel: 12345678<br>
+                    <strong>Email:</strong> juan.perez@example.com │ <strong>Sector:</strong> Sistemas
+                  </div>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <button type="button" style="background:#fff;color:#333;font-weight:bold;padding:8px 18px;border:1.5px solid #ccc;border-radius:4px;font-size:11px;cursor:pointer;">← Anterior</button>
+                  <button type="button" style="background:#F7941D;color:#fff;font-weight:bold;padding:8px 20px;border:none;border-radius:4px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:4px;">✓ Enviar solicitud</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGINA 5: Propuesta Wizard -->
+
+
+
+      <footer class="mainFooter">
+        <p>Canal Directo S.A. — Rediseño del Formulario de Apertura de Incidentes · Junio 2026</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const themeBtn = document.getElementById("themeToggle");
+    const themeText = document.getElementById("themeToggleText");
+    themeBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      if (current === "dark") {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeText.innerText = "Modo Oscuro";
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeText.innerText = "Modo Claro";
+      }
+    });
+
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    const sections = document.querySelectorAll(".section");
+    const navItems = document.querySelectorAll(".navItem");
+    const SECTIONS_NAV = ["cover", "page1", "page2", "page3", "page4", "page5"];
+    window.addEventListener("scroll", () => {
+      let current = "cover";
+      sections.forEach(sec => {
+        if (pageYOffset >= (sec.offsetTop - 250)) current = sec.getAttribute("id");
+      });
+      navItems.forEach((btn, index) => {
+        btn.classList.remove("navItemActive");
+        if (SECTIONS_NAV[index] === current) btn.classList.add("navItemActive");
+      });
+    });
+  </script>
+
+</body>
+</html>
